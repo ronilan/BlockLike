@@ -11,10 +11,10 @@
     "test": "mocha-webpack --require test/setup.js \"test/**/*.test.js\"",
     "testthis": "mocha-webpack --require test/setup.js \"test/**/$TEST.test.js\"",
     "full": "webpack --progress --config webpack.config.js",
-    "mini": "webpack --progress --config webpack.config-mini.js && node scripts/build-mascotless.js",
+    "mini": "webpack --progress --config webpack.config-mini.js && node scripts/mini.js",
     "docs": "./node_modules/.bin/jsdoc dist/blocklike-*.*.*.js --destination ./docs --template node_modules/minami --readme Docs-README.md",
     "build": "npm run test && npm run full && npm run mini && npm run docs",
-    "version": "node scripts/pre-version.js & npm run build && git add ."
+    "version": "node scripts/version.js & npm run build && git add ."
   },
   "keywords": [
     "blocklike",
@@ -33,6 +33,7 @@
   "devDependencies": {
     "babel-eslint": "^8.2.1",
     "babel-minify-webpack-plugin": "^0.2.0",
+    "canvas": "^1.6.9",
     "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-loader": "^1.9.0",
@@ -43,13 +44,14 @@
     "minami": "^1.2.3",
     "mocha": "^4.1.0",
     "mocha-webpack": "^1.0.1",
+    "replace-in-file": "^3.1.1",
     "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.10.1",
-    "canvas": "^1.6.9"
+    "webpack-dev-server": "^2.10.1"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/ronilan/BlockLike.git"
-  }
+  },
+  "dependencies": {}
 }
