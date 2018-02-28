@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - turnLeft</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+
+  const sprite1 = new blockLike.Sprite();
+  const sprite2 = new blockLike.Sprite();
+
+  stage.addSprite(sprite1);
+  stage.addSprite(sprite2);
+
+  sprite1.move(100);
+  sprite2.move(-100);
+
+  sprite1.whenClicked(function () {
+    this.turnLeft(45);
+  });
+
+  sprite2.whenClicked(function () {
+    this.turnLeft(-45);
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Forever</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  let forever = true;
+
+  const stage = new blockLike.Stage();
+  const sprite = new blockLike.Sprite();
+
+  stage.addSprite(sprite);
+
+  sprite.whenFlag(() => {
+    while (forever) {
+      this.turnRight(1);
+    }
+  });
+
+  // escape a forever loop
+  stage.whenKeyPressed('Escape', () => { forever = false; });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

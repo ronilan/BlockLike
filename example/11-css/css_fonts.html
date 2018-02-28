@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - CSS Fonts</title>
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Pacifico" rel="stylesheet">
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+
+  const brown = new blockLike.Backdrop({
+    color: '#9c8468',
+  });
+
+  const lightblue = new blockLike.Backdrop({
+    color: 'lightblue',
+  });
+
+  const embossed = new blockLike.Costume({
+    width: 400,
+    height: 100,
+  });
+
+  embossed.inner('Click the Embossed');
+  embossed.css({
+    fontSize: '48px',
+    lineHeight: '100px',
+    textAlign: 'center',
+    textShadow: '-1px -1px 1px #fff, 1px 1px 1px #000',
+    color: '#9c8468',
+    opacity: '0.3',
+    fontFamily: 'Fjalla One, sans-serif',
+  });
+
+  const threeD = new blockLike.Costume({
+    width: 400,
+    height: 100,
+  });
+
+  threeD.inner('Click the 3D');
+  threeD.css({
+    fontSize: '48px',
+    lineHeight: '100px',
+    textAlign: 'center',
+    color: '#fff',
+    textShadow: '0px 1px 0px #999, 0px 2px 0px #888, 0px 3px 0px #777, 0px 4px 0px #666, 0px 5px 0px #555, 0px 6px 0px #444, 0px 7px 0px #333, 0px 8px 7px #222',
+    fontFamily: 'Pacifico, cursive',
+  });
+
+  const sprite = new blockLike.Sprite({
+    costume: embossed,
+  });
+  sprite.addCostume(threeD);
+
+  const stage = new blockLike.Stage({
+    backdrop: brown,
+  });
+  stage.addBackdrop(lightblue);
+
+  stage.addSprite(sprite);
+
+  let rotate = false;
+  sprite.whenClicked(function () {
+    rotate = !rotate;
+    while (rotate) {
+      this.turnRight(1);
+      this.css('transform', `rotateY(${this.direction - 90}deg)`);
+    }
+  });
+
+  stage.whenClicked(function () {
+    sprite.nextCostume();
+    this.nextBackdrop();
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

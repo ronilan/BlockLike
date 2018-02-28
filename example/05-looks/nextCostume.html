@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - nextCostume</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  let forever = true;
+
+  const stage = new blockLike.Stage();
+
+  const sheep = new blockLike.Sprite();
+  const bear = new blockLike.Sprite();
+
+  sheep.addCostume(new blockLike.Costume({
+    image: '../../images/sheep_step.png',
+  }));
+
+  bear.addCostume(new blockLike.Costume({
+    image: '../../images/bear.png',
+  }));
+  bear.addCostume(new blockLike.Costume({
+    image: '../../images/bear_step.png',
+  }));
+  console.log(bear.costumes);
+  bear.removeCostumeNum(0);
+  console.log(bear.costumes);
+
+  sheep.addTo(stage);
+  bear.addTo(stage);
+
+  sheep.whenClicked(() => {
+    this.move(5);
+    this.nextCostume();
+  });
+
+  bear.whenClicked(() => {
+    this.move(5);
+    this.nextCostume();
+  });
+
+  bear.whenFlag(() => {
+    bear.goTo(100, 0);
+    while (forever) {
+      this.move(5);
+      this.wait(0.2);
+      this.nextCostume();
+    }
+  });
+
+  stage.whenKeyPressed('Escape', () => { forever = false; });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

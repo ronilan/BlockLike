@@ -1,0 +1,71 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "globals": {
+        "blockLike": true,
+        "Synth": true
+    },
+    "extends": "airbnb-base",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "plugins": [
+        "html"
+    ],
+    "parser": "babel-eslint",
+    "rules": {
+        "indent": [
+            "error",
+            2
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-underscore-dangle": [
+            "error", { 
+                "allowAfterThis": true 
+            }
+        ],
+        "max-len": [
+            "off", 80
+        ],
+        "no-unused-expressions": [
+            "off", {
+                "allowShortCircuit": true, "allowTernary": true 
+            }
+        ],
+        "func-names": [
+            "error", "never"
+        ],
+        "no-console": 0,
+        "prefer-destructuring": [
+        "error", {
+              "array": false,
+              "object": false
+        }, {
+              "enforceForRenamedProperties": false
+        }],
+        "require-jsdoc": ["warn", {
+            "require": {
+                "FunctionDeclaration": false,
+                "MethodDefinition": false,
+                "ClassDeclaration": false,
+                "ArrowFunctionExpression": false,
+                "FunctionExpression": false
+            }
+        }]
+    }
+
+}

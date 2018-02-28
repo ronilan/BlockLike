@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> -->
+    <title>BlockLike.js Example - Multiple Stages</title>
+  <style>
+    .stage {
+
+      margin: 0;
+      width: 200px;
+    }
+    #left {
+      float: left;
+      background-color: blue;
+    }
+    #right {
+      float: right;
+      background-color: orange;
+    }
+  </style>
+  </head>
+  <body>
+  <div id="left" class="stage"></div>
+  <div id="right" class="stage"></div>
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">const left = new blockLike.Stage({ width: 200, parent: document.getElementById('left') });
+  const right = new blockLike.Stage({ width: 200, parent: document.getElementById('right') });
+
+  const sprite = new blockLike.Sprite();
+  sprite.addTo(left);
+  sprite.setRotationStyle('left-right');
+
+  sprite.whenKeyPressed(39, () => {
+    this.pointInDirection(90);
+    this.move(10);
+    if (this.x > left.width / 2) {
+      sprite.removeFrom(left);
+      sprite.addTo(right);
+      sprite.goTo(-right.width / 2, 0);
+    }
+  });
+
+  sprite.whenKeyPressed(37, () => {
+    this.pointInDirection(-90);
+    this.move(10);
+    if (this.x < -right.width / 2) {
+      sprite.removeFrom(right);
+      sprite.addTo(left);
+      sprite.goTo(left.width / 2, 0);
+    }
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

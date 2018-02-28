@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Array of Sprites Animation</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  let forever = true;
+
+  const stage = new blockLike.Stage();
+
+  const sheep = new blockLike.Sprite();
+  const bear = new blockLike.Sprite();
+  const dog = new blockLike.Sprite();
+
+  sheep.addCostume(new blockLike.Costume({
+    image: '../../images/sheep_step.png',
+  }));
+
+  bear.addCostume(new blockLike.Costume({
+    image: '../../images/bear.png',
+  }));
+  bear.addCostume(new blockLike.Costume({
+    image: '../../images/bear_step.png',
+  }));
+  bear.removeCostumeNum(0);
+
+  dog.addCostume(new blockLike.Costume({
+    image: '../../images/dog.png',
+  }));
+  dog.addCostume(new blockLike.Costume({
+    image: '../../images/dog_step.png',
+  }));
+  dog.removeCostumeNum(0);
+
+  // arrow functions are cool here.
+  [sheep, bear, dog].forEach((item, index) => {
+    stage.addSprite(item);
+    item.changeY(-150 + (index * 150));
+    item.changeSize(index * 20);
+    item.setRotationStyle('left-right');
+  });
+
+  stage.whenLoaded(function () {
+    while (forever) {
+      this.wait(0.4);
+      // no arrow function inside the main function please...
+      // eslint-disable-next-line
+      [sheep, bear, dog].forEach(function(item) { 
+        item.nextCostume();
+        item.move(10 + Math.floor(Math.random() * 10));
+        item.isTouchingEdge() ? item.turnRight(180) : null;
+      });
+    }
+  });
+
+  stage.whenKeyPressed('Escape', () => { forever = false; });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

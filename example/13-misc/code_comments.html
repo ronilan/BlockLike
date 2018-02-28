@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Commments</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+  const sprite1 = new blockLike.Sprite();
+
+  sprite1.addTo(stage);
+
+  sprite1.whenClicked(function () {
+    console.log('I was clicked!!!');
+
+    // console.log('I was commented out')
+
+    console.log('I had inline comment with reserved words wait() async'); // async comment with reserved words sprite.wait()
+    /*
+    function() {}
+
+    console.log('I was in multiline comment')
+    */
+    // this.glide(2, 3, 4)
+    this.move(100); // this.glide(2, 3, 4 // broken
+
+    this.turnRight(90); // this.say(''');
+    this.playSound('https://www.blocklike.org/sounds/bleat.wav'); // this has // in it
+    // function(){
+
+    // }
+    // async
+    // function thinking(){
+    sprite1.think('thought');
+    // }
+    // thinking();
+  });
+
+  sprite1.whenFlag(() => {
+    sprite1.goTo(100, 100);
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

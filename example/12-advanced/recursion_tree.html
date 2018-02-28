@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example -  Hello World</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  let forever = true;
+
+  const stage = new blockLike.Stage({
+    backdrop: new blockLike.Backdrop({
+      color: '#A2DAFF',
+    }),
+  });
+  const sprite = new blockLike.Sprite(null);
+  sprite.pace = 1;
+
+  sprite.setY(-stage.height / 2);
+  stage.addSprite(sprite);
+
+  function draw(startX, startY, len, direction) {
+    len > 50 ? this.setPenColor('#47321b') : this.setPenColor('#3a9e29');
+    this.setPenSize(len / 10);
+
+    this.penUp();
+    this.goTo(startX, startY);
+    this.penDown();
+    this.pointInDirection(direction);
+    this.move(len);
+
+    if (len < 10) {
+      return;
+    }
+  
+    // we will come back here later
+    const x = this.x;
+    const y = this.y;
+
+    this.invoke(draw, [this.x, this.y, len * 0.8, direction + 15]);
+    this.invoke(draw, [x, y, len * 0.8, direction - 15]);
+  }
+
+  sprite.whenFlag(() => {
+    while (forever) {
+      this.pointInDirection(0);
+      this.invoke(draw, [(Math.random() * stage.width) - (stage.width / 2), -(stage.height / 2), (Math.random() * 100), 0]);
+    }
+  });
+
+  stage.whenKeyPressed('Escape', () => { forever = false; });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Invoke</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+
+  const sprite1 = new blockLike.Sprite();
+
+  sprite1.addTo(stage);
+
+  function pattern(sides, size, times) {
+    for (let i = 0; i < times; i += 1) {
+      this.penDown();
+      for (let j = 0; j < sides; j += 1) {
+        this.move(size);
+        this.turnRight(360 / sides);
+      }
+      this.penUp();
+      this.turnRight(360 / times);
+      this.wait(0.5);
+    }
+  }
+
+  function talk(text) {
+    this.say(text);
+    this.wait(0.5);
+    this.say();
+  }
+
+  function jump() {
+    this.changeY(100);
+    this.wait(0.5);
+    this.changeY(-100);
+  }
+
+  sprite1.whenFlag(() => {
+    this.invoke(jump);
+    this.wait(1);
+    this.invoke(talk, 'hi');
+    this.wait(1);
+    this.invoke(pattern, [5, 50, 12]);
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

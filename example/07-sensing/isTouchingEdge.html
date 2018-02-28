@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - isTouchingEdge</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  let forever = true;
+
+  const stage = new blockLike.Stage();
+  const sprite1 = new blockLike.Sprite();
+  const sprite2 = new blockLike.Sprite();
+
+  stage.addSprite(sprite2);
+  stage.addSprite(sprite1);
+
+  sprite1.whenFlag(() => {
+    let moveDir = 1;
+    while (forever) {
+      if (sprite1.isTouchingEdge()) {
+        moveDir *= -1;
+      }
+
+      sprite1.changeX(10 * moveDir);
+    }
+  });
+
+  sprite2.whenFlag(() => {
+    let moveDir = 1;
+    while (forever) {
+      if (sprite2.isTouchingEdge()) {
+        moveDir *= -1;
+      }
+
+      sprite2.changeY(10 * moveDir);
+    }
+  });
+
+  stage.whenKeyPressed('Escape', () => { forever = false; });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

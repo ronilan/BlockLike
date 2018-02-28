@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - switchcostumeToNum</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  let forever = true;
+
+  const stage = new blockLike.Stage();
+
+  const sheep = new blockLike.Sprite();
+  const bear = new blockLike.Sprite();
+
+  sheep.addCostume(new blockLike.Costume({
+    image: '../../images/sheep_step.png',
+  }));
+
+  bear.addCostume(new blockLike.Costume({
+    image: '../../images/bear.png',
+  }));
+  bear.addCostume(new blockLike.Costume({
+    image: '../../images/bear_step.png',
+  }));
+
+  bear.removeCostumeNum(0);
+
+  sheep.addTo(stage);
+  bear.addTo(stage);
+
+  let i = 0;
+
+  sheep.whenClicked(() => {
+    this.switchCostumeToNum(1);
+  });
+
+  bear.whenClicked(() => {
+    this.move(5);
+    this.switchCostumeToNum(1);
+  });
+
+  bear.whenFlag(() => {
+    bear.goTo(100, 0);
+    while (forever) {
+      i += 1;
+      this.move(5);
+      this.wait(0.2);
+      this.switchCostumeToNum(i % 2);
+    }
+  });
+
+  stage.whenKeyPressed('Escape', () => { forever = false; });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

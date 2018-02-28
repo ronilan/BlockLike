@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - whenEvent</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+
+  const sprite1 = new blockLike.Sprite();
+  const sprite2 = new blockLike.Sprite();
+
+  stage.addSprite(sprite2);
+  stage.addSprite(sprite1);
+
+  stage.whenEvent('mousemove', () => {
+    sprite1.turnRight(1);
+    sprite2.turnLeft(1);
+  });
+
+  sprite1.whenEvent('mouseover', function (e) {
+    this.say('tickle');
+    console.log(this);
+    console.log(e);
+  });
+
+  sprite1.whenEvent('mouseout', function () {
+    this.say();
+  });
+
+  sprite1.whenEvent('dblclick', function () {
+    this.say('double click');
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Costumes</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  let forever = true;
+
+  const stage = new blockLike.Stage();
+
+  const sprite1 = new blockLike.Sprite();
+  const sprite2 = new blockLike.Sprite();
+
+  const bearCartoon = new blockLike.Costume({
+    image: '../../images/bear.png',
+  });
+
+  const bearReal = new blockLike.Costume({
+    image: 'https://upload.wikimedia.org/wikipedia/commons/7/79/2010-brown-bear.jpg',
+    width: 200,
+    height: 300,
+  });
+
+  sprite1.addCostume(bearCartoon);
+  sprite1.addCostume(bearReal);
+  sprite1.removeCostumeNum(0);
+
+  stage.addSprite(sprite1);
+  stage.addSprite(sprite2);
+
+  sprite2.addCostume(new blockLike.Costume({ image: '../../images/sheep_step.png' }));
+
+  sprite1.whenClicked(function () {
+    this.nextCostume();
+    if (this.costume === bearReal) {
+      this.say('Roar!');
+    } else {
+      this.say();
+    }
+  });
+
+  sprite1.whenFlag(function () {
+    this.goTo(0, 100);
+  });
+
+  sprite2.whenFlag(function () {
+    this.goTo(0, -100);
+    while (forever) {
+      this.move(1);
+      this.turnRight(2);
+      this.nextCostume();
+    }
+  });
+
+  stage.whenKeyPressed('Escape', () => { forever = false; });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - sayWait and thinkWait</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  let forever = true;
+
+  const stage = new blockLike.Stage();
+  const sprite = new blockLike.Sprite();
+
+  // this will be ignored.
+  // sprite is not on stage yet, waiting only in event methods.
+  sprite.sayWait('hi');
+
+  stage.addSprite(sprite);
+
+  sprite.whenFlag(function () {
+    this.thinkWait('I will count forever!', 2);
+    this.thinkWait('I will count forever, and ever and ever!', 1.5);
+    this.thinkWait('I will count forever, and ever and ever! and ever and ever!!!', 1);
+    let i = 0;
+    while (forever) {
+      i += 1;
+      this.sayWait(i, 0.2 + (1 / i));
+    }
+  });
+
+  sprite.whenClicked(function () {
+    this.changeSize(10);
+  });
+
+  sprite.whenKeyPressed(' ', function () {
+    this.showing ? this.hide() : this.show();
+  });
+
+  stage.whenKeyPressed('Escape', () => { forever = false; });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

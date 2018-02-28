@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Insert</title>
+<style>
+.car {
+  width: 60px;
+  height: 30px;
+  position: absolute;
+  text-align: center;
+}
+.car-body {
+  width: 60px;
+  height: 30px;
+  position: absolute;
+  text-align: center;
+}
+
+.wheel {
+  background: black;
+  width: 10px;
+  height: 6px;
+  position: absolute;
+  border-radius: 2px;
+}
+
+.driver {
+  width: 5px;
+  height: 4px;
+  margin: 2px;
+  background: #000;
+}
+
+.passenger {
+  width: 5px;
+  height: 4px;
+  margin: 2px;
+  background: #666;
+}
+
+.seat {
+  width: 3px;
+  height: 2px;
+  margin: 2px;
+  border: 1px solid #666;
+}
+
+.floor {
+  width: 3px;
+  height: 2px;
+  margin: 2px;
+  border: 1px solid transparent;
+}
+
+.sedan {
+  font-size: 9px;
+  line-height: 15px;
+  border-radius: 6px 8px 8px 6px;
+  background: blue;
+}
+
+.suv {
+  font-size: 9px;
+  line-height: 15px;
+  border-radius: 2px 8px 8px 2px;
+  background: navy;
+}
+
+.truck {
+  font-size: 9px;
+  line-height: 15px;
+  border-radius: 4px 4px 2px 4px;
+  background: #888;
+}
+
+.sport {
+  font-size: 9px;
+  line-height: 15px;
+  border-radius: 4px 8px 8px 4px;
+  background: FireBrick;
+}
+
+.wheel.lf {
+  top: -3px;
+  left: 42px;
+}
+.wheel.rf {
+  top: 27px;
+  left: 42px;
+}
+
+.wheel.lb {
+  top: -3px;
+  left: 4px;
+}
+.wheel.rb {
+  top: 27px;
+  left: 4px;
+}
+
+.glass {
+  background: lightblue;
+  position: absolute;
+}
+
+.glass.f {
+  border-radius: 2px;
+  width: 15px;
+  height: 20px;
+  top: 5px;
+  left: 27px;
+}
+
+.glass.m {
+  border-radius: 2px;
+  width: 10px;
+  height: 20px;
+  top: 5px;
+  left: 16px;
+}
+
+.glass.b {
+  border-radius: 2px;
+  top: 5px;
+  left: 5px;
+  width: 10px;
+  height: 20px;
+}
+
+.glass.truck {
+  border-radius: 2px;
+  width: 12px;
+  height: 20px;
+  top: 5px;
+  left: 37px;
+}
+
+.flatbed {
+  width: 30px;
+  height: 20px;
+  top: 5px;
+  left: 3px;
+  background: #444;
+  position: absolute;
+}
+
+#truck,
+#sport,
+#suv,
+#sedan {
+
+}
+
+</style>
+  </head>
+  <body>
+
+<div id="truck" class="car" style="display:none;">
+  <div class="wheel lf"></div>
+  <div class="wheel rf"></div>
+  <div class="wheel lb"></div>
+  <div class="wheel rb"></div>
+  <div class="car-body truck">
+    <div class="glass truck">
+      <div class="driver"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <div class="flatbed"></div>
+  </div>
+</div>
+</div>
+
+<div id="sport" class="car" style="display:none;">
+  <div class="wheel lf"></div>
+  <div class="wheel rf"></div>
+  <div class="wheel lb"></div>
+  <div class="wheel rb"></div>
+  <div class="car-body sport">
+    <div class="glass f">
+      <div class="driver"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+  </div>
+</div>
+
+<div id="sedan" class="car" style="display:none;">
+  <div class="wheel lf"></div>
+  <div class="wheel rf"></div>
+  <div class="wheel lb"></div>
+  <div class="wheel rb"></div>
+  <div class="car-body sedan">
+    <div class="glass f">
+      <div class="driver"></div>
+      <div class="floor"></div>
+      <div class="seat"></div>
+    </div>
+    <div class="glass m">
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+  </div>
+</div>
+
+<div id="suv" class="car" style="display:none;">
+  <div class="wheel lf"></div>
+  <div class="wheel rf"></div>
+  <div class="wheel lb"></div>
+  <div class="wheel rb"></div>
+  <div class="car-body suv">
+
+    <div class="glass f">
+      <div class="driver"></div>
+      <div class="floor"></div>
+      <div class="seat"></div>
+    </div>
+    <div class="glass m">
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <div class="glass b">
+      <div class="seat"></div>
+      <div class="floor"></div>
+      <div class="seat"></div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  let forever = true;
+
+  const stage = new blockLike.Stage();
+
+  const sedan = new blockLike.Sprite({
+    costume: new blockLike.Costume({
+      width: 60,
+      height: 30,
+    }),
+  });
+  sedan.insert(document.getElementById('sedan'));
+
+  const sport = new blockLike.Sprite({
+    costume: new blockLike.Costume({
+      width: 60,
+      height: 30,
+    }),
+  });
+  sport.insert(document.getElementById('sport'));
+
+  const truck = new blockLike.Sprite({
+    costume: new blockLike.Costume({
+      width: 60,
+      height: 30,
+    }),
+  });
+  truck.insert(document.getElementById('truck'));
+
+  const suv = new blockLike.Sprite({
+    costume: new blockLike.Costume({
+      width: 60,
+      height: 30,
+    }),
+  });
+  suv.insert(document.getElementById('suv'));
+  
+  sport.goTo(100, 0);
+  truck.goTo(-100, 0);
+  sedan.goTo(100, -100);
+
+  stage.addSprite(sport);
+  stage.addSprite(suv);
+  stage.addSprite(truck);
+  stage.addSprite(sedan);
+
+  function bump(car) {
+    return (
+      car.isTouchingEdge() ||
+      (car !== sport && car.isTouching(sport)) ||
+      (car !== suv && car.isTouching(suv)) ||
+      (car !== truck && car.isTouching(truck)) ||
+      (car !== sedan && car.isTouching(sedan))
+    );
+  }
+
+  sedan.pointInDirection(225);
+  sport.whenFlag(function () {
+    this.setPenColor('red');
+    this.penDown();
+    while (forever) {
+      if (!bump(this)) {
+        this.move(10);
+      } else {
+        this.move(-30);
+        this.turnLeft(200);
+      }
+    }
+  });
+
+  truck.pointInDirection(135);
+  truck.whenFlag(function () {
+    this.setPenColor('gray');
+    this.penDown();
+    while (forever) {
+      if (!bump(this)) {
+        this.move(5);
+      } else {
+        this.move(-15);
+        this.turnLeft(200);
+      }
+    }
+  });
+
+  sedan.pointInDirection(45);
+
+  sedan.whenFlag(function () {
+    this.setPenColor('blue');
+    this.penDown();
+    while (forever) {
+      if (!bump(this)) {
+        this.move(5);
+      } else {
+        this.move(-15);
+        this.turnLeft(160);
+      }
+    }
+  });
+
+  suv.speed = 0;
+  suv.whenFlag(function () {
+    this.setPenColor('navy');
+    this.penDown();
+    while (forever) {
+      if (!bump(this)) {
+        this.move(this.speed);
+      } else {
+        this.move(-this.speed - 10);
+        this.turnLeft(180);
+      }
+    }
+  });
+
+  suv.whenKeyPressed(39, () => {
+    suv.turnRight(5);
+  });
+  
+  suv.whenKeyPressed(37, () => {
+    suv.turnLeft(5);
+  });
+
+  suv.whenKeyPressed(32, () => {
+    this.speed += 1;
+  });
+
+  suv.whenKeyPressed('b', () => {
+    this.speed -= 10;
+  });
+
+  stage.whenKeyPressed('Escape', () => { forever = false; });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

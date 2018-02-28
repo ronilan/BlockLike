@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - broadcastMessageWait</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+
+  const sprite2 = new blockLike.Sprite();
+  const sprite1 = new blockLike.Sprite();
+
+  stage.addSprite(sprite2);
+  stage.addSprite(sprite1);
+
+  sprite1.whenFlag(function () {
+    this.goTo(100, 100);
+  });
+
+  sprite1.whenReceiveMessage('move', function () {
+    this.wait(0.5);
+    this.move(-10);
+    this.sayWait('done', 1);
+  });
+
+  sprite2.whenFlag(function () {
+    this.goTo(-100, -100);
+  });
+
+  sprite2.whenReceiveMessage('move', function () {
+    this.wait(3);
+    this.move(10);
+    this.sayWait('done', 1);
+  });
+
+  stage.whenClicked(() => {
+    stage.broadcastMessageWait('move');
+    sprite1.say('all done');
+    sprite2.say('all done');
+    this.wait(1);
+    sprite1.say('');
+    sprite2.say('');
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

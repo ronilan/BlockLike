@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - invoke Sequence</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+  const sprite1 = new blockLike.Sprite();
+  const sprite2 = new blockLike.Sprite();
+
+  stage.addSprite(sprite1);
+  stage.addSprite(sprite2);
+  
+  sprite2.goTo(0, -100);
+  sprite1.goTo(0, 100);
+
+  function halfSecondLong() {
+    this.wait(0.4);
+    this.changeY(10);
+    this.changeY(-10);
+    this.changeY(10);
+  }
+
+  function threeSecondsLong() {
+    this.wait(2.866);
+    this.changeY(10);
+    this.changeY(-10);
+    this.changeY(10);
+    this.changeY(-10);
+  }
+
+  function twoSecondsLong() {
+    this.wait(1.866);
+    this.changeY(10);
+    this.changeY(-10);
+    this.changeY(10);
+    this.changeY(-10);
+  }
+
+  // this will run paced
+  sprite1.invoke(threeSecondsLong);
+  // but this will execute without wait (obviously)
+  sprite1.say('ready');
+
+  sprite2.doingClick = false;
+  sprite1.doingClick = false;
+
+  sprite1.whenClicked(function () {
+    if (!this.doingClick) {
+      this.doingClick = true;
+
+      const start = Date.now();
+      this.say(`${Date.now() - start} milliseconds`);
+      this.invoke(twoSecondsLong);
+      this.say(`${Date.now() - start} milliseconds`);
+      this.invoke(threeSecondsLong);
+      this.say(`${Date.now() - start} milliseconds`);
+      this.wait(1.866);
+      this.changeY(10);
+      this.changeY(-10);
+      this.changeY(10);
+      this.changeY(-10);
+      this.say(`${Date.now() - start} milliseconds`);
+      this.invoke(threeSecondsLong);
+      this.say(`${Date.now() - start} milliseconds`);
+
+      this.doingClick = false;
+    }
+  });
+
+  sprite1.whenKeyPressed('a', function () {
+    this.turnRight(90);
+    this.invoke(halfSecondLong);
+    this.turnLeft(90);
+  });
+
+  sprite2.whenKeyPressed('s', function () {
+    this.turnRight(90);
+    this.invoke(halfSecondLong);
+    this.turnLeft(90);
+  });
+
+  function turtles(start) {
+    this.invoke(twoSecondsLong);
+    this.say(`${Date.now() - start} milliseconds`);
+    this.invoke(twoSecondsLong);
+  }
+
+  function rabbitHole(start) {
+    this.invoke(turtles, [start]);
+    this.say(`${Date.now() - start} milliseconds`);
+    this.invoke(twoSecondsLong);
+    this.say(`${Date.now() - start} milliseconds`);
+
+    this.turnLeft(90);
+    this.turnLeft(90);
+    this.turnLeft(90);
+    this.turnLeft(90);
+
+    this.wait(1.866);
+    this.say(`${Date.now() - start} milliseconds`);
+    this.invoke(twoSecondsLong);
+  }
+
+  sprite2.whenClicked(function () {
+    if (!this.doingClick) {
+      this.doingClick = true;
+
+      const start = Date.now();
+      this.say(`${Date.now() - start} milliseconds`);
+      this.invoke(rabbitHole, [start]);
+      this.say(`${Date.now() - start} milliseconds`);
+
+      this.doingClick = false;
+    }
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Interactive Pattern</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+
+  const sprite1 = new blockLike.Sprite();
+  const sprite2 = new blockLike.Sprite();
+
+  sprite1.addTo(stage);
+  sprite2.addTo(stage);
+
+  function pattern(sides, size, times) {
+    for (let i = 0; i < times; i += 1) {
+      this.penDown();
+      for (let j = 0; j < sides; j += 1) {
+        this.move(size);
+        this.turnRight(360 / sides);
+      }
+      this.penUp();
+      this.turnRight(360 / times);
+    }
+  }
+
+  let sides;
+  let size;
+  let times;
+
+  stage.whenFlag(() => {
+    sprite1.move(150);
+    sprite2.move(-150);
+    sprite1.think('I am a shape drawing animal!<br />Click me!');
+  });
+
+  sprite1.whenClicked(function () {
+    sides = sprite1.ask('How many sides does the shape have?');
+    size = sprite1.ask('What size is each side?');
+    times = sprite1.ask('How many times should the shape be drawn?');
+  
+    this.invoke(pattern, [sides, size, times]);
+  });
+
+  sprite2.whenClicked(function () {
+    this.setPenColor('#ff0000');
+    this.invoke(pattern, [sides, size, times]);
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

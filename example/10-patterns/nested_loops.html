@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Nested Loops</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  let forever = true;
+
+  const stage = new blockLike.Stage();
+  const sprite = new blockLike.Sprite();
+
+  sprite.addTo(stage);
+
+  sprite.whenFlag(() => {
+    sprite.goTo(0, 0);
+    sprite.penDown();
+
+    while (forever) {
+      for (let i = 0; i < 12; i += 1) {
+        sprite.penDown();
+        for (let j = 0; j < 5; j += 1) {
+          sprite.move(50);
+          sprite.turnRight(360 / 5);
+        }
+
+        sprite.penUp();
+        sprite.turnRight(360 / 12);
+      }
+
+      this.say('Done');
+      this.wait(0.5);
+      this.say();
+
+      this.move(100);
+      this.turnRight(90);
+    }
+
+    // code placed after a forever loop will not run
+    this.say('Forever ended!');
+  });
+
+  stage.whenKeyPressed('Escape', () => { forever = false; });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

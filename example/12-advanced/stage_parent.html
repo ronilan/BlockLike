@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> -->
+    <title>BlockLike.js Example - Stage Parent</title>
+  </head>
+  <body>
+  <h1>Above</h1>
+  The stage border is of the parent.
+  <div id="container" style="border:5px solid #069; width: 610px;"></div>
+  <h1>Below</h1>
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const options = {
+    width: 600,
+    height: 450,
+    parent: document.getElementById('container'),
+  };
+
+  const stage = new blockLike.Stage(options);
+
+  stage.whenFlag(() => {
+
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

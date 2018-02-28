@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - CSS Filters</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+  const sprite = new blockLike.Sprite({
+    costume: new blockLike.Costume({
+      image: '../../images/colorwheel.svg',
+      width: 200,
+      height: 200,
+    }),
+  });
+
+  stage.addSprite(sprite);
+  sprite.say('s for saturation, i for invert, g for grayscale, h for hue');
+
+  let s = 100;
+  let i = 0;
+  let g = 0;
+  let h = 0;
+
+  sprite.whenKeyPressed('h', () => {
+    h += 36;
+    this.css('filter', `hue-rotate(${h % 360}deg)`);
+  });
+
+  sprite.whenKeyPressed('s', () => {
+    s += 20;
+    this.css('filter', `saturate(${s % 200}%)`);
+  });
+
+  sprite.whenKeyPressed('i', () => {
+    i += 10;
+    this.css('filter', `invert(${i % 100}%)`);
+  });
+
+  sprite.whenKeyPressed('g', () => {
+    g += 10;
+    this.css('filter', `grayscale(${g % 100}%)`);
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

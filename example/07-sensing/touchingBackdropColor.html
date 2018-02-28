@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - touchingBackdropColor</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+  const player = new blockLike.Sprite();
+
+  const backdrop1 = new blockLike.Backdrop({ image: '../../images/colorwheel.svg' });
+
+  backdrop1.addTo(stage);
+  stage.nextBackdrop();
+
+  stage.addSprite(player);
+
+  function senseColor() {
+    player.say(player.touchingBackdropColor().join('<br />'));
+  }
+
+  player.whenKeyPressed(39, () => {
+    player.changeX(10);
+    senseColor();
+  });
+
+  player.whenKeyPressed(37, () => {
+    player.changeX(-10);
+    senseColor();
+  });
+
+  player.whenKeyPressed(38, () => {
+    player.changeY(10);
+    senseColor();
+  });
+  
+  player.whenKeyPressed(40, () => {
+    player.changeY(-10);
+    senseColor();
+  });
+
+  </script>
+</body>
+</html>

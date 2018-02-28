@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - penClear</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+
+  const sprite = new blockLike.Sprite();
+  sprite.addTo(stage);
+
+  sprite.whenFlag(() => {
+    this.penDown();
+
+    this.setPenColor('blue');
+    for (let j = 0; j < 6; j += 1) {
+      this.move(100);
+      this.turnRight(360 / 6);
+    }
+
+    this.penClear();
+    this.move(10);
+
+    this.setPenColor('#FF8800');
+    for (let j = 0; j < 6; j += 1) {
+      this.move(100);
+      this.turnRight(360 / 6);
+    }
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Ask, Say, Think</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+  const sprite1 = new blockLike.Sprite();
+
+  // variables to capture user input must be defined in the global scope.
+  let fname;
+  let lname;
+
+  stage.addSprite(sprite1);
+
+  sprite1.whenFlag(function () {
+    sprite1.glide(1, 100, 0);
+
+    sprite1.think('This is a thought...');
+    this.wait(1);
+
+    sprite1.say('I just had a thought');
+    this.wait(1);
+
+    fname = sprite1.ask('What\'s your first name?');
+    sprite1.say(fname);
+    this.wait(1);
+
+    lname = sprite1.ask('What\'s your last name?');
+    sprite1.say(lname);
+    this.wait(1);
+
+    sprite1.glide(1, 100, 100);
+    this.say(`Your name is ${fname} ${lname}`);
+    sprite1.glide(1, 100, 0);
+
+    this.say();
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

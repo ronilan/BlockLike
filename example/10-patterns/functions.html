@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Functions</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+
+  const sprite1 = new blockLike.Sprite();
+  const sprite2 = new blockLike.Sprite();
+  const sprite3 = new blockLike.Sprite();
+  const sprite4 = new blockLike.Sprite();
+
+  sprite1.addTo(stage);
+  sprite2.addTo(stage);
+  sprite3.addTo(stage);
+  sprite4.addTo(stage);
+
+  sprite1.move(100);
+  sprite2.move(-100);
+  sprite3.changeY(-100);
+  sprite4.changeY(100);
+
+  let returned;
+
+  // A global function when called "normally" is executed without "pacing" or "waiting"
+  function pattern(sprite, sides, size, times) {
+    for (let i = 0; i < times; i += 1) {
+      sprite.penDown();
+      for (let j = 0; j < sides; j += 1) {
+        sprite.move(size);
+        sprite.turnRight(360 / sides);
+      }
+      sprite.penUp();
+      sprite.turnRight(360 / times);
+      sprite.wait(0.5);
+    }
+  }
+
+  // An invoked function can reference the invokeing entity using keyword this
+  function invokedPattern(sides, size, times) {
+    const start = Date.now();
+    for (let i = 0; i < times; i += 1) {
+      this.penDown();
+      for (let j = 0; j < sides; j += 1) {
+        this.move(size);
+        this.turnRight(360 / sides);
+      }
+      this.penUp();
+      this.turnRight(360 / times);
+      this.wait(0.5);
+    }
+    // an invoked function can return a value;
+    return Date.now() - start;
+  }
+
+  sprite1.whenFlag(() => {
+    // A function inside the event method when called "normally" (async is added).
+    function pattern(sprite, sides, size, times) { // eslint-disable-line no-shadow
+      for (let i = 0; i < times; i += 1) {
+        sprite.penDown();
+        for (let j = 0; j < sides; j += 1) {
+          sprite.move(size);
+          sprite.turnRight(360 / sides);
+        }
+
+        sprite.penUp();
+        sprite.turnRight(360 / times);
+        sprite.wait(0.5);
+      }
+    }
+
+    this.setPenColor('blue');
+    // calling a function directly does not wait for it to complete.
+    pattern(this, 5, 50, 12);
+    this.say('Don\'t know if done');
+  });
+
+  sprite2.whenFlag(() => {
+    // calling a global function directly does not pace and does not wait for it to complete.
+    pattern(this, 5, 50, 12);
+    this.say('Done');
+  });
+
+  sprite3.whenFlag(() => {
+    // invokeing a function waits for it to complete.
+    // invokeing a function and passing this.
+    this.invoke(pattern, [this, 5, 50, 12]);
+    this.say('Done first');
+    this.wait(1);
+    this.say();
+    this.setPenColor('#f00');
+    // invokeing a function that references is this.
+    this.invoke(invokedPattern, [5, 50, 12]);
+    this.say('Done second');
+  });
+
+  sprite4.whenFlag(() => {
+    // invokeing and using returned value;
+    returned = this.invoke(invokedPattern, [5, 50, 12]);
+    this.say(`Took ${returned} milliseconds`);
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

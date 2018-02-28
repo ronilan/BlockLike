@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Ask and Answer</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+  const sprite = new blockLike.Sprite();
+
+  stage.addSprite(sprite);
+
+  let answer;
+
+  sprite.whenClicked(function () {
+    let i = 30;
+
+    this.think('yay! I am a sheep! I am a sheep! I am a sheep!');
+    this.wait(0.5);
+    answer = this.ask('Do you want to see me dance?');
+
+    if (answer.toLowerCase() === 'yes' || answer.toLowerCase() === 'y') {
+      while (i > 0) {
+        this.turnRight(20);
+        this.move(20 + Math.floor(Math.random() * 10));
+        this.say(`I'm at: ${this.x} ${this.y}`);
+        i -= 1;
+      }
+    }
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Pace</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  let forever = true;
+
+  const stage = new blockLike.Stage();
+
+  const sprite1 = new blockLike.Sprite({ pace: 333 });
+  const sprite2 = new blockLike.Sprite();
+  const sprite3 = new blockLike.Sprite({ pace: 3 });
+
+  stage.addSprite(sprite1);
+  stage.addSprite(sprite2);
+  stage.addSprite(sprite3);
+
+  sprite1.goTo((stage.width / 2) - 200, 150);
+  sprite3.goTo(-stage.width, -150);
+
+  sprite1.whenFlag(function () {
+    while (forever) {
+      this.drawing ? this.penUp() : this.penDown();
+      this.move(10);
+    }
+  });
+
+  sprite2.whenFlag(function () {
+    while (forever) {
+      this.drawing ? this.penUp() : this.penDown();
+      this.move(10);
+    }
+  });
+
+  sprite3.whenFlag(function () {
+    while (forever) {
+      this.drawing ? this.penUp() : this.penDown();
+      this.move(10);
+    }
+  });
+
+  stage.whenKeyPressed('Escape', () => { forever = false; });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - distanceTo Sprite</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+  const sprite = new blockLike.Sprite();
+  const player = new blockLike.Sprite();
+
+  stage.addSprite(player);
+
+  const colorSheep = new blockLike.Costume({
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Sheep.svg/240px-Sheep.svg.png',
+  });
+  sprite.addCostume(colorSheep);
+  sprite.nextCostume();
+  
+  stage.addSprite(sprite);
+  sprite.goTo(0, 100);
+
+  stage.sendSpriteToFront(player);
+
+  function senseDistance() {
+    const dist = player.distanceTo(sprite.x, sprite.y);
+    player.say(`My center is ${dist} pixels away from their center.`);
+  }
+
+  player.whenKeyPressed(39, () => {
+    player.changeX(10);
+    senseDistance();
+  });
+
+  player.whenKeyPressed(37, () => {
+    player.changeX(-10);
+    senseDistance();
+  });
+  
+  player.whenKeyPressed(38, () => {
+    player.changeY(10);
+    senseDistance();
+  });
+
+  player.whenKeyPressed(40, () => {
+    player.changeY(-10);
+    senseDistance();
+  });
+  function randX() {
+    return (Math.random() * (stage.width / 2)) - (stage.width / 2);
+  }
+  function randY() {
+    return (Math.random() * (stage.height / 2)) - (stage.height / 2);
+  }
+  sprite.whenClicked(() => {
+    this.goTo(randX(), randY());
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - CSS Rules</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+  const sprite = new blockLike.Sprite();
+
+  const backdropGray = new blockLike.Backdrop({
+    color: '#efefef',
+  });
+
+  const backdropBlack = new blockLike.Backdrop({
+    color: '#222222',
+  });
+  backdropGray.css('cursor', 'pointer');
+
+  stage.addBackdrop(backdropGray);
+  stage.addBackdrop(backdropBlack);
+
+  const green = new blockLike.Costume({
+    width: 166,
+    height: 166,
+    color: '#A2DA00',
+    image: 'https://www.blocklike.org/images/sheep_step.png',
+  });
+
+  const blue = new blockLike.Costume({
+    width: 166,
+    height: 166,
+    color: '#A2DAFF',
+    image: 'https://www.blocklike.org/images/sheep.png',
+  });
+
+  blue.css('border', '1px dashed #222');
+  
+  sprite.addCostume(blue);
+  sprite.addCostume(green);
+  sprite.removeCostumeNum(0);
+
+  sprite.css('border-radius', '200px');
+  sprite.css('padding', '33px');
+
+  stage.addSprite(sprite);
+
+  sprite.whenClicked(function () {
+    this.nextCostume();
+  });
+
+  stage.whenClicked(function () {
+    this.nextBackdrop();
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

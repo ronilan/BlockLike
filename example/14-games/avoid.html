@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Avoid Game</title>
+
+  <style>
+    .scorebox {
+      font-family: 'Arial';
+      font-size: 16px;
+      text-align: center;
+      line-height: 30px;
+      border-radius: 6px;
+      border: 1px solid #444;
+    }
+  </style>
+
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/audiosynth/1.0.0/audiosynth.js"></script>
+
+  <script id="example">
+  // prep
+
+  // third party
+  const piano = Synth.createInstrument('piano');
+  const organ = Synth.createInstrument('organ');
+
+  // backdrop
+  const backdrop = new blockLike.Backdrop({ color: '#efefef' });
+  backdrop.css('border', '6px solid #444');
+  backdrop.css('border-radius', '6px');
+
+  // set stage
+  let stage = null;
+  if (window.innerWidth < 800 || window.innerHeight < 600) {
+    stage = new blockLike.Stage();
+  } else {
+    stage = new blockLike.Stage({ width: 800, height: 600, backdrop });
+  }
+  
+  // restart button
+  const restart = new blockLike.Sprite({
+    costume: new blockLike.Costume({
+      height: 130,
+      width: 130,
+      image: null,
+    }),
+  });
+  restart.addClass('blocklike-flag');
+  restart.inner('&#x21bb;');
+  restart.addTo(stage);
+
+  // player
+  const player = new blockLike.Sprite({
+    costume: new blockLike.Costume({
+      image: '',
+      color: '#fff',
+      width: 30,
+      height: 30,
+    }),
+  });
+  player.addClass('scorebox');
+
+  // ball & bullets
+  const ball = new blockLike.Sprite({
+    costume: new blockLike.Costume({
+      image: '',
+      color: '#444',
+      width: 30,
+      height: 30,
+    }),
+  });
+  ball.css('border-radius', '6px');
+
+  const bullet = new blockLike.Costume({
+    image: '',
+    color: '#444',
+    width: 10,
+    height: 10,
+  });
+  bullet.css('border-radius', '2px');
+  ball.addCostume(bullet);
+
+  // persistent
+  let highScore;
+  highScore = window.localStorage.getItem('avoid-highscore');
+  if (!highScore) {
+    window.localStorage.setItem('avoid-highscore', 0);
+  }
+
+  // globals
+  let theScore;
+  let alive;
+
+  // prep controls
+  player.whenKeyPressed(39, function () {
+    this.pointInDirection(90);
+  });
+  player.whenKeyPressed(37, function () {
+    this.pointInDirection(270);
+  });
+  player.whenKeyPressed(38, function () {
+    this.pointInDirection(0);
+  });
+  player.whenKeyPressed(40, function () {
+    this.pointInDirection(180);
+  });
+
+  // mobile "arrow" replacment
+  stage.whenClicked((e) => {
+    const x = e.x - stage.element.el.offsetLeft - (stage.width / 2);
+    const y = -1 * (e.y - stage.element.el.offsetTop - (stage.height / 2));
+
+    const xDiff = player.x - x;
+    const yDiff = player.y - y;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+      xDiff > 0 ? player.pointInDirection(270) : player.pointInDirection(90);
+    } else {
+      yDiff > 0 ? player.pointInDirection(180) : player.pointInDirection(0);
+    }
+  });
+
+  // game start and end
+  function init() {
+    highScore = window.localStorage.getItem('avoid-highscore');
+    player.inner(highScore);
+
+    stage.css('cursor', 'none');
+
+    theScore = 0;
+    alive = true;
+
+    player.goTo(0, 0);
+    player.pointInDirection(90);
+    player.addTo(stage);
+
+    ball.goTo(0, (stage.height / 2) - 50);
+    ball.pointInDirection(180);
+    ball.addTo(stage);
+
+    restart.hide();
+    stage.broadcastMessage('go');
+  }
+
+  function endGame() {
+    if (theScore > highScore) {
+      window.localStorage.setItem('avoid-highscore', theScore);
+    }
+    stage.css('cursor', 'default');
+    restart.show();
+  }
+
+  // game start end controls
+  stage.whenFlag(() => {
+    init();
+  });
+
+  restart.whenClicked(() => {
+    init();
+  });
+
+  // shared bounce off wall function
+  function bounce(thing) {
+    const side = thing.touchingEdge();
+    const angle = thing.direction % 90;
+
+    if (side === 'top') {
+      if (thing.direction > 90) {
+        thing.turnLeft(2 * angle);
+      } else {
+        thing.turnRight(180 - (2 * angle));
+      }
+  
+      thing.move(40);
+    } else if (side === 'bottom') {
+      if (thing.direction < 180) {
+        thing.turnLeft(2 * angle);
+      } else {
+        thing.turnRight(180 - (2 * angle));
+      }
+
+      thing.move(40);
+    } else if (side === 'right') {
+      if (thing.direction < 90) {
+        thing.turnLeft(2 * angle);
+      } else {
+        thing.turnRight(180 - (2 * angle));
+      }
+
+      thing.move(40);
+    } else if (side === 'left') {
+      if (thing.direction < 270) {
+        thing.turnLeft(2 * angle);
+      } else {
+        thing.turnRight(180 - (2 * angle));
+      }
+  
+      thing.move(40);
+    }
+
+    if (side) {
+      piano.play('C', 5, 2);
+    }
+  }
+
+  // player movement
+  player.whenReceiveMessage('go', function () {
+    this.setRotationStyle('none');
+
+    while (alive) {
+      this.move(7);
+      if (this.isTouchingEdge()) {
+        alive = false;
+        organ.play('E', 4, 5);
+      }
+    }
+
+    if (!alive) {
+      this.wait(2);
+      this.removeFrom(stage);
+      endGame();
+    }
+  });
+
+  // ball movement
+  ball.whenReceiveMessage('go', function () {
+    let cycle = 0;
+    while (alive) {
+      cycle += 1;
+  
+      if (player.isTouching(this)) {
+        alive = false;
+        organ.play('E', 4, 5);
+      }
+
+      if (cycle % 100 === 0) {
+        this.clone();
+        theScore += 1;
+        player.inner(theScore);
+        organ.play('A', 4, 2);
+      }
+
+      this.move(5);
+      bounce(ball);
+    }
+
+    if (!alive) {
+      this.wait(2);
+      this.removeFrom(stage);
+    }
+  });
+
+  // clone movement
+  ball.whenCloned(function () {
+    stage.addSprite(this);
+    this.pointTowards(player);
+    this.nextCostume();
+
+    while (alive) {
+      if (player.isTouching(this)) {
+        alive = false;
+        organ.play('E', 4, 5);
+      }
+
+      this.move(5);
+      bounce(this);
+    }
+
+    if (!alive) {
+      this.wait(2);
+      this.removeFrom(stage);
+    }
+  });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - sayWait</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.0.min.js"></script>
+
+  <script id="example">
+  const stage = new blockLike.Stage();
+  const sprite = new blockLike.Sprite();
+
+  stage.addSprite(sprite);
+
+  sprite.whenClicked(() => {
+    const text = 'It is not the consciousness of men that determines their being, but, on the contrary, their social being that determines their consciousness.';
+    sprite.sayWait(text, text.length / 20);
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>
