@@ -135,7 +135,7 @@ export default class Entity {
     try {
       eval(`${varString} = '${value}'`); // eslint-disable-line no-eval
     } catch (error) {
-      throw ('BlockLike.js Error: Variables accepting an value must be declared in the global scope.'); // eslint-disable-line no-throw-literal
+      throw ('BlockLike.js Error: Variables accepting a value must be declared in the global scope.'); // eslint-disable-line no-throw-literal
     }
   }
 
