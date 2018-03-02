@@ -67,7 +67,7 @@ export default class Entity {
     ];
 
     /*
-    * Waited methods work similarly to waited methods only that they enable capturing a value
+    * waitedRetunred methods work similarly to waited methods only that they enable capturing a value
     * into a globally declared variable (or an undeclared one).
     * 1. Event Method functions are rewritten.
     * 2. For waitedReturned methods rewriter will add an await to a promise after the waited method call.
@@ -79,6 +79,8 @@ export default class Entity {
     * 5. When the method completes running an event is dispatched resolving the promise.
     * 6. The value returned is transfered into the variable using eval.
     *
+    * This allows the waited method to halt execution of any code following it until it is done.
+    * At which point the variable has "captured" the value.
     */
     this.waitedReturned = [
       'invoke',
