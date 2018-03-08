@@ -22,22 +22,22 @@
   sprite1.whenFlag(() => {
     let moveDir = 1;
     while (forever) {
-      if (sprite1.isTouchingEdge()) {
+      if (this.isTouchingEdge()) {
         moveDir *= -1;
       }
 
-      sprite1.changeX(10 * moveDir);
+      this.changeX(10 * moveDir);
     }
   });
 
   sprite2.whenFlag(() => {
     let moveDir = 1;
     while (forever) {
-      if (sprite2.isTouchingEdge()) {
+      if (this.isTouchingEdge()) {
         moveDir *= -1;
       }
 
-      sprite2.changeY(10 * moveDir);
+      this.changeY(10 * moveDir);
     }
   });
 

@@ -33,22 +33,22 @@
   }
 
   player.whenKeyPressed(39, () => {
-    player.changeX(10);
+    this.changeX(10);
     senseDistance();
   });
 
   player.whenKeyPressed(37, () => {
-    player.changeX(-10);
+    this.changeX(-10);
     senseDistance();
   });
   
   player.whenKeyPressed(38, () => {
-    player.changeY(10);
+    this.changeY(10);
     senseDistance();
   });
 
   player.whenKeyPressed(40, () => {
-    player.changeY(-10);
+    this.changeY(-10);
     senseDistance();
   });
   function randX() {

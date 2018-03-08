@@ -20,7 +20,7 @@
   stage.addSprite(sprite1);
 
   sprite1.whenFlag(() => {
-    sprite1.say('press space, 1 and/or 2');
+    this.say('press space, 1 and/or 2');
     sprite2.changeY(150);
   });
 
@@ -29,11 +29,11 @@
   });
 
   sprite1.whenKeyPressed('1', () => {
-    sprite1.say('1 is attached to sprite1');
+    this.say('1 is attached to sprite1');
   });
 
   sprite1.whenKeyPressed('2', () => {
-    sprite1.move(200);
+    this.move(200);
     sprite2.say('2 is attached to 2 but moves 1');
   });
 
