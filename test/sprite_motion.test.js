@@ -204,7 +204,6 @@ describe('Sprite Motion', () => {
       const startAt = Date.now();
       const sec = 0.5;
 
-
       sprite.pointInDirection(90);
       sprite.goTo(0, 0);
       sprite.glide(sec, 100, 100);

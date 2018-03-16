@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Costume resizeToImage</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-0.9.0.min.js"></script>
+
+  <script id="example">
+
+  const stage = new blockLike.Stage({ sensing: true });
+  const sprite = new blockLike.Sprite({
+    costume: new blockLike.Costume({
+      width: 2,
+      height: 2,
+    }),
+  });
+  sprite.draggable = false; // disables browser default
+  sprite.css('border', '1px dotted #222');
+
+  sprite.hide();
+  sprite.addTo(stage);
+
+  let startX = 0;
+  let startY = 0;
+  let active = false;
+
+  // mouse ui
+  stage.whenEvent('mousedown', function () {
+    active = true;
+    sprite.show();
+
+    startX = this.mouseX;
+    startY = this.mouseY;
+
+    sprite.setX(startX);
+    sprite.setY(startY);
+  });
+
+  stage.whenEvent('mousemove', function () {
+    if (active) {
+      sprite.costume.width = Math.abs(this.mouseX - startX) * 2;
+      sprite.costume.height = Math.abs(this.mouseY - startY) * 2;
+     // when costume is resized at "run time" sprite must be refreshed.
+      sprite.refresh();
+    }
+  });
+
+  stage.whenEvent('mouseup', () => {
+    active = false;
+    sprite.clone();
+
+    sprite.costume.width = 2;
+    sprite.costume.height = 2;
+     // when costume is resized at "run time" sprite must be refreshed.
+    sprite.refresh();
+  });
+
+  sprite.whenCloned(() => {
+    this.costume.color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    this.css('border', 'none');
+    this.addTo(stage);
+  });
+
+  stage.whenKeyPressed('Escape', () => {
+    active = false;
+    sprite.hide();
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>

@@ -13,13 +13,13 @@ describe('Costume', () => {
   describe('width', () => {
     it('should be 100 by default', () => {
       assert(costume.width === 100);
-      assert(costume.originalWidth === 100);
+      assert(costume.visibleWidth === 100);
     });
   });
   describe('height', () => {
     it('should be 100 by default', () => {
       assert(costume.height === 100);
-      assert(costume.originalHeight === 100);
+      assert(costume.visibleHeight === 100);
     });
   });
   describe('color', () => {

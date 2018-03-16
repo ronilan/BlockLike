@@ -38,8 +38,8 @@ export default class SpriteElement {
 
     // Costume
     if (sprite.costume) {
-      el.style.width = `${sprite.costume.width}px`;
-      el.style.height = `${sprite.costume.height}px`;
+      el.style.width = `${sprite.costume.visibleWidth}px`;
+      el.style.height = `${sprite.costume.visibleHeight}px`;
     }
 
     el.style.left = `${(sprite.stageWidth / 2) + x}px`;

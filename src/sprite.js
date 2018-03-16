@@ -89,8 +89,8 @@ export default class Sprite extends Entity {
 
     if (this.costume) {
       this.costumes.push(this.costume);
-      this.width = this.costume.width;
-      this.height = this.costume.height;
+      this.width = this.costume.visibleWidth;
+      this.height = this.costume.visibleHeight;
     } else {
       this.width = 0;
       this.height = 0;
@@ -601,8 +601,8 @@ export default class Sprite extends Entity {
   */
   _refreshCostume() {
     if (this.costume) {
-      this.width = this.costume.width;
-      this.height = this.costume.height;
+      this.width = this.costume.visibleWidth;
+      this.height = this.costume.visibleHeight;
     }
 
     this.element ? this.element.update(this) : null;
@@ -627,8 +627,8 @@ export default class Sprite extends Entity {
     // if "bare" set the added as active.
     if (!this.costume) {
       this.costume = this.costumes[0];
-      this.width = this.costume.width;
-      this.height = this.costume.height;
+      this.width = this.costume.visibleWidth;
+      this.height = this.costume.visibleHeight;
     }
 
     this.element ? this.element.update(this) : null;
@@ -778,6 +778,7 @@ export default class Sprite extends Entity {
   refresh() {
     const me = this;
     // wait a sec...
+    // TODO: This is to accomodate dynamic image resize. Not ideal. Should be event driven.
     setTimeout(() => {
       // in case costume was resized force a reset of size.
       me.setSize(me.magnification);
@@ -840,17 +841,17 @@ export default class Sprite extends Entity {
       return Math.round(value * (10 ** points)) / (10 ** points);
     }
 
-    this.width = decimalRound(this.costume.originalWidth * (this.magnification / 100), 2);
-    this.height = decimalRound(this.costume.originalHeight * (this.magnification / 100), 2);
+    this.width = decimalRound(this.costume.width * (this.magnification / 100), 2);
+    this.height = decimalRound(this.costume.height * (this.magnification / 100), 2);
 
     this.costumes.forEach((item) => {
       const costume = item;
-      costume.width = decimalRound(costume.originalWidth * (this.magnification / 100), 2);
-      costume.height = decimalRound(costume.originalHeight * (this.magnification / 100), 2);
+      costume.visibleWidth = decimalRound(costume.width * (this.magnification / 100), 2);
+      costume.visibleHeight = decimalRound(costume.height * (this.magnification / 100), 2);
     });
 
-    this.costume.width = this.width;
-    this.costume.height = this.height;
+    this.costume.visibleWidth = this.width;
+    this.costume.visibleHeight = this.height;
 
     this.element ? this.element.update(this) : null;
   }

@@ -37,8 +37,8 @@ export default class Costume extends Look {
 
     this.width = actual.width;
     this.height = actual.height;
-    this.originalWidth = actual.width;
-    this.originalHeight = actual.height;
+    this.visibleWidth = actual.width;
+    this.visibleHeight = actual.height;
 
     this.image = actual.image;
     this.color = actual.color;
@@ -72,8 +72,8 @@ export default class Costume extends Look {
     // if "bare" set the added as active.
     if (!sprite.costume) {
       curSprite.costume = sprite.costumes[0];
-      curSprite.width = sprite.costume.width;
-      curSprite.height = sprite.costume.height;
+      curSprite.width = sprite.costume.visibleWidth;
+      curSprite.height = sprite.costume.visibleHeight;
     }
 
     sprite.element ? sprite.element.update(sprite) : null;
@@ -116,10 +116,10 @@ export default class Costume extends Look {
       image.src = this.image;
 
       image.addEventListener('load', () => {
-        me.originalWidth = image.width;
-        me.originalHeight = image.height;
-        me.width = me.originalWidth;
-        me.height = me.originalHeight;
+        me.width = image.width;
+        me.height = image.height;
+        me.visibleWidth = me.width;
+        me.visibleHeight = me.height;
       });
     }
   }

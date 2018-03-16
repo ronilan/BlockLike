@@ -129,22 +129,22 @@ describe('Sprite Size and Visibility', () => {
     });
     it('it should set the size of the current costume', () => {
       sprite.setSize(200);
-      assert(sprite.costume.width === 200);
-      assert(sprite.costume.height === 200);
+      assert(sprite.costume.visibleWidth === 200);
+      assert(sprite.costume.visibleHeight === 200);
       sprite.setSize(100);
-      assert(sprite.costume.width === 100);
-      assert(sprite.costume.height === 100);
+      assert(sprite.costume.visibleWidth === 100);
+      assert(sprite.costume.visibleHeight === 100);
     });
     it('it should set the size of all costumes', () => {
       sprite.setSize(200);
       sprite.costumes.forEach((item) => {
-        assert(item.width === item.originalWidth * (sprite.magnification / 100));
-        assert(item.height === item.originalHeight * (sprite.magnification / 100));
+        assert(item.visibleWidth === item.width * (sprite.magnification / 100));
+        assert(item.visibleHeight === item.height * (sprite.magnification / 100));
       });
       sprite.setSize(100);
       sprite.costumes.forEach((item) => {
-        assert(item.width === item.originalWidth * (sprite.magnification / 100));
-        assert(item.height === item.originalHeight * (sprite.magnification / 100));
+        assert(item.visibleWidth === item.width * (sprite.magnification / 100));
+        assert(item.visibleHeight === item.height * (sprite.magnification / 100));
       });
     });
   });
@@ -166,30 +166,50 @@ describe('Sprite Size and Visibility', () => {
     });
     it('it should set the size of the current costume', () => {
       sprite.changeSize(-33);
-      assert(sprite.costume.width === 67);
-      assert(sprite.costume.height === 67);
+      assert(sprite.costume.visibleWidth === 67);
+      assert(sprite.costume.visibleHeight === 67);
       sprite.changeSize(66);
-      assert(sprite.costume.width === 133);
-      assert(sprite.costume.height === 133);
+      assert(sprite.costume.visibleWidth === 133);
+      assert(sprite.costume.visibleHeight === 133);
       sprite.changeSize(-33);
-      assert(sprite.costume.width === 100);
-      assert(sprite.costume.height === 100);
+      assert(sprite.costume.visibleWidth === 100);
+      assert(sprite.costume.visibleHeight === 100);
     });
     it('it should set the size of all costumes', () => {
       sprite.changeSize(-33);
       sprite.costumes.forEach((item) => {
-        assert(item.width === decimalRound(item.originalWidth * (sprite.magnification / 100), 2));
-        assert(item.height === decimalRound(item.originalHeight * (sprite.magnification / 100), 2));
+        assert(item.visibleWidth === decimalRound(item.width * (sprite.magnification / 100), 2));
+        assert(item.visibleHeight === decimalRound(item.height * (sprite.magnification / 100), 2));
       });
       sprite.changeSize(66);
       sprite.costumes.forEach((item) => {
-        assert(item.width === decimalRound(item.originalWidth * (sprite.magnification / 100), 2));
-        assert(item.height === decimalRound(item.originalHeight * (sprite.magnification / 100), 2));
+        assert(item.visibleWidth === decimalRound(item.width * (sprite.magnification / 100), 2));
+        assert(item.visibleHeight === decimalRound(item.height * (sprite.magnification / 100), 2));
       });
       sprite.changeSize(-33);
       sprite.costumes.forEach((item) => {
-        assert(item.width === decimalRound(item.originalWidth * (sprite.magnification / 100), 2));
-        assert(item.height === decimalRound(item.originalHeight * (sprite.magnification / 100), 2));
+        assert(item.visibleWidth === decimalRound(item.width * (sprite.magnification / 100), 2));
+        assert(item.visibleHeight === decimalRound(item.height * (sprite.magnification / 100), 2));
+      });
+    });
+
+    describe('refresh()', () => {
+      it('it should set the size of the sprite after costume direct manipulation', (done) => {
+        sprite.costume.width = 10;
+        sprite.costume.height = 20;
+        assert(sprite.costume.visibleWidth !== 10);
+        assert(sprite.costume.visibleHeight !== 20);
+        assert(sprite.width !== 10);
+        assert(sprite.height !== 20);
+        sprite.refresh();
+
+        setTimeout(() => {
+          assert(sprite.costume.visibleWidth === 10);
+          assert(sprite.costume.visibleHeight === 20);
+          assert(sprite.width === 10);
+          assert(sprite.height === 20);
+          done();
+        }, sprite.pace * 2);
       });
     });
   });
