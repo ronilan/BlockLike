@@ -12,7 +12,7 @@ See [BlockLike.org](https://www.blocklike.org) for details, [docs](https://www.b
 
 The easiest way to start with BlockLike.js is using CodePen.IO. Alternatively, you can create an index.html file and include BlockLike.js with the script tag.
 
-The [website](https://www.blocklike.org/#getstarted) has a one-click setup for  CodePen and [instructions](https://www.blocklike.org/#getstarted) how to load the most recent version off of a CDN.
+The [website](https://www.blocklike.org/#getstarted) has a one-click setup for CodePen and [instructions](https://www.blocklike.org/#getstarted) how to load the most recent version off of a CDN.
 
 ## Dev
 Make sure to have [Node.js](https://nodejs.org) installed.
@@ -34,7 +34,7 @@ npm run watch
 npm run build
 ```
 
-Build will build the two library versions (normal and min), generate the third one (mascotless) and republish the docs.
+The build script will build the two library versions (normal and min), generate the third one (mascotless) and republish the docs.
 
 ### Test
 
