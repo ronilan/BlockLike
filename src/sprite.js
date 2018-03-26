@@ -788,6 +788,29 @@ export default class Sprite extends Entity {
   }
 
   /**
+  * resizeToImage - sets the width and height of the sprite to that of the image file of current costume.
+  * Note: service method. Similar to calling resizeToImage() on costume and then refresh() on sprite.
+  *
+  * @example
+  * const sprite = new blockLike.Sprite(null);
+  *
+  * const angrySheep = new blockLike.Costume({
+  *   image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Emojione_1F411.svg/200px-Emojione_1F411.svg.png',
+  * });
+  * angrySheep.addTo(sprite);
+  *
+  * sprite.resizeToImage();
+  * sprite.addTo(stage);
+  */
+  resizeToImage() {
+    if (this.costume) {
+      this.costume.resizeToImage();
+    }
+
+    this.refresh();
+  }
+
+  /**
   * inner - Places html element inside the current costume of the sprite.
   *
   * @example
