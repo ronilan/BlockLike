@@ -14,7 +14,10 @@ The easiest way to start with BlockLike.js is using CodePen.IO. Alternatively, y
 
 The [website](https://www.blocklike.org/#getstarted) has a one-click setup for CodePen and [instructions](https://www.blocklike.org/#getstarted) how to load the most recent version off of a CDN.
 
-## Dev
+## Development
+
+### Install
+
 Make sure to have [Node.js](https://nodejs.org) installed.
 
 Clone the repo.
@@ -27,6 +30,36 @@ npm start
 
 npm run watch
 ```
+
+#### Troubleshoot
+
+##### If you encounter:
+
+```sh
+Failed at the canvas@1.6.10 install script 'node-gyp rebuild'.
+```
+
+You'll need Cairo and Pango installed on your dev box. BlockLike uses [node-canvas](https://github.com/Automattic/node-canvas) to run tests (dev dependency) and it requires the former.
+
+###### Mac
+
+```sh
+brew install pkg-config cairo pango libpng jpeg giflib
+npm install
+```
+
+###### Other systems 
+See [node-canvas documentation](https://github.com/Automattic/node-canvas).
+
+##### If you encounter:
+
+```sh
+listen EADDRINUSE 127.0.0.1:9000
+```
+
+Something else is using that port. 
+
+Open webpack.config.js and change the port setting for the devServer.
 
 ### Build
 
