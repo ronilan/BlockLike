@@ -96,7 +96,7 @@ export default class SpriteElement {
   }
 
   /**
-  * delete - deletes the DOM element (hides it)
+  * delete - deletes the DOM element.
   *
   * @param {object} sprite - the sprite to delete.
   */
@@ -108,7 +108,7 @@ export default class SpriteElement {
   }
 
   /**
-  * addFlag - puts the flag div infront of everything (shows it)
+  * addFlag - puts the flag div infront of everything (shows it).
   *
   * @param {object} sprite - the sprite that "requested" the flag.
   */
@@ -120,7 +120,7 @@ export default class SpriteElement {
   }
 
   /**
-  * addFlag - puts the flag div at the back (hides it)
+  * removeFlag - puts the flag div at the back (hides it).
   *
   * @param {object} sprite - the sprite that "requested" the flag.
   */
