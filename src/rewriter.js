@@ -124,7 +124,7 @@ function emptyLoopProtection(funcS) {
 * @return {string} - the body of the function.
 */
 function removeOuter(funcS) {
-  return funcS.substring(funcS.indexOf('{') + 1, funcS.lastIndexOf('}') - 1);
+  return funcS.substring(funcS.indexOf('{') + 1, funcS.lastIndexOf('}'));
 }
 
 /**
