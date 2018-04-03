@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Object Function</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-0.9.2.min.js"></script>
+
+  <script id="example">
+
+  blockLike.Sprite.prototype.pattern = function (sides, size, times) {
+    for (let i = 0; i < times; i += 1) {
+      this.penDown();
+      for (let j = 0; j < sides; j += 1) {
+        this.move(size);
+        this.turnRight(360 / sides);
+      }
+      this.penUp();
+      this.turnRight(360 / times);
+      this.wait(0.5);
+    }
+  };
+
+  const stage = new blockLike.Stage();
+  const sprite1 = new blockLike.Sprite({ pace: 1000 });
+
+  stage.addSprite(sprite1);
+
+  // this has to be explicitly set for the object instance.
+  sprite1.paced.push('pattern');
+
+  sprite1.whenFlag(function () {
+    this.pattern(5, 50, 12);
+    this.setPenColor('#ff0000');
+    this.pattern(5, 50, 12);
+    this.setPenColor('#00ff00');
+    this.pattern(5, 50, 12);
+    this.setPenColor('#0000ff ');
+  });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>
