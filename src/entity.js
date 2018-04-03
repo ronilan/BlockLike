@@ -149,7 +149,7 @@ export default class Entity {
   * @param {function} func - a function to rewrite and execute.
   * @param {array} argsArr - an array of arguments to pass to the function.
   */
-  async _exec(func, argsArr) {
+  _exec(func, argsArr) {
     const me = this;
     me.triggeringId = this._generateUUID();
     const f = rewrite(func, me);
@@ -219,7 +219,7 @@ export default class Entity {
   * @param {function} func - a function to rewrite and execute.
   */
   whenLoaded(func) {
-    this._exec(func, []).constructor.resolve();
+    this._exec(func, []);
   }
 
   /**
@@ -245,7 +245,7 @@ export default class Entity {
 
       this.element.flag.addEventListener('click', (e) => {
         me.element.removeFlag(me);
-        me._exec(func, [e]).constructor.resolve();
+        me._exec(func, [e]);
         e.stopPropagation();
       });
     }
@@ -271,7 +271,7 @@ export default class Entity {
 
     if (me.element) {
       this.element.el.addEventListener('click', (e) => {
-        me._exec(func, [e]).constructor.resolve();
+        me._exec(func, [e]);
         e.stopPropagation();
       });
     }
@@ -306,7 +306,7 @@ export default class Entity {
       e.key && e.key.toLowerCase() === check ? match = true : null;
       e.keyCode === check ? match = true : null;
       if (match) {
-        me._exec(func, [e]).constructor.resolve();
+        me._exec(func, [e]);
         e.preventDefault();
       }
     });
@@ -333,7 +333,7 @@ export default class Entity {
 
     if (me.element) {
       this.element.el.addEventListener(eventStr, (e) => {
-        me._exec(func, [e]).constructor.resolve();
+        me._exec(func, [e]);
         e.stopPropagation();
       });
     }
@@ -363,13 +363,12 @@ export default class Entity {
     // listen to specified message
     document.addEventListener(msg, (e) => {
       // execute the func and then
-      const p = this._exec(func, [e]).then(() => {
+      this._exec(func, [e]).then(() => {
         // dispatch an event that is unique to the listener and message received.
         const msgId = e.detail.msgId;
         const event = new window.CustomEvent('blockLike.donewheneeceivemessage', { detail: { msgId, listenerId } });
 
         document.dispatchEvent(event);
-        p.constructor.resolve();
       });
     });
   }
