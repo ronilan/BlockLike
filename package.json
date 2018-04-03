@@ -53,5 +53,7 @@
     "type": "git",
     "url": "https://github.com/ronilan/BlockLike.git"
   },
-  "dependencies": {}
+  "dependencies": {
+    "npm": "^5.8.0"
+  }
 }
