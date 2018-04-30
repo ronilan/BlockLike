@@ -79,6 +79,25 @@ describe('Event Methods', () => {
     });
   });
 
+  describe('whenLoaded()', () => {
+    const stage = new blockLike.Stage();
+
+    it('should execute after all code is loaded', (done) => {
+      stage.whenLoaded(() => {
+        this.gotEvent = true;
+        this.outOfEvent = 1;
+      });
+
+      stage.outOfEvent = 0;
+
+      setTimeout(() => {
+        assert(stage.gotEvent === true);
+        assert(stage.outOfEvent === 1);
+        done();
+      }, 100);
+    });
+  });
+
   // TODO:
   // - solve keyboard
   // - rest of events

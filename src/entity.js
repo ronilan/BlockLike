@@ -219,7 +219,9 @@ export default class Entity {
   * @param {function} func - a function to rewrite and execute.
   */
   whenLoaded(func) {
-    this._exec(func, []);
+    setTimeout(() => {
+      this._exec(func, []);
+    }, 0);
   }
 
   /**
