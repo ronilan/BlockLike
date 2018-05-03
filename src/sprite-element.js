@@ -82,6 +82,7 @@ export default class SpriteElement {
 
       image.style.width = '100%';
       image.style.height = '100%';
+      image.style.position = 'absolute';
       image.src = sprite.costume.image;
       el.appendChild(image);
     }
