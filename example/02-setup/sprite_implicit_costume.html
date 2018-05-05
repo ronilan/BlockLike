@@ -14,7 +14,8 @@
   const sprite = new blockLike.Sprite();
 
   const pink = new blockLike.Sprite({
-      color: 'pink'
+    color: 'pink',
+    width: 75,
   });
 
   const greenBear = new blockLike.Sprite({
@@ -30,8 +31,10 @@
   });
 
   const bare = new blockLike.Sprite({
-    width: 10,
-    height: 15,
+    width: 20,
+    height: 25,
+    image: null,
+
   });
 
   sprite.addTo(stage);
@@ -48,7 +51,7 @@
 
   bare.goTo(0, 220);
   bare.addTo(stage);
-  bare.say(`I am ${bare.width}px x ${bare.height}px sprite with no costume`);
+  bare.say(`I am ${bare.width}px by ${bare.height}px sprite with no costume`);
 
   </script>
   <script src='../example-helper.js'></script>
