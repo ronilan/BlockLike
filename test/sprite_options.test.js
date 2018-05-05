@@ -34,6 +34,39 @@ describe('Sprite Object Options', () => {
   });
 });
 
+describe('Sprite Object Options Short Circut', () => {
+  const options = {
+    pace: 100,
+    image: '../../images/bear.png',
+    color: 'blue',
+    width: 50,
+    height: 50,
+  };
+
+  const sprite = new blockLike.Sprite(options);
+
+  describe('width', () => {
+    it('should be as set in options', () => {
+      assert(sprite.costume.width === options.width);
+    });
+  });
+  describe('height', () => {
+    it('should be as set in options', () => {
+      assert(sprite.costume.height === options.height);
+    });
+  });
+  describe('image', () => {
+    it('should be as set in options', () => {
+      assert(sprite.costume.image === options.image);
+    });
+  });
+  describe('color', () => {
+    it('should be as set in options', () => {
+      assert(sprite.costume.color === options.color);
+    });
+  });
+});
+
 describe('Sprite String Options', () => {
   const sprite = new blockLike.Sprite('../../images/confetti.svg');
 
