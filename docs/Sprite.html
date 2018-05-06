@@ -61,7 +61,7 @@ Sprites can be added to the Stage.</div>
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="Sprite"><span class="type-signature"></span>new Sprite<span class="signature">(options)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Sprite"><span class="type-signature"></span>new Sprite<span class="signature">(options, options)</span><span class="type-signature"></span></h4>
 
     
 
@@ -104,7 +104,7 @@ Sprites can be added to the Stage.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2472">line 2472</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2481">line 2481</a>
     </li></ul></dd>
     
 
@@ -165,8 +165,8 @@ Sprites can be added to the Stage.</div>
             
 
             <td class="description last">
-                options for the sprite.
-Alternatively an image url. If a url is provided default costume will be sized to image.
+                options for the sprite and/or options passed to costume.
+Alternatively an image URL. If a URL is provided default costume will be sized to image.
                 
                     
 
@@ -241,9 +241,139 @@ Alternatively an image url. If a url is provided default costume will be sized t
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                the costume width in pixels. Default is 100.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                the costume height in pixels. Default is 100.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>image</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                a URL (or data URL) for the costume image.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                a css color string ('#ff0000', 'red').
+                
+            </td>
+        </tr>
+
+    
     </tbody>
 </table>
 
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                a URL (or data URL) for the costume image.
                 
             </td>
         </tr>
@@ -279,6 +409,13 @@ Alternatively an image url. If a url is provided default costume will be sized t
     color: '#A2DAFF',
     image: 'https://www.blocklike.org/images/sheep_step.png'
   })
+});</code></pre>
+
+    <pre class="prettyprint"><code>let sprite = new blockLike.Sprite({
+    width: 50,
+    height: 50,
+    color: '#A2DAFF',
+    image: 'https://www.blocklike.org/images/sheep_step.png'
 });</code></pre>
 
     <pre class="prettyprint"><code>let confetti = new blockLike.Sprite('https://www.blocklike.org/images/confetti.svg');</code></pre>
@@ -371,7 +508,7 @@ Alternatively an image url. If a url is provided default costume will be sized t
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line719">line 719</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line719">line 719</a>
     </li></ul></dd>
     
 
@@ -515,7 +652,7 @@ sprite.addClass('rainbow');</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3064">line 3064</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3087">line 3087</a>
     </li></ul></dd>
     
 
@@ -662,7 +799,7 @@ sprite.addCostume(costume);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2575">line 2575</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2598">line 2598</a>
     </li></ul></dd>
     
 
@@ -810,7 +947,7 @@ Note - variable for answer must be declared in global scope.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3464">line 3464</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3487">line 3487</a>
     </li></ul></dd>
     
 
@@ -969,7 +1106,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line536">line 536</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line536">line 536</a>
     </li></ul></dd>
     
 
@@ -1121,7 +1258,7 @@ Waits for all whenReceiveMessage listeners to complete.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line564">line 564</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line564">line 564</a>
     </li></ul></dd>
     
 
@@ -1276,7 +1413,7 @@ stage.whenClicked(function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3596">line 3596</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3619">line 3619</a>
     </li></ul></dd>
     
 
@@ -1424,7 +1561,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3334">line 3334</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3357">line 3357</a>
     </li></ul></dd>
     
 
@@ -1570,7 +1707,7 @@ sprite.changeSize(50);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2875">line 2875</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2898">line 2898</a>
     </li></ul></dd>
     
 
@@ -1718,7 +1855,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2893">line 2893</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2916">line 2916</a>
     </li></ul></dd>
     
 
@@ -1866,7 +2003,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2606">line 2606</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2629">line 2629</a>
     </li></ul></dd>
     
 
@@ -1969,7 +2106,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line704">line 704</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line704">line 704</a>
     </li></ul></dd>
     
 
@@ -2155,7 +2292,7 @@ sprite.css({background: '#0000ff'});</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3631">line 3631</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3654">line 3654</a>
     </li></ul></dd>
     
 
@@ -2367,7 +2504,7 @@ Provides smooth movement.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2735">line 2735</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2758">line 2758</a>
     </li></ul></dd>
     
 
@@ -2568,7 +2705,7 @@ Provides smooth movement.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2800">line 2800</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2823">line 2823</a>
     </li></ul></dd>
     
 
@@ -2742,7 +2879,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2821">line 2821</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2844">line 2844</a>
     </li></ul></dd>
     
 
@@ -2898,7 +3035,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line755">line 755</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line755">line 755</a>
     </li></ul></dd>
     
 
@@ -3071,7 +3208,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3209">line 3209</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3232">line 3232</a>
     </li></ul></dd>
     
 
@@ -3165,7 +3302,7 @@ sprite.hide();</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3268">line 3268</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3291">line 3291</a>
     </li></ul></dd>
     
 
@@ -3313,7 +3450,7 @@ sprite.inner('&lt;p class="big centered rainbow">:)&lt;/p>');</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3285">line 3285</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3308">line 3308</a>
     </li></ul></dd>
     
 
@@ -3465,7 +3602,7 @@ Function will be "paced" and code execution will be "waited" until it is complet
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line319">line 319</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line319">line 319</a>
     </li></ul></dd>
     
 
@@ -3637,7 +3774,7 @@ Function will be "paced" and code execution will be "waited" until it is complet
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3766">line 3766</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3789">line 3789</a>
     </li></ul></dd>
     
 
@@ -3821,7 +3958,7 @@ Notes:
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3849">line 3849</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3872">line 3872</a>
     </li></ul></dd>
     
 
@@ -4002,7 +4139,7 @@ Notes:
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3699">line 3699</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3722">line 3722</a>
     </li></ul></dd>
     
 
@@ -4126,7 +4263,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2768">line 2768</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2791">line 2791</a>
     </li></ul></dd>
     
 
@@ -4274,7 +4411,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3129">line 3129</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3152">line 3152</a>
     </li></ul></dd>
     
 
@@ -4370,7 +4507,7 @@ sprite.nextCostume();</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3501">line 3501</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3524">line 3524</a>
     </li></ul></dd>
     
 
@@ -4467,7 +4604,7 @@ When activated sprite motion will create the drawing on the stage's canvas.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3520">line 3520</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3543">line 3543</a>
     </li></ul></dd>
     
 
@@ -4564,7 +4701,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3542">line 3542</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3565">line 3565</a>
     </li></ul></dd>
     
 
@@ -4667,7 +4804,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line604">line 604</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line604">line 604</a>
     </li></ul></dd>
     
 
@@ -4820,7 +4957,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line627">line 627</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line627">line 627</a>
     </li></ul></dd>
     
 
@@ -4974,7 +5111,7 @@ This is similar to playSound and wait for the duration of the sound.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line652">line 652</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line652">line 652</a>
     </li></ul></dd>
     
 
@@ -5122,7 +5259,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2911">line 2911</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2934">line 2934</a>
     </li></ul></dd>
     
 
@@ -5270,7 +5407,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2933">line 2933</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2956">line 2956</a>
     </li></ul></dd>
     
 
@@ -5422,7 +5559,7 @@ Note: service method to be used if costume was manipulated directly.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3218">line 3218</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3241">line 3241</a>
     </li></ul></dd>
     
 
@@ -5510,7 +5647,7 @@ Note: service method to be used if costume was manipulated directly.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line735">line 735</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line735">line 735</a>
     </li></ul></dd>
     
 
@@ -5655,7 +5792,7 @@ sprite.removeClass('rainbow');</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3150">line 3150</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3173">line 3173</a>
     </li></ul></dd>
     
 
@@ -5804,7 +5941,7 @@ If there is only one costume, will fail and emit a console message.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3177">line 3177</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3200">line 3200</a>
     </li></ul></dd>
     
 
@@ -5952,7 +6089,7 @@ sprite.removeCostumeNum(1);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2660">line 2660</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2683">line 2683</a>
     </li></ul></dd>
     
 
@@ -6047,7 +6184,7 @@ Note: service method. Similar to calling resizeToImage() on costume and then ref
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3245">line 3245</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3268">line 3268</a>
     </li></ul></dd>
     
 
@@ -6145,7 +6282,7 @@ sprite.addTo(stage);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3412">line 3412</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3435">line 3435</a>
     </li></ul></dd>
     
 
@@ -6291,7 +6428,7 @@ sprite.say('It is not the consciousness of men that determines their being, but,
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3432">line 3432</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3455">line 3455</a>
     </li></ul></dd>
     
 
@@ -6463,7 +6600,7 @@ sprite.sayWait('It is not the consciousness of men that determines their being, 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3562">line 3562</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3585">line 3585</a>
     </li></ul></dd>
     
 
@@ -6611,7 +6748,7 @@ sprite.setPenColor('#ff0000')</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3578">line 3578</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3601">line 3601</a>
     </li></ul></dd>
     
 
@@ -6760,7 +6897,7 @@ sprite.setPenSize(10);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3025">line 3025</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3048">line 3048</a>
     </li></ul></dd>
     
 
@@ -6908,7 +7045,7 @@ sprite.setRotationStyle('left-right');</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3352">line 3352</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3375">line 3375</a>
     </li></ul></dd>
     
 
@@ -7054,7 +7191,7 @@ sprite.setSize(150);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2839">line 2839</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2862">line 2862</a>
     </li></ul></dd>
     
 
@@ -7202,7 +7339,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2857">line 2857</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2880">line 2880</a>
     </li></ul></dd>
     
 
@@ -7350,7 +7487,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3193">line 3193</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3216">line 3216</a>
     </li></ul></dd>
     
 
@@ -7450,7 +7587,7 @@ sprite.show();</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line679">line 679</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line679">line 679</a>
     </li></ul></dd>
     
 
@@ -7550,7 +7687,7 @@ stage.whenKeyPressed('Escape', () => {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3091">line 3091</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3114">line 3114</a>
     </li></ul></dd>
     
 
@@ -7698,7 +7835,7 @@ sprite.switchCostumeTo(costume);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3112">line 3112</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3135">line 3135</a>
     </li></ul></dd>
     
 
@@ -7846,7 +7983,7 @@ sprite.switchCostumeToNum(1);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3372">line 3372</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3395">line 3395</a>
     </li></ul></dd>
     
 
@@ -7992,7 +8129,7 @@ sprite.think('I think therefore I am.');</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3392">line 3392</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3415">line 3415</a>
     </li></ul></dd>
     
 
@@ -8168,7 +8305,7 @@ Notes:
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3728">line 3728</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3751">line 3751</a>
     </li></ul></dd>
     
 
@@ -8352,7 +8489,7 @@ Notes:
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3793">line 3793</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3816">line 3816</a>
     </li></ul></dd>
     
 
@@ -8481,7 +8618,7 @@ Notes:
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3659">line 3659</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3682">line 3682</a>
     </li></ul></dd>
     
 
@@ -8605,7 +8742,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line3002">line 3002</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3025">line 3025</a>
     </li></ul></dd>
     
 
@@ -8753,7 +8890,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2983">line 2983</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line3006">line 3006</a>
     </li></ul></dd>
     
 
@@ -8906,7 +9043,7 @@ sprite.whenClicked( function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line344">line 344</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line344">line 344</a>
     </li></ul></dd>
     
 
@@ -9057,7 +9194,7 @@ When triggered will invoke user supplied function.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line417">line 417</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line417">line 417</a>
     </li></ul></dd>
     
 
@@ -9207,7 +9344,7 @@ When triggered will invoke user supplied function.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line2690">line 2690</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line2713">line 2713</a>
     </li></ul></dd>
     
 
@@ -9366,7 +9503,7 @@ When triggered will invoke user supplied function.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line479">line 479</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line479">line 479</a>
     </li></ul></dd>
     
 
@@ -9546,7 +9683,7 @@ When triggered will remove the flag div and invoke user supplied function.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line388">line 388</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line388">line 388</a>
     </li></ul></dd>
     
 
@@ -9700,7 +9837,7 @@ When triggered will invoke user supplied function.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line444">line 444</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line444">line 444</a>
     </li></ul></dd>
     
 
@@ -9880,7 +10017,7 @@ To be used with code that needs to run onload.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line367">line 367</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line367">line 367</a>
     </li></ul></dd>
     
 
@@ -10034,7 +10171,7 @@ When triggered will invoke user supplied function.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blocklike-0.9.4.js.html">blocklike-0.9.4.js</a>, <a href="blocklike-0.9.4.js.html#line506">line 506</a>
+        <a href="blocklike-0.9.5.js.html">blocklike-0.9.5.js</a>, <a href="blocklike-0.9.5.js.html#line506">line 506</a>
     </li></ul></dd>
     
 
@@ -10177,7 +10314,7 @@ sprite.whenReceiveMessage('move', function() {
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Apr 29 2018 18:07:03 GMT-0700 (PDT) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat May 05 2018 17:22:14 GMT-0700 (PDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
