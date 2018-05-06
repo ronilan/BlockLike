@@ -973,7 +973,7 @@ export default class Sprite extends Entity {
   */
   thinkWait(text, sec, triggeringId = null) {
     setTimeout(() => {
-      this.say('');
+      this.think('');
       this._releaseWaited(triggeringId);
     }, sec * 1000);
     this.think(text);
