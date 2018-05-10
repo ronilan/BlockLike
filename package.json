@@ -44,6 +44,7 @@
     "minami": "^1.2.3",
     "mocha": "^4.1.0",
     "mocha-webpack": "^1.1.0",
+    "npm": "^6.0.1",
     "replace-in-file": "^3.4.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^3.11.0",
