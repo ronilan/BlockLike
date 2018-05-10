@@ -52,7 +52,7 @@ describe('rewriter', () => {
       };
 
       f = rewrite(func, sprite);
-      assert(f.toString().indexOf('async function anonymous()') !== -1);
+      assert(f.toString().indexOf('async function anonymous(') !== -1);
     });
   });
 
