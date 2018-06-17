@@ -1394,7 +1394,7 @@ export default class Sprite extends Entity {
       const data = backdropContext.getImageData(((this.stageWidth / 2) - (this.width / 2)) + this.x, ((this.stageHeight / 2) - (this.height / 2)) - this.y, this.width, this.height).data;
 
       for (let i = 0; i < data.length; i += 4) {
-        result.push(rgbToHex(data[i], data[i + 1], data[i + 2]));
+        data[i + 3] !== 0 ? result.push(rgbToHex(data[i], data[i + 1], data[i + 2])) : null;
       }
     } catch (e) {
       console.log('BlockLike.js Notice: isTouchingBackdropColor() ingnored. Backdrop image can not be located at a remote origin.'); // eslint-disable-line no-console
