@@ -30,6 +30,7 @@ export default class Costume extends Look {
     const defaults = {
       width: 100,
       height: 100,
+      color: null,
     };
     const actual = Object.assign({}, defaults, options);
 

@@ -24,7 +24,7 @@ describe('Costume', () => {
   });
   describe('color', () => {
     it('should be undefined', () => {
-      assert(typeof costume.color === 'undefined');
+      assert(costume.color === null);
     });
   });
   describe('image', () => {
@@ -142,4 +142,3 @@ describe('Costume CSS', () => {
     });
   });
 });
-

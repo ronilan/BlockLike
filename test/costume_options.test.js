@@ -42,7 +42,7 @@ describe('costume Options', () => {
       assert(imageCostume.image === optionsImage.image);
     });
     it('should not have a color if none is set', () => {
-      assert(typeof imageCostume.color === 'undefined');
+      assert(imageCostume.color === null);
     });
   });
   describe('color', () => {

@@ -282,3 +282,27 @@ describe('Sprite CSS', () => {
     });
   });
 });
+
+describe('Settings color and CSS', () => {
+  const stage = new blockLike.Stage();
+
+  const sprite = new blockLike.Sprite({ color: '#00ff00' });
+  const costume = new blockLike.Costume();
+
+  costume.addTo(sprite);
+
+  sprite.css('background-color', '#ff0000');
+
+  sprite.addTo(stage);
+
+  describe('sprite background color', () => {
+    it('should be set to defined color and override CSS', () => {
+      assert(sprite.element.el.style.backgroundColor === 'rgb(0, 255, 0)');
+    });
+    it('should be set to css when no color is defined', () => {
+      sprite.nextCostume();
+      assert(sprite.element.el.style.backgroundColor === 'rgb(255, 0, 0)');
+    });
+  });
+});
+

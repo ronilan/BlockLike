@@ -61,14 +61,20 @@ export default class SpriteElement {
     // Css rotate -> Number of degrees.
     sprite.rotationStyle === 0 ? el.style.transform = `rotate(${((sprite.direction - 90) + 360) % 360}deg)` : null;
 
-    // css rules
+    // CSS rules classes and the background color.
+    // The costume color setting overrides any CSS setting.
+
+    // There is no color property to current costume - so reset the background-color property of the element.
+    !sprite.costume || sprite.costume.color ? el.style.backgroundColor = '' : null;
+
+    // apply CSS rules (may include background color)
     css.apply(sprite);
 
-    // css classes
+    // apply CSS classes
     sprite.costume ? el.className = sprite.costume.classes.concat(sprite.classes).join(' ') : el.className = sprite.classes.join(' ');
 
-    // Background. Must be done after the CSS.
-    sprite.costume && sprite.costume.color ? el.style.backgroundColor = sprite.costume.color : el.style.backgroundColor = null;
+    // There is a color property to current costume - so apply it and override CSS rules.
+    sprite.costume && sprite.costume.color ? el.style.backgroundColor = sprite.costume.color : null;
 
     // Image.
     if (sprite.costume && el.firstChild) { // has image from previous costume
