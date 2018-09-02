@@ -65,7 +65,7 @@ export default class SpriteElement {
     // The costume color setting overrides any CSS setting.
 
     // There is no color property to current costume - so reset the background-color property of the element.
-    !sprite.costume || sprite.costume.color ? el.style.backgroundColor = '' : null;
+    !sprite.costume || !sprite.costume.color ? el.style.backgroundColor = '' : null;
 
     // apply CSS rules (may include background color)
     css.apply(sprite);
