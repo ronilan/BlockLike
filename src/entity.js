@@ -334,7 +334,10 @@ export default class Entity {
     const me = this;
 
     if (me.element) {
-      this.element.el.addEventListener(eventStr, (e) => {
+      let attachTo = this.element.el;
+      'keydown|keyup|keypress'.indexOf(eventStr) !== -1 ? attachTo = document : null;
+
+      attachTo.addEventListener(eventStr, (e) => {
         me._exec(func, [e]);
         e.stopPropagation();
       });
