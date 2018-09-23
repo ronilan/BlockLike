@@ -87,14 +87,14 @@
     }
   }
 
-  sprite.whenKeyPressed(39, () => {
+  sprite.whenKeyPressed(39, function () {
     this.changeX(20);
     this.pointInDirection(90);
     this.nextCostume();
     edgeBump(sprite);
   });
 
-  sprite.whenKeyPressed(37, () => {
+  sprite.whenKeyPressed(37, function () {
     this.changeX(-20);
     this.pointInDirection(270);
     this.nextCostume();
