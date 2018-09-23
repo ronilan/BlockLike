@@ -886,19 +886,21 @@ export default class Sprite extends Entity {
       return Math.round(value * (10 ** points)) / (10 ** points);
     }
 
-    this.width = decimalRound(this.costume.width * (this.magnification / 100), 2);
-    this.height = decimalRound(this.costume.height * (this.magnification / 100), 2);
+    if (this.costume) {
+      this.width = decimalRound(this.costume.width * (this.magnification / 100), 2);
+      this.height = decimalRound(this.costume.height * (this.magnification / 100), 2);
 
-    this.costumes.forEach((item) => {
-      const costume = item;
-      costume.visibleWidth = decimalRound(costume.width * (this.magnification / 100), 2);
-      costume.visibleHeight = decimalRound(costume.height * (this.magnification / 100), 2);
-    });
+      this.costumes.forEach((item) => {
+        const costume = item;
+        costume.visibleWidth = decimalRound(costume.width * (this.magnification / 100), 2);
+        costume.visibleHeight = decimalRound(costume.height * (this.magnification / 100), 2);
+      });
 
-    this.costume.visibleWidth = this.width;
-    this.costume.visibleHeight = this.height;
+      this.costume.visibleWidth = this.width;
+      this.costume.visibleHeight = this.height;
 
-    this.element ? this.element.update(this) : null;
+      this.element ? this.element.update(this) : null;
+    }
   }
 
   /**
