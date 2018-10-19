@@ -39,6 +39,18 @@
     bear.say(`Tag me! <br/> You have ${score} points`);
   }
 
+  function dragSheep() {
+    drag = true;
+    while (drag) {
+      this.wait(0.01);
+      this.goTo(stage.mouseX, stage.mouseY);
+      if (this.isTouching(bear) && drag) {
+        this.invoke(positionBear);
+        drag = false;
+      }
+    }
+  }
+
   stage.whenFlag(() => {
     positionBear();
     sprite.say('Drag me to tag the bear!');
@@ -48,16 +60,16 @@
 
   let drag = false;
 
+  sprite.whenEvent('touchstart', function () {
+    this.invoke(dragSheep);
+  });
+
+  sprite.whenEvent('touchend', () => {
+    drag = false;
+  });
+
   sprite.whenEvent('mousedown', function () {
-    drag = true;
-    while (drag) {
-      this.wait(0.01);
-      sprite.goTo(stage.mouseX, stage.mouseY);
-      if (this.isTouching(bear) && drag) {
-        this.invoke(positionBear);
-        drag = false;
-      }
-    }
+    this.invoke(dragSheep);
   });
 
   sprite.whenEvent('mouseup', () => {

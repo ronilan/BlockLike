@@ -2,7 +2,6 @@ import Entity from './entity';
 
 import StageElement from './stage-element';
 import StageSurface from './stage-surface';
-// import Backdrop from './backdrop';
 import SpriteElement from './sprite-element';
 
 /**
@@ -37,11 +36,25 @@ export default class Stage extends Entity {
   */
   constructor(options = {}) {
     /**
-    * enableSensing - Enables sensing of document level events (keydown and mousemove)
+    * enableSensing - Enables sensing of document level events (keydown, mousemove, mousedown, touchmove)
     */
     function enableSensing(stage) {
       const me = stage;
       me.sensing = true;
+
+      /**
+      * computeX - Computes centered x based on x extracted from event.
+      */
+      function computeX(x) {
+        return x - me.element.el.offsetLeft - (me.width / 2);
+      }
+
+      /**
+      * computeY - Computes centered y based on y extracted from event.
+      */
+      function computeY(y) {
+        return -y + me.element.el.offsetTop + (me.height / 2);
+      }
 
       document.addEventListener('keydown', (e) => {
         e.key && me.keysKey.indexOf(e.key.toLowerCase()) === -1 ? me.keysKey.push(e.key.toLowerCase()) : null;
@@ -56,8 +69,13 @@ export default class Stage extends Entity {
       });
 
       me.element.el.addEventListener('mousemove', (e) => {
-        me.mouseX = e.x - me.element.el.offsetLeft - (me.width / 2);
-        me.mouseY = -e.y + me.element.el.offsetTop + (me.height / 2);
+        me.mouseX = computeX(e.x);
+        me.mouseY = computeY(e.y);
+      });
+
+      me.element.el.addEventListener('touchmove', (e) => {
+        me.mouseX = computeX(e.changedTouches[0].clientX);
+        me.mouseY = computeY(e.changedTouches[0].clientY);
       });
 
       me.element.el.addEventListener('mousedown', () => {
@@ -67,11 +85,15 @@ export default class Stage extends Entity {
         me.mouseDown = false;
       });
 
-      me.element.el.addEventListener('touchstart', () => {
+      me.element.el.addEventListener('touchstart', (e) => {
+        me.mouseX = computeX(e.touches[0].clientX);
+        me.mouseY = computeY(e.touches[0].clientY);
         me.mouseDown = true;
       });
       me.element.el.addEventListener('touchend', () => {
         me.mouseDown = false;
+        delete me.mouseX;
+        delete me.mouseY;
       });
     }
 
