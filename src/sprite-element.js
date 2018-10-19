@@ -93,6 +93,8 @@ export default class SpriteElement {
       el.appendChild(image);
     }
 
+    el.firstChild ? el.firstChild.draggable = false : null;
+
     // Inner. Must by done after the image
     sprite.costume && sprite.costume.innerHTML ? el.innerHTML = sprite.costume.innerHTML : null;
 

@@ -84,6 +84,9 @@ describe('Sprite', () => {
       assert(typeof sprite.element.el.firstChild === 'object');
       assert(sprite.element.el.firstChild.constructor.name === 'HTMLImageElement');
     });
+    it('should not be draggable', () => {
+      assert(sprite.element.el.firstChild.draggable === false);
+    });
     it('should set image to the current costume image', () => {
       assert(sprite.element.el.firstChild.src === sprite.costume.image);
     });
