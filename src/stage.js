@@ -76,7 +76,7 @@ export default class Stage extends Entity {
       me.element.el.addEventListener('touchmove', (e) => {
         me.mouseX = computeX(e.changedTouches[0].clientX);
         me.mouseY = computeY(e.changedTouches[0].clientY);
-      });
+      }, { passive: true });
 
       me.element.el.addEventListener('mousedown', () => {
         me.mouseDown = true;
@@ -89,7 +89,8 @@ export default class Stage extends Entity {
         me.mouseX = computeX(e.touches[0].clientX);
         me.mouseY = computeY(e.touches[0].clientY);
         me.mouseDown = true;
-      });
+      }, { passive: true });
+
       me.element.el.addEventListener('touchend', () => {
         me.mouseDown = false;
         delete me.mouseX;

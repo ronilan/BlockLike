@@ -335,12 +335,14 @@ export default class Entity {
 
     if (me.element) {
       let attachTo = this.element.el;
+      let options = {};
       'keydown|keyup|keypress'.indexOf(eventStr) !== -1 ? attachTo = document : null;
+      'touchstart|touchmove'.indexOf(eventStr) !== -1 ? options = { passive: true } : null;
 
       attachTo.addEventListener(eventStr, (e) => {
         me._exec(func, [e]);
         e.stopPropagation();
-      });
+      }, options);
     }
   }
 
