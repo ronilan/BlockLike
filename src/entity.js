@@ -552,11 +552,6 @@ export default class Entity {
   *
   * sprite.css('background', '#0000ff');
   *
-  * @example
-  * let sprite = new blockLike.Sprite();
-  *
-  * sprite.css({background: '#0000ff'});
-  *
   * @param {string} prop - the css property (e.g. color). Alternatively an object with key: value pairs.
   * @param {string} value - the value for the css property (e.g. #ff8833)
   */
