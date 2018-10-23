@@ -18,6 +18,8 @@
     }),
   };
 
+  let drag = false;
+
   const stage = new blockLike.Stage(options);
   const sprite = new blockLike.Sprite();
   sprite.addTo(stage);
@@ -41,9 +43,11 @@
 
   function dragSheep() {
     drag = true;
+
     while (drag) {
-      this.wait(0.01);
+      this.wait(0.5);
       this.goTo(stage.mouseX, stage.mouseY);
+
       if (this.isTouching(bear) && drag) {
         this.invoke(positionBear);
         drag = false;
@@ -57,8 +61,6 @@
     sprite.wait(1);
     sprite.say();
   });
-
-  let drag = false;
 
   sprite.whenEvent('touchstart', function () {
     this.invoke(dragSheep);

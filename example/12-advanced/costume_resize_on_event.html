@@ -10,7 +10,6 @@
   <script type="text/javascript" src="../../dist/blocklike-0.9.8.min.js"></script>
 
   <script id="example">
-
   const stage = new blockLike.Stage({ sensing: true });
   const sprite = new blockLike.Sprite({
     costume: new blockLike.Costume({
@@ -27,8 +26,9 @@
   let startY = 0;
   let active = false;
 
-  // mouse ui
-  stage.whenEvent('mousedown', function () {
+  // UI
+
+  function start() {
     active = true;
     sprite.show();
 
@@ -37,18 +37,18 @@
 
     sprite.setX(startX);
     sprite.setY(startY);
-  });
+  }
 
-  stage.whenEvent('mousemove', function () {
+  function draw() {
     if (active) {
       sprite.costume.width = Math.abs(this.mouseX - startX) * 2;
       sprite.costume.height = Math.abs(this.mouseY - startY) * 2;
       // when costume is resized at "run time" sprite must be refreshed.
       sprite.refresh();
     }
-  });
+  }
 
-  stage.whenEvent('mouseup', () => {
+  function end() {
     active = false;
     sprite.clone();
 
@@ -56,6 +56,31 @@
     sprite.costume.height = 2;
     // when costume is resized at "run time" sprite must be refreshed.
     sprite.refresh();
+  }
+
+  stage.whenEvent('mousedown', function () {
+    this.invoke(start);
+  });
+
+  stage.whenEvent('touchstart', function () {
+    this.invoke(start);
+  });
+
+
+  stage.whenEvent('mousemove', function () {
+    this.invoke(draw);
+  });
+
+  stage.whenEvent('touchmove', function () {
+    this.invoke(draw);
+  });
+
+  stage.whenEvent('mouseup', () => {
+    this.invoke(end);
+  });
+
+  stage.whenEvent('touchend', () => {
+    this.invoke(end);
   });
 
   sprite.whenCloned(() => {
