@@ -84,8 +84,6 @@ describe('Stage', () => {
     });
   });
 
-  // TODO: add tests for mouse and key press events when sensing is enabled in options.
-
   describe('delete()', () => {
     it('should delete the stage', () => {
       stage.delete();
