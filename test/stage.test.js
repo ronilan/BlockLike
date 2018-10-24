@@ -77,6 +77,7 @@ describe('Stage', () => {
       assert(stage.element.context.constructor.name === 'CanvasRenderingContext2D');
     });
   });
+
   describe('parent', () => {
     it('should be the DOM Body element', () => {
       assert(stage.element.el.parentElement.constructor.name === 'HTMLBodyElement');

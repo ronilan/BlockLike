@@ -142,3 +142,21 @@ describe('Stage CSS', () => {
     });
   });
 });
+
+
+describe('Stage Zoom', () => {
+  const stage = new blockLike.Stage();
+
+  describe('zoom()', () => {
+    it('should initilize to 100 and scale(1)', () => {
+      assert(stage.magnification === 100);
+      assert(stage.element.el.style.transform === 'scale(1)');
+    });
+    it('it should scale the stage element', () => {
+      stage.zoom(200);
+      assert(stage.element.el.style.transform === 'scale(2)');
+      stage.zoom(50);
+      assert(stage.element.el.style.transform === 'scale(0.5)');
+    });
+  });
+});

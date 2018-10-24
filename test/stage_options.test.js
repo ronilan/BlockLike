@@ -40,6 +40,9 @@ describe('Stage Options', () => {
       assert(stage.element.el.parentElement.constructor.name === 'HTMLDivElement');
       assert(stage.element.el.parentElement === options.parent);
     });
+    it('should set stage top and bottom margins to 0', () => {
+      assert(stage.element.el.style.margin === '0px auto');
+    });
   });
   describe('backdrop', () => {
     it('should be as set in options', () => {

@@ -89,8 +89,6 @@ export default class StageElement {
     el.style.width = `${options.width}px`;
     el.style.height = `${options.height}px`;
 
-    el.style.margin = `${options.marginTB}px auto`;
-
     el.style.position = 'relative';
     el.style.boxSizing = 'border-box';
     el.style.overflow = 'hidden';
@@ -131,6 +129,12 @@ export default class StageElement {
     const el = stage.element.el;
     const backdropContext = stage.element.backdropContainer.getContext('2d');
 
+    let marginTB = 0;
+    if (stage.element.el.parentElement.tagName === 'BODY') {
+      marginTB = Math.floor((window.innerHeight - stage.height) / 2);
+      marginTB < 0 ? marginTB = 0 : null;
+    }
+
     // If color - fill the canvas with the color set, or clear it
     if (stage.backdrop && stage.backdrop.color) {
       backdropContext.rect(0, 0, stage.width, stage.height);
@@ -148,6 +152,10 @@ export default class StageElement {
       };
       img.src = stage.backdrop.image;
     }
+
+    // zoom and placement
+    el.style.transform = `scale(${stage.magnification / 100})`;
+    el.style.margin = `${marginTB}px auto`;
 
     // css rules
     css.apply(stage);

@@ -43,13 +43,8 @@ export default class Stage extends Entity {
       parent: document.body,
       pace: 33,
       backdrop: null,
-      marginTB: 0,
     };
     const actual = Object.assign({}, defaults, options);
-
-    if (actual.parent === defaults.parent) {
-      actual.marginTB = Math.floor((window.innerHeight - actual.height) / 2);
-    }
 
     super(actual.pace);
 
@@ -70,6 +65,8 @@ export default class Stage extends Entity {
     this.keysKeyCode = [];
 
     this.sprites = [];
+
+    this.magnification = 100;
 
     this.cssRules = [];
     this.classes = [];
@@ -264,6 +261,21 @@ export default class Stage extends Entity {
   */
   refresh() {
     this.element ? this.element.update(this) : null;
+  }
+
+  /**
+  * zoom - zooms the stage to the specified percentage number.
+  *
+  * @example
+  * let stage = new blockLike.Stage();
+  *
+  * stage.zoom(150);
+  *
+  * @param {number} percent - the percentage to set.
+  */
+  zoom(percent) {
+    this.magnification = percent;
+    this.element.update(this);
   }
 
   /** Sprites * */

@@ -10,17 +10,29 @@ export default function enable(stage) {
   me.sensing = true;
 
   /**
+  * decimalRound - rounds a number too decimal points.
+  *
+  * @param {number} value - the value to round.
+  * @param {number} points - how many decimal points to leave.
+  */
+  function decimalRound(value, points) {
+    return Math.round(value * (10 ** points)) / (10 ** points);
+  }
+
+  /**
   * computeX - Computes centered x based on x extracted from event.
   */
   function computeX(x) {
-    return x - me.element.el.offsetLeft - (me.width / 2);
+    const mag = me.magnification / 100;
+    return decimalRound((x - (me.element.el.offsetLeft) - (me.width / 2)) / mag, 2);
   }
 
   /**
   * computeY - Computes centered y based on y extracted from event.
   */
   function computeY(y) {
-    return -y + me.element.el.offsetTop + (me.height / 2);
+    const mag = me.magnification / 100;
+    return decimalRound((-y + me.element.el.offsetTop + (me.height / 2)) / mag, 2);
   }
 
   document.addEventListener('keydown', (e) => {
