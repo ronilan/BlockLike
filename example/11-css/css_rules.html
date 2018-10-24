@@ -49,6 +49,9 @@
   sprite.css('padding', '33px');
 
   stage.addSprite(sprite);
+  // shrink image
+  sprite.element.el.firstChild.style.width = '100px'
+  sprite.element.el.firstChild.style.height = '100px'
 
   sprite.whenClicked(function () {
     this.nextCostume();
