@@ -27,6 +27,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, ""),
     compress: true,
+    host: '0.0.0.0',//your ip address
     port: 9000
   }
 };
