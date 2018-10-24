@@ -105,11 +105,6 @@ export default class StageElement {
     this.canvas.className = 'blocklike-panel-surface';
     el.appendChild(this.canvas);
 
-    this.el = createDiv(0);
-    this.el.id = `${stage.id}-container`;
-    this.el.className = 'blocklike-panel-container';
-    el.appendChild(this.el);
-
     this.flag = createFlag();
     this.flag.id = `${stage.id}-flag`;
     this.flag.className = 'blocklike-panel-flag';
