@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Class Extend Paced</title>
+    <style>
+    .text{
+      color: gray;
+      padding: 5px;
+      border-radius: 5px;
+      width: 45px;
+      margin: auto;
+      text-align: center;
+    }
+    .slider {
+      width: 100px;
+      margin: auto;
+    }
+  </style>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-0.9.9.min.js"></script>
+
+  <script id="example">
+  let forever = true;
+
+  const stage = new blockLike.Stage();
+
+  class TextInput extends blockLike.Sprite {
+    constructor(options = {}) {
+      super(options);
+      const defaults = {
+        value: '',
+      };
+      const actual = Object.assign({}, defaults, options);
+
+      const el = document.createElement('INPUT');
+      el.setAttribute('type', 'text');
+      el.setAttribute('value', actual.value);
+
+      this.value = actual.value;
+
+      this.insert(el);
+    }
+
+    getValue() {
+      return this.element.el.children[0].value;
+    }
+  
+    setValue(val) {
+      this.element.el.children[0].value = val;
+    }
+  }
+
+  class Slider extends blockLike.Sprite {
+    constructor(options = {}) {
+      super(options);
+      const defaults = {
+        min: 0,
+        max: 100,
+        step: 1,
+        value: 0,
+      };
+      const actual = Object.assign({}, defaults, options);
+
+      const el = document.createElement('INPUT');
+      el.setAttribute('type', 'range');
+      el.setAttribute('min', actual.min);
+      el.setAttribute('max', actual.max);
+      el.setAttribute('step', actual.step);
+      el.setAttribute('value', actual.value);
+
+      this.value = actual.value;
+
+      this.insert(el);
+    }
+  
+    getValue() {
+      return this.element.el.children[0].value;
+    }
+  
+    setValue(val) {
+      this.element.el.children[0].value = val;
+    }
+  }
+
+  const sprite = new blockLike.Sprite();
+  sprite.changeY(150);
+  const slider = new Slider({ min: -90, max: 90, step: 10 });
+  const text = new TextInput({ value: slider.value });
+  text.changeY(-50);
+
+  stage.addSprite(text);
+  stage.addSprite(slider);
+  stage.addSprite(sprite);
+
+  slider.element.el.children[0].className = 'slider';
+  text.element.el.children[0].className = 'text';
+
+  slider.whenEvent('change', function () {
+    sprite.sayWait(this.getValue(), 0.5);
+  });
+
+  slider.whenEvent('mousemove', function () {
+    text.setValue(this.getValue());
+  });
+
+  stage.whenEvent('dblclick', () => {
+    slider.setValue(0);
+    text.setValue(slider.getValue());
+  });
+
+  sprite.whenLoaded(function () {
+    while (forever) {
+      this.wait(0.5);
+      this.turnRight(parseInt(text.getValue(), 10));
+    }
+  });
+
+  stage.whenKeyPressed('Escape', () => { forever = false; });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>
