@@ -33,6 +33,7 @@
 
     while (this.alive) {
       forever ? this.move(10) : null;
+      this.wait(0.5);
 
       if (this.touchingEdge()) {
         this.removeFrom(stage);
