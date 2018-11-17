@@ -3,6 +3,91 @@
 */
 
 /**
+* countChar - count how many time a given character (or string) appears in another string.
+* helper for evented skipping.
+*
+* @param {string} str - a line of code.
+* @param {string} char - a string to look for.
+*
+* @return {number} - the number of times found.
+*/
+function countChar(str, char) {
+  const regExp = new RegExp(`\\${char}`, 'g');
+  return (str.match(regExp) || []).length;
+}
+
+/**
+* removeStrings - Removes strings from a line of code.
+* helper for evented skipping.
+*
+* @param {string} line - a line of code.
+* @return {string} - the line without strings.
+*/
+function removeStrings(line) {
+  return line.replace(/"(.*?)"|'(.*?)'|`(.*?)`/g, '');
+}
+
+/**
+* isMethodInString - checks a string against an array of method names.
+*
+* @param {string} str - a line of code.
+* @param {Array} arr - an array of method names.
+*
+* @return {boolean} - is the method in the string.
+*/
+function isMethodInString(arr, str) {
+  return (arr.some(method => str.indexOf(`.${method}(`) !== -1));
+}
+
+/**
+* isPaced - checks if a line of code includes a paced method.
+*
+* @param {string} item - a line of code.
+* @param {entity} entity - the entity triggering the method.
+*
+* @return {string} - is paced in code.
+*/
+function isPaced(item, entity) {
+  return isMethodInString(entity.paced, item);
+}
+
+/**
+* isWaited - checks if a line of code includes a waited method.
+*
+* @param {string} item - a line of code.
+* @param {entity} entity - the entity triggering the method.
+*
+* @return {string} - is waited in code.
+*/
+function isWaited(item, entity) {
+  return isMethodInString(entity.waited, item);
+}
+
+/**
+* isEvented - checks if a line of code includes an evented method.
+*
+* @param {string} item - a line of code.
+* @param {entity} entity - the entity triggering the method.
+*
+* @return {string} - is evented in code.
+*/
+function isEvented(item, entity) {
+  return isMethodInString(entity.evented, item);
+}
+
+/**
+* whichWaitedReturn - checks if a line of code includes a waitedReturn method.
+*
+* @param {string} item - a line of code.
+* @param {entity} entity - the entity triggering the method.
+*
+* @return {string} - the waitedReturn method found or null.
+*/
+function whichWaitedReturn(item, entity) {
+  return entity.waitedReturned.find(method => (item.indexOf(`.${method}(`) !== -1 ? method : false));
+}
+
+/**
 * insertPaced - inserts a timed await line after any method that is on the list of paced methods.
 *
 * @param {string} item - a line of code.
@@ -11,18 +96,8 @@
 * @return {string} - a modified line of code.
 */
 function insertPaced(item, entity) {
-  let found = false;
-  let i = entity.paced.length;
-
-  while (i) {
-    i -= 1;
-    item.indexOf(`.${entity.paced[i]}(`) !== -1 ? (found = true) : null;
-    if (found) {
-      break;
-    }
-  }
-
-  return found ? `${item}\n await new Promise(resolve => setTimeout(resolve, ${entity.pace}));` : item;
+  const code = `${item}\n await new Promise(resolve => setTimeout(resolve, ${entity.pace}));`;
+  return isPaced(item, entity) ? code : item;
 }
 
 /**
@@ -36,33 +111,23 @@ function insertPaced(item, entity) {
 function insertWaited(item, entity) {
   let found = null;
   let code;
-  let i;
 
   // look for waited methods.
-  i = entity.waited.length;
-  while (i) {
-    i -= 1;
-    item.indexOf(`.${entity.waited[i]}(`) !== -1 ? (found = entity.waited[i]) : null;
-    if (found) {
-      break;
-    }
-  }
+  found = isWaited(item, entity);
 
   // not a normal "waited". look for waitedReturned.
   if (!found) {
     let theVar = null;
 
-    i = entity.waitedReturned.length;
-    while (i) {
-      i -= 1;
-      item.indexOf(`.${entity.waitedReturned[i]}(`) !== -1 ? (found = entity.waitedReturned[i]) : null;
-      if (found) {
-        break;
-      }
-    }
+    found = whichWaitedReturn(item, entity);
 
     // code for waitedReturn
-    theVar = item.substr(0, item.indexOf('=')).replace('let', '').replace('var', '').trim();
+    theVar = item.substr(0, item.indexOf('='))
+      .replace('let', '')
+      .replace('var', '')
+      .replace('const', '')
+      .trim();
+
     code = `${item.substring(0, item.lastIndexOf(')'))}, '${theVar}', '${entity.triggeringId}')`;
 
     // invoke is "forgiving". may, or may not, have variables.
@@ -73,15 +138,12 @@ function insertWaited(item, entity) {
   }
 
   // entity.triggeringId creates a unique context to chain the waited methods.
-  code = `
-    ${code}\n 
-    await new Promise(resolve => {
+  code = `${code}\n await new Promise(resolve => {
       document.addEventListener('blockLike.waited.${entity.triggeringId}', function waitedListener(e) {
         document.removeEventListener('blockLike.waited.${entity.triggeringId}', waitedListener);
         resolve();
       });
-    });
-    `;
+    });`;
 
   return found ? code : item;
 }
@@ -165,19 +227,26 @@ export default function rewrite(func, entity) {
     code = 'throw \'BlockLike.js Error: Empty loop detected\';';
   } else {
     code = removeComments(removeOuter(code));
+    code = code.split('\n').filter(item => item.trim().length !== 0);
 
-    code = code.split('\n').filter(item => item !== '');
+    // counter for open parentheses.
+    let eventedOpenParen = 0;
 
     code = code.map((item) => {
       const temp = item;
       let result = temp;
 
-      // a method can be one of the following but not more than one
-      result === temp ? result = insertPaced(temp, entity) : null; // more likely
-      result === temp ? result = insertWaited(temp, entity) : null; // less likely
+      // internal evented methods are skipped
+      if (isEvented(temp, entity) || eventedOpenParen) {
+        eventedOpenParen += (countChar(removeStrings(temp), '(') - countChar(removeStrings(temp), ')'));
+      } else {
+        // a method can be one of the following but not more than one
+        result === temp ? result = insertPaced(temp, entity) : null; // more likely
+        result === temp ? result = insertWaited(temp, entity) : null; // less likely
 
-      // and only if not a method will add async to functions
-      result === temp ? result = insertAsync(temp) : null;
+        // and only if not a method will add async to functions
+        result === temp ? result = insertAsync(temp) : null;
+      }
 
       return result;
     });

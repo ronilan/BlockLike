@@ -86,6 +86,20 @@ export default class Entity {
       'invoke',
       'ask',
     ];
+
+    /*
+    * Event methods (evented) are containers for functions to be rewritten.
+    * When an event method is nested inside another the code of the inner method is NOT rewritten.
+    */
+    this.evented = [
+      'whenFlag',
+      'whenLoaded',
+      'whenClicked',
+      'whenKeyPressed',
+      'whenEvent',
+      'whenReceiveMessage',
+      'whenCloned',
+    ];
   }
 
   /**

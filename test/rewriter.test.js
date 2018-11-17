@@ -501,6 +501,192 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('ask(\'How are you?\', \'returned\', \'just-random-string\')') !== -1);
     });
   });
+
+  describe('evented methods', () => {
+    it('should not rewrite whenLoaded inside function', () => {
+      const func = function () {
+        this.whenLoaded(function () { // eslint-disable-line func-names
+          this.say('inside', 1);
+        });
+      };
+      const f = rewrite(func, sprite);
+      assert(f.toString().indexOf('await') === -1);
+    });
+
+    it('should not rewrite whenLoaded inside function', () => {
+      const func = function () {
+        this.whenFlag(function () { // eslint-disable-line func-names
+          this.say('inside', 1);
+        });
+      };
+      const f = rewrite(func, sprite);
+      assert(f.toString().indexOf('await') === -1);
+    });
+
+    it('should not rewrite whenClicked inside function', () => {
+      const func = function () {
+        this.whenClicked(function () { // eslint-disable-line func-names
+          this.say('inside', 1);
+        });
+      };
+      const f = rewrite(func, sprite);
+      assert(f.toString().indexOf('await') === -1);
+    });
+
+    it('should not rewrite whenKeyPressed inside function', () => {
+      const func = function () {
+        this.whenKeyPressed(function () { // eslint-disable-line func-names
+          this.say('inside', 1);
+        });
+      };
+      const f = rewrite(func, sprite);
+      assert(f.toString().indexOf('await') === -1);
+    });
+
+    it('should not rewrite whenEvent inside function', () => {
+      const func = function () {
+        this.whenEvent('mouseover', function () { // eslint-disable-line func-names
+          this.say('inside', 1);
+        });
+      };
+      const f = rewrite(func, sprite);
+      assert(f.toString().indexOf('await') === -1);
+    });
+
+    it('should not rewrite whenReceiveMessage inside function', () => {
+      const func = function () {
+        this.whenReceiveMessage('go fish', function () { // eslint-disable-line func-names
+          this.say('inside', 1);
+        });
+      };
+      const f = rewrite(func, sprite);
+      assert(f.toString().indexOf('await') === -1);
+    });
+
+    it('should not rewrite whenCloned inside function', () => {
+      const func = function () {
+        this.whenCloned(function () { // eslint-disable-line func-names
+          this.say('inside', 1);
+        });
+      };
+      const f = rewrite(func, sprite);
+      assert(f.toString().indexOf('await') === -1);
+    });
+
+    it('should rewrite before and after evented', () => {
+      const func = function () {
+        this.say('before');
+        this.whenReceiveMessage('go fish', function () { // eslint-disable-line func-names
+          this.say('inside', 1);
+        });
+        this.say('after');
+      };
+      const f = rewrite(func, sprite);
+      const lines = f.toString().split('\n');
+      assert(lines[2].indexOf('await') !== -1);
+      assert(lines[5].indexOf('await') === -1);
+      assert(lines[7].indexOf('await') !== -1);
+    });
+
+    it('should be fogiving for method closing format', () => {
+      const func = function () {
+        this.say('before');
+        this.whenReceiveMessage('go fish', function () { // eslint-disable-line func-names
+          this.say('inside', 1);
+        },
+        /*eslint-disable */
+        );
+        /* eslint-enable */
+        this.say('after');
+      };
+      const f = rewrite(func, sprite);
+      const lines = f.toString().split('\n');
+      assert(lines[2].indexOf('await') !== -1);
+      assert(lines[5].indexOf('await') === -1);
+      assert(lines[8].indexOf('await') !== -1);
+    });
+
+    it('should not be influenced by strings', () => {
+      let func;
+      let f;
+      let lines;
+
+      func = function () {
+        this.say('before');
+        this.whenReceiveMessage('go fish', function () { // eslint-disable-line func-names
+          const j = 'junk (';
+          this.say(j, 1);
+        });
+        this.say('after');
+      };
+      f = rewrite(func, sprite);
+      lines = f.toString().split('\n');
+      assert(lines[2].indexOf('await') !== -1);
+      assert(lines[6].indexOf('await') === -1);
+      assert(lines[8].indexOf('await') !== -1);
+
+      func = function () {
+        this.say('before');
+        this.whenReceiveMessage('go fish', function () { // eslint-disable-line func-names
+          const j = 'junk )';
+          this.say(j, 1);
+        });
+        this.say('after');
+      };
+      f = rewrite(func, sprite);
+      lines = f.toString().split('\n');
+      assert(lines[2].indexOf('await') !== -1);
+      assert(lines[6].indexOf('await') === -1);
+      assert(lines[8].indexOf('await') !== -1);
+
+      func = function () {
+        this.say('before');
+        this.whenReceiveMessage('go fish', function () { // eslint-disable-line func-names
+          const j = 'junk "(" (';
+          this.say(j, 1);
+        });
+        this.say('after');
+      };
+      f = rewrite(func, sprite);
+      lines = f.toString().split('\n');
+      assert(lines[2].indexOf('await') !== -1);
+      assert(lines[6].indexOf('await') === -1);
+      assert(lines[8].indexOf('await') !== -1);
+
+      func = function () {
+        this.say('before');
+        this.whenReceiveMessage('go fish', function () { // eslint-disable-line func-names
+          const j = 'junk ") ()';
+          this.say(j, 1);
+        });
+        this.say('after');
+      };
+      f = rewrite(func, sprite);
+      lines = f.toString().split('\n');
+      assert(lines[2].indexOf('await') !== -1);
+      assert(lines[6].indexOf('await') === -1);
+      assert(lines[8].indexOf('await') !== -1);
+
+      const x = `
+        x\n
+        xx
+      `;
+      func = function () {
+        this.say('before');
+        this.whenReceiveMessage('go fish', function () { // eslint-disable-line func-names
+          const j = `junk ")${x} ()`;
+          this.say(j, 1);
+        });
+        this.say('after');
+      };
+      f = rewrite(func, sprite);
+      lines = f.toString().split('\n');
+      assert(lines[2].indexOf('await') !== -1);
+      assert(lines[6].indexOf('await') === -1);
+      assert(lines[8].indexOf('await') !== -1);
+    });
+  });
+
 /* eslint-disable */
   describe('adding async in function body', () => {
     it('should add async to named functions', () => {
