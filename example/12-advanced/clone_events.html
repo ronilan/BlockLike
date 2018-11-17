@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Clone Events</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-0.9.9.min.js"></script>
+
+  <script id="example">
+  let forever = true;
+
+  const stage = new blockLike.Stage();
+  const sprite = new blockLike.Sprite();
+
+  sprite.addTo(stage);
+
+  sprite.whenClicked(() => {
+    this.clone();
+  });
+
+  sprite.whenCloned(() => {
+    this.alive = false;
+
+    this.pointInDirection(Math.floor(Math.random() * 360));
+    this.move(100);
+    this.setSize(80);
+    this.addTo(stage);
+
+    // nested events must be attached only after clone is added to stage
+    this.whenClicked(function () {
+      // protecting from "click spamming".
+      if (!this.alive) {
+        this.alive = true;
+
+        // the thing that gets cloned to which whenCloned refers.
+        const clone = this;
+        this.whenEvent('mouseover', function () {
+          this.clone();
+        });
+        clone.whenCloned(function () {
+          this.addTo(stage);
+          this.setSize(50);
+        });
+
+        // kee "this" moving
+        while (this.alive) {
+          forever ? this.move(10) : null;
+          this.wait(0.1);
+
+          if (this.touchingEdge()) {
+            this.removeFrom(stage);
+            this.alive = false;
+          }
+        }
+      }
+    });
+  });
+
+  stage.whenKeyPressed('Escape', () => { forever = false; });
+
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>
