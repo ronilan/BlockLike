@@ -149,7 +149,7 @@ function insertWaited(item, entity) {
 }
 
 /**
-* insertAsync - Adds keyword async to function deceleration is not present
+* insertAsync - Adds keyword async to function deceleration if not present
 * Will catch:
 * - all named function decelerations with a space after the keyword 'function'
 * - anything that has a fat arrow with any of several variable patterns before it.
