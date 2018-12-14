@@ -38,7 +38,6 @@
   }));
   dog.removeCostumeNum(0);
 
-  // arrow functions are cool here.
   [sheep, bear, dog].forEach((item, index) => {
     stage.addSprite(item);
     item.changeY(-150 + (index * 150));
@@ -49,9 +48,8 @@
   stage.whenLoaded(function () {
     while (forever) {
       this.wait(0.4);
-      // no arrow function inside the main function please...
-      // eslint-disable-next-line
-      [sheep, bear, dog].forEach(function(item) { 
+
+      [sheep, bear, dog].forEach((item) => {
         item.nextCostume();
         item.move(10 + Math.floor(Math.random() * 10));
         item.isTouchingEdge() ? item.turnRight(180) : null;

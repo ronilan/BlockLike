@@ -10,9 +10,7 @@
   <script type="text/javascript" src="../../dist/blocklike-0.9.10.min.js"></script>
 
   <script id="example">
-  /* eslint-disable */
   const stage = new blockLike.Stage({ pace: 1000 });
-
 
   const sprites = [];
   for (let i = 0; i < 10; i += 1) {
@@ -20,28 +18,26 @@
   }
 
   stage.whenFlag(() => {
-    sprites.forEach(function (item, index) {
+    sprites.forEach((item, index) => {
       stage.addSprite(item);
       item.move(index * 30);
     });
   });
 
   stage.whenClicked(() => {
-    sprites.forEach(function (item, index) {
+    sprites.forEach((item, index) => {
       item.turnRight(15 * index);
       item.turnLeft(30 * index);
       item.turnRight(15 * index);
     });
 
-    // for anonymous functions async is optional...
-    sprites.forEach( function (item, index) {
+    sprites.forEach((item, index) => {
       item.changeX(15 * index);
       item.changeX(-30 * index);
       item.changeX(15 * index);
     });
 
-    // arrow anonymous functions must be declared async...
-    sprites.forEach(async (item, index) => {
+    sprites.forEach((item, index) => {
       item.changeY(15 * index);
       item.changeY(-30 * index);
       item.changeY(15 * index);

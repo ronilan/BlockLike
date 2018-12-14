@@ -149,18 +149,27 @@ function insertWaited(item, entity) {
 }
 
 /**
-* insertAsync - Adds keyword async to function deceleration.
-* Will catch all named function decelerations with a space after the keyword 'function'
+* insertAsync - Adds keyword async to function deceleration is not present
+* Will catch:
+* - all named function decelerations with a space after the keyword 'function'
+* - anything that has a fat arrow with any of several variable patterns before it.
 *
 * @param {string} item - a line of code.
 * @return {string} - a modified line of code.
 */
 function insertAsync(item) {
   const exist = item.indexOf('async ');
-  const regExp = /function |function\(|function( |\t)\(/;
-  const matches = regExp.exec(item);
 
-  return exist === -1 && matches ? `${item.substring(0, matches.index)} async ${item.substring(matches.index, item.length)}` : item;
+  // function declaration
+  let regExp = /function |function\(|function( |\t)\(/;
+  let matches = regExp.exec(item);
+
+  // or arrow
+  if (!matches) {
+    regExp = /([a-zA-Z]\w*|\([a-zA-Z]\w*(,\s*[a-zA-Z]\w*)*\)) =>/;
+    matches = regExp.exec(item);
+  }
+  return exist === -1 && matches ? `${item.substring(0, matches.index)}async ${item.substring(matches.index, item.length)}` : item;
 }
 
 /**

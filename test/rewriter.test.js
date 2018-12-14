@@ -712,31 +712,42 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('async function named  (){') !== -1);
     });
 
-    it('should add async to anonymous functions', () => {
+    it('should add async to arrow functions', () => {
       let func;
       let f;
 
       func = function (){
         let arr = [a, b, c];
-        arr.forEach(function(item) {
+        arr.forEach( (item) => {
           item.wait(9);
         })
 
       };
 
       f = rewrite(func, sprite);
-      assert(f.toString().indexOf('arr.forEach( async function(item) {') !== -1);
+      assert(f.toString().indexOf('arr.forEach( async (item) => {') !== -1);
 
       func = function (){
         let arr = [a, b, c];
-        arr.forEach( function  (item) {
+        arr.forEach( (item, index) => {
+          item.wait(index);
+        })
+
+      };
+
+      f = rewrite(func, sprite);
+      assert(f.toString().indexOf('arr.forEach( async (item, index) => {') !== -1);
+
+      func = function (){
+        let arr = [a, b, c];
+        arr.forEach( item => {
           item.wait(9);
         })
 
       };
 
       f = rewrite(func, sprite);
-      assert(f.toString().indexOf('arr.forEach(  async function  (item) {') !== -1);
+      assert(f.toString().indexOf('arr.forEach( async item => {') !== -1);
 
     });
 
