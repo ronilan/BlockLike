@@ -215,6 +215,7 @@ export default class Entity {
       this._releaseWaited(triggeringId);
     }, sec * 1000);
   }
+
   /** Events * */
 
   /**

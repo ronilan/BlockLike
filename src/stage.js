@@ -30,7 +30,7 @@ export default class Stage extends Entity {
   * @param {object} options - Options for the Stage.
   * @param {number} options.width - The stage width in pixels. Default is full window.
   * @param {number} options.height - The stage height in pixels. Default is full window.
-  * @param {number} options.pace - The number of milliseconds to wait for each paced method.
+  * @param {number} options.pace - The number of milliseconds to wait for each paced method.  Will disable pacing when set to zero.
   * @param {object} options.parent - The DOM element into which the stage will be inserted. Default is the body.
   * @param {object} options.backdrop - A default Backdrop.
   * @param {boolean} options.sensing - Enables sensing of mouse location and what keys pressed.

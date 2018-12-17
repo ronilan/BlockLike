@@ -97,7 +97,7 @@ function whichWaitedReturn(item, entity) {
 */
 function insertPaced(item, entity) {
   const code = `${item}\n await new Promise(resolve => setTimeout(resolve, ${entity.pace}));`;
-  return isPaced(item, entity) ? code : item;
+  return entity.pace && isPaced(item, entity) ? code : item;
 }
 
 /**

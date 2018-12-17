@@ -298,6 +298,30 @@ describe('rewriter', () => {
       const f = rewrite(func, sprite);
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 16))') !== -1);
     });
+
+    it('should not rewrite paced methods when pace is zero or null', () => {
+      let func;
+      let f;
+
+      sprite.pace = 0;
+
+      func = function () {
+        this.pointTowards(otherSprite);
+      };
+
+      f = rewrite(func, sprite);
+      assert(f.toString().indexOf('await new Promise(resolve => setTimeout') === -1);
+
+      sprite.pace = null;
+
+      func = function () {
+        this.pointTowards(otherSprite);
+      };
+
+      f = rewrite(func, sprite);
+      assert(f.toString().indexOf('await new Promise(resolve => setTimeout') === -1);
+      sprite.pace = 33;
+    });
   });
 
   describe('waited methods', () => {
@@ -588,7 +612,7 @@ describe('rewriter', () => {
       assert(lines[7].indexOf('await') !== -1);
     });
 
-    it('should be fogiving for method closing format', () => {
+    it('should be forgiving for method closing format', () => {
       const func = function () {
         this.say('before');
         this.whenReceiveMessage('go fish', function () { // eslint-disable-line func-names
