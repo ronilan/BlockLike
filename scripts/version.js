@@ -11,10 +11,10 @@ const version = PACKAGE.version;
 
 const fs = require('fs');
 const path = require('path');
-const replace = require('replace-in-file');
+const replace = require('replace-in-file'); // eslint-disable-line import/no-extraneous-dependencies
 
 // flip examples
-const changes = replace.sync({
+replace.sync({
   files: 'example/**/*.html',
   from: /\/dist\/blocklike-\d+.\d+.\d+.min.js/g,
   to: `/dist/blocklike-${version}.min.js`,
@@ -22,14 +22,12 @@ const changes = replace.sync({
 
 // remove artifacts
 const directories = ['dist', 'docs'];
-let i = directories.length;
 
-while (i > 0) {
-  i -= 1;
-  const files = fs.readdirSync(directories[i]);
-  for (const file of files) {
-    if (fs.lstatSync(path.join(directories[i], file)).isFile()) {
-      fs.unlinkSync(path.join(directories[i], file));
+directories.forEach((directory) => {
+  const files = fs.readdirSync(directory);
+  files.forEach((file) => {
+    if (fs.lstatSync(path.join(directory, file)).isFile()) {
+      fs.unlinkSync(path.join(directory, file));
     }
-  }
-}
+  });
+});
