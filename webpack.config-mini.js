@@ -1,29 +1,11 @@
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const PACKAGE = require('./package.json');
 const version = PACKAGE.version;
 
 module.exports = {
   entry: './src/lib.js',
-  plugins: [
-    new UglifyJsPlugin({
-      sourceMap: false,
-      parallel: true,
-      uglifyOptions: {
-        compress: {
-          keep_classnames: true,
-        },
-        mangle: {
-          reserved: ['Stage', 'Sprite', 'Costume', 'Backdrop'],
-          properties: false
-        },
-        output: {
-          beautify: false
-        },
-      },
-    })
-  ],
+  mode: 'production',
   module: {
     rules: [
       {

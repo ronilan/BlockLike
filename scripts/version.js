@@ -17,18 +17,18 @@ const replace = require('replace-in-file');
 const changes = replace.sync({
   files: 'example/**/*.html',
   from: /\/dist\/blocklike-\d+.\d+.\d+.min.js/g,
-  to: `/dist/blocklike-${version}.min.js`
+  to: `/dist/blocklike-${version}.min.js`,
 });
 
 // remove artifacts
 const directories = ['dist', 'docs'];
 let i = directories.length;
 
-while(i > 0) {
+while (i > 0) {
   i -= 1;
-  let files = fs.readdirSync(directories[i])
+  const files = fs.readdirSync(directories[i]);
   for (const file of files) {
-    if(fs.lstatSync(path.join(directories[i], file)).isFile() ) {
+    if (fs.lstatSync(path.join(directories[i], file)).isFile()) {
       fs.unlinkSync(path.join(directories[i], file));
     }
   }

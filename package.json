@@ -5,11 +5,11 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "watch": "webpack --progress --watch --config webpack.config.js",
-    "lintscripts": "./node_modules/.bin/eslint scripts/*.js --fix --config .eslintrc.json",
-    "linttests": "./node_modules/.bin/eslint test/*.js --fix --config .eslintrc.json",
-    "lintexamples": "./node_modules/.bin/eslint example/*/*.html --fix --config .eslintrc-examples.json",
+    "lint:scripts": "./node_modules/.bin/eslint scripts/*.js --fix --config .eslintrc.json",
+    "lint:tests": "./node_modules/.bin/eslint test/*.js --fix --config .eslintrc.json",
+    "lint:examples": "./node_modules/.bin/eslint example/*/*.html --fix --config .eslintrc-examples.json",
     "test": "mocha-webpack --require test/setup.js \"test/**/*.test.js\"",
-    "testthis": "mocha-webpack --require test/setup.js \"test/**/$TEST.test.js\"",
+    "test:it": "mocha-webpack --require test/setup.js \"test/**/$TEST.test.js\"",
     "full": "webpack --progress --config webpack.config.js",
     "mini": "webpack --progress --config webpack.config-mini.js && node scripts/mini.js",
     "docs": "./node_modules/.bin/jsdoc dist/blocklike-*.*.*.js --destination ./docs --template node_modules/minami --readme Docs-README.md",
@@ -32,26 +32,27 @@
   "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^8.2.3",
-    "babel-minify-webpack-plugin": "^0.2.0",
     "canvas": "^1.6.11",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-loader": "^1.9.0",
+    "eslint-loader": "^2.0.0",
     "eslint-plugin-html": "^4.0.5",
     "eslint-plugin-import": "^2.12.0",
     "jsdoc": "^3.5.5",
     "jsdom": "^11.11.0",
     "minami": "^1.2.3",
     "mocha": "^4.1.0",
-    "mocha-webpack": "^1.1.0",
     "npm": "^6.5.0",
     "replace-in-file": "^3.4.0",
-    "uglifyjs-webpack-plugin": "^1.2.6",
-    "webpack": "^3.12.0",
-    "webpack-dev-server": "^2.11.2"
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/ronilan/BlockLike.git"
+  },
+  "dependencies": {
+    "mocha-webpack": "^2.0.0-beta.0"
   }
 }

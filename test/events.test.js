@@ -13,8 +13,10 @@ describe('Event Methods', () => {
 
     stage.addSprite(sprite);
 
+
+    window.gotEvent = false;
     stage.whenFlag(() => {
-      this.gotEvent = true;
+      window.gotEvent = true;
     });
 
     it('it should create a Flag element and show it', () => {
@@ -24,7 +26,7 @@ describe('Event Methods', () => {
     });
     it('should capture a Flag click initiated by the stage', () => {
       stage.element.flag.dispatchEvent(clickEvent);
-      assert(stage.gotEvent === true); // eslint-disable-line no-undef
+      assert(window.gotEvent === true);
     });
     it('should remove the Flag', () => {
       assert(stage.element.flag.style.zIndex === '-1');
@@ -37,8 +39,9 @@ describe('Event Methods', () => {
 
     stage.addSprite(sprite);
 
+    window.gotEvent = false;
     sprite.whenFlag(() => {
-      this.gotEvent = true;
+      window.gotEvent = true;
     });
 
     it('it should create a Flag element', () => {
@@ -48,7 +51,7 @@ describe('Event Methods', () => {
     });
     it('should capture a Flag click initiated by a sprite', () => {
       sprite.element.flag.dispatchEvent(clickEvent);
-      assert(sprite.gotEvent === true);
+      assert(window.gotEvent === true);
     });
     it('should remove the Flag', () => {
       assert(sprite.element.flag.style.zIndex === '-1');
@@ -62,20 +65,22 @@ describe('Event Methods', () => {
     stage.addSprite(sprite);
 
     it('should capture a click on the stage', () => {
+      window.gotEvent = false;
       stage.whenClicked(() => {
-        this.gotEvent = true;
+        window.gotEvent = true;
       });
 
       stage.element.el.dispatchEvent(clickEvent);
-      assert(stage.gotEvent === true);
+      assert(window.gotEvent === true);
     });
     it('should capture a click on the sprite', () => {
+      window.gotEvent = false;
       sprite.whenClicked(() => {
-        this.gotEvent = true;
+        window.gotEvent = true;
       });
 
       sprite.element.el.dispatchEvent(clickEvent);
-      assert(sprite.gotEvent === true);
+      assert(window.gotEvent === true);
     });
   });
 
@@ -83,16 +88,17 @@ describe('Event Methods', () => {
     const stage = new blockLike.Stage();
 
     it('should execute after all code is loaded', (done) => {
+      window.gotEvent = false;
       stage.whenLoaded(() => {
-        this.gotEvent = true;
-        this.outOfEvent = 1;
+        window.gotEvent = true;
+        window.outOfEvent = 1;
       });
 
-      stage.outOfEvent = 0;
+      window.outOfEvent = 0;
 
       setTimeout(() => {
-        assert(stage.gotEvent === true);
-        assert(stage.outOfEvent === 1);
+        assert(window.gotEvent === true);
+        assert(window.outOfEvent === 1);
         done();
       }, 100);
     });

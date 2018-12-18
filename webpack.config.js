@@ -5,6 +5,7 @@ const version = PACKAGE.version;
 
 module.exports = {
   entry: './src/lib.js',
+  mode: 'development',
   module: {
     rules: [
       {
