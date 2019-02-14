@@ -741,7 +741,7 @@ describe('rewriter', () => {
       let f;
 
       func = function (){
-        let arr = [a, b, c];
+        let arr = ['a', 'b', 'c'];
         arr.forEach(function(item) {
           item.wait(9);
         })
@@ -752,7 +752,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('arr.forEach(async function(item) {') !== -1);
 
       func = function (){
-        let arr = [a, b, c];
+        let arr = ['a', 'b', 'c'];
         arr.forEach( function  (item) {
           item.wait(9);
         })
@@ -769,8 +769,8 @@ describe('rewriter', () => {
       let f;
 
       func = function (){
-        let arr = [a, b, c];
-        arr.forEach( (item) => {
+        let arr = ['a', 'b', 'c'];
+        arr.forEach( (item) => { // spaced
           item.wait(9);
         })
 
@@ -780,8 +780,41 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('arr.forEach( async (item) => {') !== -1);
 
       func = function (){
-        let arr = [a, b, c];
-        arr.forEach( (item, index) => {
+        let arr = ['a', 'b', 'c'];
+        arr.forEach((item) => { // no space before paren
+          item.wait(9);
+        })
+
+      };
+
+      f = rewrite(func, sprite);
+      assert(f.toString().indexOf('arr.forEach(async (item) => {') !== -1);
+
+      func = function (){
+        let arr = ['a', 'b', 'c'];
+        arr.forEach((item) =>{ // no space before curly
+          item.wait(9);
+        })
+
+      };
+
+      f = rewrite(func, sprite);
+      assert(f.toString().indexOf('arr.forEach(async (item) =>{') !== -1);
+
+      func = function (){
+        let arr = ['a', 'b', 'c'];
+        arr.forEach((item)=> { // no space before arrow
+          item.wait(9);
+        })
+
+      };
+
+      f = rewrite(func, sprite);
+      assert(f.toString().indexOf('arr.forEach(async (item)=> {') !== -1);
+
+      func = function (){
+        let arr = ['a', 'b', 'c'];
+        arr.forEach( (item, index) => { // multiple params
           item.wait(index);
         })
 
@@ -791,8 +824,30 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('arr.forEach( async (item, index) => {') !== -1);
 
       func = function (){
-        let arr = [a, b, c];
-        arr.forEach( item => {
+        let arr = ['a', 'b', 'c'];
+        arr.forEach( (item, index)=> { // multiple params no space before arrow
+          item.wait(index);
+        })
+
+      };
+
+      f = rewrite(func, sprite);
+      assert(f.toString().indexOf('arr.forEach( async (item, index)=> {') !== -1);
+
+      func = function (){
+        let arr = ['a', 'b', 'c'];
+        arr.forEach( ( item, index )=> { // space in paran
+          item.wait(index);
+        })
+
+      };
+
+      f = rewrite(func, sprite);
+      assert(f.toString().indexOf('arr.forEach( async ( item, index )=> {') !== -1);
+
+      func = function (){
+        let arr = ['a', 'b', 'c'];
+        arr.forEach( item => { // no paren
           item.wait(9);
         })
 
@@ -800,6 +855,14 @@ describe('rewriter', () => {
 
       f = rewrite(func, sprite);
       assert(f.toString().indexOf('arr.forEach( async item => {') !== -1);
+
+      func = function (){
+        let arr = [1, 2, 3];
+        const mult = arr.map(item => item * 2) // one line returner
+      };
+
+      f = rewrite(func, sprite);
+      assert(f.toString().indexOf('arr.map(async item => item * 2)') !== -1);
 
     });
 
