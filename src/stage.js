@@ -137,7 +137,6 @@ export default class Stage extends Entity {
   */
   removeSprite(sprite) {
     const curSprite = sprite;
-
     this.sprites = this.sprites.filter(item => item !== sprite);
     curSprite.element ? curSprite.element = curSprite.element.delete(curSprite) : null;
   }
@@ -335,7 +334,7 @@ export default class Stage extends Entity {
   */
   sendSpriteForward(sprite) {
     const index = this.sprites.indexOf(sprite);
-    if (index < this.sprites.length - 1) {
+    if (index < this.sprites.length - 1 && index !== -1) {
       this.sprites[index] = this.sprites[index + 1]; // move one down
       this.sprites[index + 1] = sprite; // me subject up
     }
@@ -358,8 +357,10 @@ export default class Stage extends Entity {
   */
   sendSpriteToFront(sprite) {
     const index = this.sprites.indexOf(sprite);
-    this.sprites.splice(index, 1);
-    this.sprites.push(sprite);
+    if (index !== -1) {
+      this.sprites.splice(index, 1);
+      this.sprites.push(sprite);
+    }
     this._refreshSprites();
   }
 
@@ -379,8 +380,10 @@ export default class Stage extends Entity {
   */
   sendSpriteToBack(sprite) {
     const index = this.sprites.indexOf(sprite);
-    this.sprites.splice(index, 1);
-    this.sprites.unshift(sprite);
+    if (index !== -1) {
+      this.sprites.splice(index, 1);
+      this.sprites.unshift(sprite);
+    }
     this._refreshSprites();
   }
 
