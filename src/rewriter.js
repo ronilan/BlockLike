@@ -3,7 +3,7 @@
 */
 
 /**
-* countChar - count how many time a given character (or string) appears in another string.
+* countChar - count how many times a given character (or string) appears in another string.
 * helper for evented skipping.
 *
 * @param {string} str - a line of code.
@@ -161,7 +161,7 @@ function insertAsync(item) {
   const exist = item.indexOf('async ');
 
   // function declaration
-  let regExp = /function |function\(|function( |\t)\(/;
+  let regExp = /function(\s*?[a-zA-Z]\w*\s*?\(|\s*?\()/;
   let matches = regExp.exec(item);
 
   // or arrow

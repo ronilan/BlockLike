@@ -727,13 +727,23 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('async function named() {') !== -1);
 
       func = function () {
-        function named  (){
+        function  named (){ // multi space
           this.wait(1);
         }
         this.wait(9);
       };
       f = rewrite(func, sprite);
-      assert(f.toString().indexOf('async function named  (){') !== -1);
+      assert(f.toString().indexOf('async function  named (){') !== -1);
+
+      func = function () {
+        function	named (){ // tab
+          this.wait(1);
+        }
+        this.wait(9);
+      };
+      f = rewrite(func, sprite);
+      assert(f.toString().indexOf( 'async function	named (){') !== -1); // tab
+
     });
 
     it('should add async to anonymous functions', () => {
@@ -745,7 +755,6 @@ describe('rewriter', () => {
         arr.forEach(function(item) {
           item.wait(9);
         })
-
       };
 
       f = rewrite(func, sprite);
@@ -753,14 +762,23 @@ describe('rewriter', () => {
 
       func = function (){
         let arr = ['a', 'b', 'c'];
-        arr.forEach( function  (item) {
+        arr.forEach(function  (item) {  // multi space
           item.wait(9);
         })
-
       };
 
       f = rewrite(func, sprite);
-      assert(f.toString().indexOf('arr.forEach( async function  (item) {') !== -1);
+      assert(f.toString().indexOf('arr.forEach(async function  (item) {') !== -1);
+
+      func = function (){
+        let arr = ['a', 'b', 'c'];
+        arr.forEach(function	(item) {  // tab
+          item.wait(9);
+        })
+      };
+
+      f = rewrite(func, sprite);
+      assert(f.toString().indexOf( 'arr.forEach(async function	(item) {') !== -1); // tab
 
     });
 
@@ -773,7 +791,6 @@ describe('rewriter', () => {
         arr.forEach( (item) => { // spaced
           item.wait(9);
         })
-
       };
 
       f = rewrite(func, sprite);
@@ -784,7 +801,6 @@ describe('rewriter', () => {
         arr.forEach((item) => { // no space before paren
           item.wait(9);
         })
-
       };
 
       f = rewrite(func, sprite);
@@ -795,7 +811,6 @@ describe('rewriter', () => {
         arr.forEach((item) =>{ // no space before curly
           item.wait(9);
         })
-
       };
 
       f = rewrite(func, sprite);
@@ -806,7 +821,6 @@ describe('rewriter', () => {
         arr.forEach((item)=> { // no space before arrow
           item.wait(9);
         })
-
       };
 
       f = rewrite(func, sprite);
@@ -817,7 +831,6 @@ describe('rewriter', () => {
         arr.forEach( (item, index) => { // multiple params
           item.wait(index);
         })
-
       };
 
       f = rewrite(func, sprite);
@@ -828,7 +841,6 @@ describe('rewriter', () => {
         arr.forEach( (item, index)=> { // multiple params no space before arrow
           item.wait(index);
         })
-
       };
 
       f = rewrite(func, sprite);
@@ -839,7 +851,6 @@ describe('rewriter', () => {
         arr.forEach( ( item, index )=> { // space in paran
           item.wait(index);
         })
-
       };
 
       f = rewrite(func, sprite);
@@ -850,7 +861,6 @@ describe('rewriter', () => {
         arr.forEach( item => { // no paren
           item.wait(9);
         })
-
       };
 
       f = rewrite(func, sprite);
@@ -863,7 +873,6 @@ describe('rewriter', () => {
 
       f = rewrite(func, sprite);
       assert(f.toString().indexOf('arr.map(async item => item * 2)') !== -1);
-
     });
 
   });
