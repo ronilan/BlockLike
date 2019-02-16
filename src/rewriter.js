@@ -4,7 +4,7 @@
 
 /**
 * countChar - count how many times a given character (or string) appears in another string.
-* helper for evented skipping.
+* helper for evented skipping and method rewriting.
 *
 * @param {string} str - a line of code.
 * @param {string} char - a string to look for.
@@ -17,14 +17,15 @@ function countChar(str, char) {
 }
 
 /**
-* removeStrings - Removes strings from a line of code.
-* helper for evented skipping.
+* replaceUserStringWithBlanks - for a given line of code, replaces all occurrences of
+* user provided strings with a sequence of spaces of the same length.
+* helper for identifiyevented skipping
 *
 * @param {string} line - a line of code.
 * @return {string} - the line without strings.
 */
-function removeStrings(line) {
-  return line.replace(/"(.*?)"|'(.*?)'|`(.*?)`/g, '');
+function replaceUserStringWithBlanks(line) {
+  return line.replace(/"(.*?)"|'(.*?)'|`(.*?)`/g, ' ');
 }
 
 /**
@@ -97,7 +98,7 @@ function whichWaitedReturn(item, entity) {
 */
 function insertPaced(item, entity) {
   const code = `${item}\n await new Promise(resolve => setTimeout(resolve, ${entity.pace}));`;
-  return entity.pace && isPaced(item, entity) ? code : item;
+  return entity.pace && isPaced(replaceUserStringWithBlanks(item), entity) ? code : item;
 }
 
 /**
@@ -113,13 +114,13 @@ function insertWaited(item, entity) {
   let code;
 
   // look for waited methods.
-  found = isWaited(item, entity);
+  found = isWaited(replaceUserStringWithBlanks(item), entity);
 
   // not a normal "waited". look for waitedReturned.
   if (!found) {
     let theVar = null;
 
-    found = whichWaitedReturn(item, entity);
+    found = whichWaitedReturn(replaceUserStringWithBlanks(item), entity);
 
     // code for waitedReturn
     theVar = item.substr(0, item.indexOf('='))
@@ -162,12 +163,12 @@ function insertAsync(item) {
 
   // function declaration
   let regExp = /function(\s*?[a-zA-Z]\w*\s*?\(|\s*?\()/;
-  let matches = regExp.exec(item);
+  let matches = regExp.exec(replaceUserStringWithBlanks(item));
 
   // or arrow
   if (!matches) {
     regExp = /([a-zA-Z]\w*|\(\s*?[a-zA-Z]\w*(,\s*[a-zA-Z]\w*)*\s*?\))\s*?=>/;
-    matches = regExp.exec(item);
+    matches = regExp.exec(replaceUserStringWithBlanks(item));
   }
   return exist === -1 && matches ? `${item.substring(0, matches.index)}async ${item.substring(matches.index, item.length)}` : item;
 }
@@ -247,7 +248,7 @@ export default function rewrite(func, entity) {
 
       // internal evented methods are skipped
       if (isEvented(temp, entity) || eventedOpenParen) {
-        eventedOpenParen += (countChar(removeStrings(temp), '(') - countChar(removeStrings(temp), ')'));
+        eventedOpenParen += (countChar(replaceUserStringWithBlanks(temp), '(') - countChar(replaceUserStringWithBlanks(temp), ')'));
       } else {
         // a method can be one of the following but not more than one
         result === temp ? result = insertPaced(temp, entity) : null; // more likely

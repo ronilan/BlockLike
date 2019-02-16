@@ -711,7 +711,7 @@ describe('rewriter', () => {
     });
   });
 
-/* eslint-disable */
+  /* eslint-disable */
   describe('adding async in function body', () => {
     it('should add async to named functions', () => {
       let func;
@@ -875,5 +875,126 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('arr.map(async item => item * 2)') !== -1);
     });
 
+  });
+  /* eslint-enable */
+
+  describe('ignoring user created string in code', () => {
+    it('should skip (and not rewrite) any string with paced method name', () => {
+      const func = function () {
+        const pacedMethodStrings = [
+          'this.goTo(5, 10)',
+          'this.move(5)',
+          'this.changeX(5)',
+          'this.changeY(10)',
+          'this.setX(5)',
+          'this.setY(10)',
+          'this.goTowards(sprite)',
+          'this.turnRight(90)',
+          'this.turnLeft(90)',
+          'this.pointInDirection(90)',
+          'this.pointTowards(sprite)',
+          'this.changeSize(10)',
+          'this.setSize(110)',
+          'this.say("hi")',
+          'this.think(`wow`)',
+          'this.refresh()',
+        ];
+        pacedMethodStrings.pop();
+      };
+
+      const f = rewrite(func, sprite);
+      assert(f.toString().indexOf('await') === -1);
+    });
+
+    it('should skip (and not rewrite) any string with waited method name', () => {
+      const func = function () {
+        const waitedMethodStrings = [
+          'this.wait(5)',
+          'glide(5, 10, 20)',
+          'sayWait("hi", 5)',
+          'thinkWait(`wow`, 10)',
+          'playSoundUntilDone(`../../sounds/bleat.wav`)',
+          'broadcastMessageWait("move")',
+        ];
+        waitedMethodStrings.pop();
+      };
+
+      const f = rewrite(func, sprite);
+      assert(f.toString().indexOf('await') === -1);
+    });
+
+    it('should skip (and not rewrite) any string with waited returned method name', () => {
+      const func = function () {
+        const waitedReturnedMethodStrings = [
+          'this.invoke(func, [arg, anotherArg])',
+          'this.answer = ask("how doin?")',
+        ];
+        waitedReturnedMethodStrings.pop();
+      };
+
+      const f = rewrite(func, sprite);
+      assert(f.toString().indexOf('await') === -1);
+    });
+
+    it('should skip (and not rewrite) strings regardless of the way user created them', () => {
+      const value = 10;
+      const func = function () {
+        const exampleStrings = [
+          'this.wait(5)',
+          'this.wait(5)',
+          'this.wait(5)',
+          `this.wait(${value})`,
+          'this.say("yay")',
+          'this.say(\'yay\')',
+          'this.say(\'yay\')',
+        ];
+        exampleStrings.pop();
+      };
+
+      const f = rewrite(func, sprite);
+      assert(f.toString().indexOf('await') === -1);
+    });
+
+    it('should skip (and not rewrite) strings while rewriting for methods on same line', () => {
+      const func = function () {
+        this.say('this.say(\'yay\')');
+      };
+
+      const f = rewrite(func, sprite);
+      assert(f.toString().indexOf('await') !== -1);
+    });
+
+    it('should skip (and not rewrite) strings with anonymous function() in them', () => {
+      const func = function () {
+        const x = 'function()';
+        this.say(x);
+      };
+
+      const f = rewrite(func, sprite);
+      assert(f.toString().split('\n').slice(1, -1).indexOf('async') === -1);
+    });
+
+    it('should skip (and not rewrite) strings with name function() in them', () => {
+      const func = function () {
+        const x = 'function name()';
+        this.say(x);
+      };
+
+      const f = rewrite(func, sprite);
+      assert(f.toString().split('\n').slice(1, -1).indexOf('async') === -1);
+    });
+
+    it('should skip (and not rewrite) strings with fat arrow function in them in them', () => {
+      const func = function () {
+        const a = '(a => b)';
+        const b = '((a) => b)';
+        const c = '((c) => {return `yay`})';
+        const d = '((d1, d2) => {return \'wow\'})';
+        this.say(`${a} ${b} ${c} ${d}`);
+      };
+
+      const f = rewrite(func, sprite);
+      assert(f.toString().split('\n').slice(1, -1).indexOf('async') === -1);
+    });
   });
 });
