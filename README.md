@@ -78,7 +78,7 @@ npm run test
 
 Single test:
 ```sh
-TEST=stage_looks npm run testthis
+TEST=stage_looks npm run test:it
 ```
 
 ### Documentation publishing
