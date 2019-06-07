@@ -833,7 +833,7 @@ export default class Sprite extends Entity {
   }
 
   /**
-  * inner - Places html element inside the current costume of the sprite.
+  * inner - Places an HTML element inside the current costume of the sprite.
   *
   * @example
   * let stage = new blockLike.Stage();

@@ -215,6 +215,32 @@ describe('Sprite Size and Visibility', () => {
   });
 });
 
+describe('Sprite Content', () => {
+  const stage = new blockLike.Stage();
+  const bareSprite = new blockLike.Sprite(null);
+  const costume = new blockLike.Costume();
+  costume.addTo(bareSprite);
+  bareSprite.addTo(stage);
+
+  describe('inner()', () => {
+    it('should set the inner HTML of the current costume to a provided string', () => {
+      bareSprite.inner('<p class="big centered rainbow">:)</p>');
+
+      assert(bareSprite.element.el.innerHTML === '<p class="big centered rainbow">:)</p>');
+    });
+  });
+
+  describe('insert()', () => {
+    it('should set the inner HTML of the current costume to a provided element', () => {
+      const el = document.createElement('DIV');
+      el.innerHTML = ':)';
+      bareSprite.insert(el);
+
+      assert(bareSprite.element.el.innerHTML === '<div style="display: block; visibility: inherit;">:)</div>');
+    });
+  });
+});
+
 describe('Sprite CSS', () => {
   const sprite = new blockLike.Sprite();
 

@@ -289,7 +289,7 @@
     );
   }
 
-  sedan.pointInDirection(225);
+  sport.pointInDirection(225);
   sport.whenFlag(function () {
     this.setPenColor('red');
     this.penDown();
@@ -318,7 +318,6 @@
   });
 
   sedan.pointInDirection(45);
-
   sedan.whenFlag(function () {
     this.setPenColor('blue');
     this.penDown();
@@ -360,6 +359,10 @@
 
   suv.whenKeyPressed('b', () => {
     this.speed -= 10;
+  });
+
+  stage.whenClicked(() => {
+    suv.showing ? suv.hide() : suv.show()
   });
 
   stage.whenKeyPressed('Escape', () => { forever = false; });

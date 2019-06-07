@@ -75,6 +75,38 @@ describe('Costume Sprite', () => {
   });
 });
 
+describe('Costume Content', () => {
+  const stage = new blockLike.Stage();
+  const bareSprite = new blockLike.Sprite(null);
+  const costume = new blockLike.Costume();
+  costume.addTo(bareSprite);
+  bareSprite.addTo(stage);
+
+  describe('inner()', () => {
+    it('should set the inner HTML of the costume to a provided string', (done) => {
+      costume.inner('<p class="big centered rainbow">:)</p>');
+      bareSprite.refresh();
+      setTimeout(() => {
+        assert(bareSprite.element.el.innerHTML === '<p class="big centered rainbow">:)</p>');
+        done();
+      }, bareSprite.pace * 2);
+    });
+  });
+
+  describe('insert()', () => {
+    it('should set the inner HTML of the costume to a provided element', (done) => {
+      const el = document.createElement('DIV');
+      el.innerHTML = ':)';
+      costume.insert(el);
+      bareSprite.refresh();
+      setTimeout(() => {
+        assert(bareSprite.element.el.innerHTML === '<div style="display: block; visibility: inherit;">:)</div>');
+        done();
+      }, bareSprite.pace * 2);
+    });
+  });
+});
+
 describe('Costume CSS', () => {
   const costume = new blockLike.Costume();
 

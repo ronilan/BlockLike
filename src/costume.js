@@ -126,7 +126,7 @@ export default class Costume extends Look {
   }
 
   /**
-  * inner - inserts html into the costume.
+  * inner - Places an HTML element inside the costume.
   *
   * @example
   * let costume = new blockLike.Costume();
@@ -143,7 +143,7 @@ export default class Costume extends Look {
   }
 
   /**
-  * insert - places a dom element inside the sprite.
+  * insert - Places a DOM element inside the costume.
   *
   * @example
   * let costume = new blockLike.Costume();
@@ -155,7 +155,7 @@ export default class Costume extends Look {
   insert(el) {
     const iel = el.cloneNode(true);
     iel.style.display = 'block';
-    iel.style.visibility = 'visible';
+    iel.style.visibility = 'inherit';
 
     this.image = null;
     this.color = 'transparent';
