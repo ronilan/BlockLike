@@ -9,15 +9,15 @@
 */
 export function apply(entity) {
   const curEntity = entity;
+  // Sprites have Costumes, Stage has Backdrop, figure out which entity it is.
+  const curLook = entity.backdrop || entity.costume;
+  const curLooks = entity.backdrops || entity.costumes;
+
   const el = entity.element.el;
 
-  // Sprites have Costumes, Stage has Backdrop, figure out which entity it is.
-  entity.backdrop ? curEntity.look = entity.backdrop : curEntity.look = entity.costume;
-  entity.backdrops ? curEntity.looks = entity.backdrops : curEntity.looks = entity.costumes;
-
   // remove any style applied by any look
-  if (curEntity.looks) {
-    curEntity.looks.forEach((b) => {
+  if (curLooks) {
+    curLooks.forEach((b) => {
       b.cssRules.forEach((item) => {
         const camelCased = item.prop.replace(/-([a-z])/g, g => g[1].toUpperCase());
         el.style[camelCased] = '';
@@ -26,8 +26,8 @@ export function apply(entity) {
   }
 
   // add current look styles
-  if (curEntity.look) {
-    curEntity.look.cssRules.forEach((item) => {
+  if (curLook) {
+    curLook.cssRules.forEach((item) => {
       const camelCased = item.prop.replace(/-([a-z])/g, g => g[1].toUpperCase());
       el.style[camelCased] = item.value;
     });
