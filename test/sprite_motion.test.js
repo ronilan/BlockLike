@@ -209,11 +209,12 @@ describe('Sprite Motion', () => {
       sprite.glide(sec, 100, 100);
 
       setTimeout(() => {
+        console.log(sprite.x, sprite.y)
         assert(sprite.x === 100);
         assert(sprite.y === 100);
         assert(Date.now() - startAt > 1000);
         done();
-      }, (sec * 1000) + 500);
+      }, (sec * 1000) + 500 + sprite.pace * 2);
     });
   });
 });
