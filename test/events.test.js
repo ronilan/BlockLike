@@ -146,6 +146,35 @@ describe('Event Methods', () => {
     });
   });
 
+  describe('whenEvent()', () => {
+    const dblclickEvent = new window.MouseEvent('dblclick');
+    const stage = new blockLike.Stage();
+    const sprite = new blockLike.Sprite();
+
+    stage.addSprite(sprite);
+
+    it('should capture a user event on the stage', () => {
+      window.gotEvent = false;
+      stage.whenEvent('dblclick', () => {
+        window.gotEvent = true;
+      });
+
+      stage.element.el.dispatchEvent(dblclickEvent);
+      assert(window.gotEvent === true);
+    });
+    it('should capture a user event on the sprite', () => {
+      window.gotEvent = false;
+      sprite.whenEvent('dblclick', () => {
+        window.gotEvent = true;
+      });
+
+      sprite.element.el.dispatchEvent(dblclickEvent);
+      assert(window.gotEvent === true);
+    });
+  });
+
+
+
   // TODO:
   // - rest of events
   // - apply
