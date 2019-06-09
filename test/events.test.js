@@ -5,7 +5,7 @@ const assert = require('assert');
 
 describe('Event Methods', () => {
   const clickEvent = new window.MouseEvent('click');
-  // const keyEvent = new window.KeyboardEvent('keydown', { key: 'z', char: 'z', keyCode: 90 });
+  const keyEvent = new window.KeyboardEvent('keydown', { key: 'z', char: 'z', keyCode: 90 });
 
   describe('Stage whenFlag()', () => {
     const stage = new blockLike.Stage();
@@ -104,8 +104,49 @@ describe('Event Methods', () => {
     });
   });
 
+  describe('whenKeyPressed()', () => {
+    const stage = new blockLike.Stage();
+    const sprite = new blockLike.Sprite();
+
+    stage.addSprite(sprite);
+
+    it('should capture a pressed key when specified as letter', () => {
+      window.gotEvent = false;
+      stage.whenKeyPressed('z', () => {
+        window.gotEvent = true;
+      });
+
+      document.dispatchEvent(keyEvent);
+      assert(window.gotEvent === true);
+    });
+
+    it('should capture a pressed key when specified as code', () => {
+      window.gotEvent = false;
+      stage.whenKeyPressed(90, () => {
+        window.gotEvent = true;
+      });
+
+      document.dispatchEvent(keyEvent);
+      assert(window.gotEvent === true);
+    });
+
+    it('should capture a pressed key with both stage and sprites', () => {
+      window.gotEventStage = false;
+      stage.whenKeyPressed('z', () => {
+        window.gotEventStage = true;
+      });
+      window.gotEventSprite = true;
+      sprite.whenKeyPressed('z', () => {
+        window.gotEventSprite = true;
+      });
+
+      document.dispatchEvent(keyEvent);
+      assert(window.gotEventStage === true);
+      assert(window.gotEventSprite === true);
+    });
+  });
+
   // TODO:
-  // - solve keyboard
   // - rest of events
   // - apply
 });
