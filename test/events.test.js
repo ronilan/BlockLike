@@ -174,8 +174,7 @@ describe('Event Methods', () => {
   });
 
 
-
   // TODO:
   // - rest of events
-  // - apply
+  // - invoke
 });
