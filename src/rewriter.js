@@ -19,7 +19,7 @@ function countChar(str, char) {
 /**
 * replaceUserStringWithBlanks - for a given line of code, replaces all occurrences of
 * user provided strings with a sequence of spaces of the same length.
-* helper for identifiyevented skipping
+* helper for evented skipping and method rewriting.
 *
 * @param {string} line - a line of code.
 * @return {string} - the line without strings.
