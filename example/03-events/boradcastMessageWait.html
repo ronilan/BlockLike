@@ -22,6 +22,14 @@
     this.goTo(100, 100);
   });
 
+  sprite1.whenReceiveMessage('turn', function () {
+    this.turnRight(90);
+  });
+
+  sprite2.whenReceiveMessage('turn', function () {
+    this.turnRight(-90);
+  });
+
   sprite1.whenReceiveMessage('move', function () {
     this.wait(0.5);
     this.move(-10);
@@ -45,6 +53,14 @@
     this.wait(1);
     sprite1.say('');
     sprite2.say('');
+  });
+
+  sprite1.whenClicked(function () {
+    this.broadcastMessageWait('turn');
+  });
+
+  sprite2.whenClicked(function () {
+    this.broadcastMessageWait('turn');
   });
 
   </script>

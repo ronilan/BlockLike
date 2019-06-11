@@ -380,7 +380,7 @@ export default class Entity {
   whenReceiveMessage(msg, func) {
     const listenerId = this._generateUUID();
     // register as a message listener.
-    Entity.messageListeners.push(listenerId);
+    Entity.messageListeners.push({ msg, listenerId });
 
     // listen to specified message
     document.addEventListener(msg, (e) => {
@@ -440,7 +440,7 @@ export default class Entity {
     const me = this;
     const msgId = this._generateUUID();
     // save registered listeners for this broadcast.
-    let myListeners = Entity.messageListeners;
+    let myListeners = Entity.messageListeners.filter(item => item.msg === msg);
     // dispatch the message
     const event = new window.CustomEvent(msg, { detail: { msgId } });
     document.dispatchEvent(event);
@@ -448,7 +448,7 @@ export default class Entity {
     // listen to those who received the message
     document.addEventListener('blockLike.donewheneeceivemessage', function broadcastMessageWaitListener(e) {
       // if event is for this message remove listenerId from list of listeners.
-      (e.detail.msgId === msgId) ? myListeners = myListeners.filter(item => item !== e.detail.listenerId) : null;
+      (e.detail.msgId === msgId) ? myListeners = myListeners.filter(item => item.listenerId !== e.detail.listenerId) : null;
       // all listeners responded.
       if (!myListeners.length) {
         // remove the event listener
