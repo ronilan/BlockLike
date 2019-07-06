@@ -35,7 +35,7 @@
     "canvas": "^1.6.13",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-loader": "^2.1.2",
+    "eslint-loader": "^2.2.1",
     "eslint-plugin-html": "^4.0.5",
     "eslint-plugin-import": "^2.18.0",
     "jsdoc": "^3.6.2",
@@ -45,7 +45,7 @@
     "mocha-webpack": "^2.0.0-beta.0",
     "npm": "^6.10.0",
     "replace-in-file": "^3.4.4",
-    "webpack": "^4.35.0",
+    "webpack": "^4.35.2",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2"
   },
