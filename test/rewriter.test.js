@@ -607,9 +607,9 @@ describe('rewriter', () => {
       };
       const f = rewrite(func, sprite);
       const lines = f.toString().split('\n');
-      assert(lines[2].indexOf('await') !== -1);
-      assert(lines[5].indexOf('await') === -1);
-      assert(lines[7].indexOf('await') !== -1);
+      assert(lines[3].indexOf('await') !== -1);
+      assert(lines[6].indexOf('await') === -1);
+      assert(lines[8].indexOf('await') !== -1);
     });
 
     it('should be forgiving for method closing format', () => {
@@ -625,9 +625,9 @@ describe('rewriter', () => {
       };
       const f = rewrite(func, sprite);
       const lines = f.toString().split('\n');
-      assert(lines[2].indexOf('await') !== -1);
-      assert(lines[5].indexOf('await') === -1);
-      assert(lines[8].indexOf('await') !== -1);
+      assert(lines[3].indexOf('await') !== -1);
+      assert(lines[6].indexOf('await') === -1);
+      assert(lines[9].indexOf('await') !== -1);
     });
 
     it('should not be influenced by strings', () => {
@@ -645,9 +645,9 @@ describe('rewriter', () => {
       };
       f = rewrite(func, sprite);
       lines = f.toString().split('\n');
-      assert(lines[2].indexOf('await') !== -1);
-      assert(lines[6].indexOf('await') === -1);
-      assert(lines[8].indexOf('await') !== -1);
+      assert(lines[3].indexOf('await') !== -1);
+      assert(lines[7].indexOf('await') === -1);
+      assert(lines[9].indexOf('await') !== -1);
 
       func = function () {
         this.say('before');
@@ -659,9 +659,9 @@ describe('rewriter', () => {
       };
       f = rewrite(func, sprite);
       lines = f.toString().split('\n');
-      assert(lines[2].indexOf('await') !== -1);
-      assert(lines[6].indexOf('await') === -1);
-      assert(lines[8].indexOf('await') !== -1);
+      assert(lines[3].indexOf('await') !== -1);
+      assert(lines[7].indexOf('await') === -1);
+      assert(lines[9].indexOf('await') !== -1);
 
       func = function () {
         this.say('before');
@@ -673,9 +673,9 @@ describe('rewriter', () => {
       };
       f = rewrite(func, sprite);
       lines = f.toString().split('\n');
-      assert(lines[2].indexOf('await') !== -1);
-      assert(lines[6].indexOf('await') === -1);
-      assert(lines[8].indexOf('await') !== -1);
+      assert(lines[3].indexOf('await') !== -1);
+      assert(lines[7].indexOf('await') === -1);
+      assert(lines[9].indexOf('await') !== -1);
 
       func = function () {
         this.say('before');
@@ -687,9 +687,9 @@ describe('rewriter', () => {
       };
       f = rewrite(func, sprite);
       lines = f.toString().split('\n');
-      assert(lines[2].indexOf('await') !== -1);
-      assert(lines[6].indexOf('await') === -1);
-      assert(lines[8].indexOf('await') !== -1);
+      assert(lines[3].indexOf('await') !== -1);
+      assert(lines[7].indexOf('await') === -1);
+      assert(lines[9].indexOf('await') !== -1);
 
       const x = `
         x\n
@@ -705,9 +705,9 @@ describe('rewriter', () => {
       };
       f = rewrite(func, sprite);
       lines = f.toString().split('\n');
-      assert(lines[2].indexOf('await') !== -1);
-      assert(lines[6].indexOf('await') === -1);
-      assert(lines[8].indexOf('await') !== -1);
+      assert(lines[3].indexOf('await') !== -1);
+      assert(lines[7].indexOf('await') === -1);
+      assert(lines[9].indexOf('await') !== -1);
     });
   });
 
