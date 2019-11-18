@@ -43,11 +43,11 @@
     "minami": "^1.2.3",
     "mocha": "^4.1.0",
     "mocha-webpack": "^2.0.0-beta.0",
-    "npm": "^6.12.0",
+    "npm": "^6.13.0",
     "replace-in-file": "^3.4.4",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.8.2"
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
   },
   "repository": {
     "type": "git",
