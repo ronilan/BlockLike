@@ -1,6 +1,6 @@
 {
   "name": "blocklike",
-  "version": "0.9.15",
+  "version": "1.0.0",
   "description": "Bridging the gap between block programming and JavaScript",
   "scripts": {
     "start": "webpack-dev-server --open",
