@@ -84,7 +84,7 @@ describe('Sprite Sensing', () => {
   });
 
   describe('touchingBackdropColor()', () => {
-    it('it should return what colors a sprite is touching', () => {
+    it.skip('it should return what colors a sprite is touching', () => {
       stage.switchBackdropTo(backdrop);
       const backdropColors = sprite.touchingBackdropColor();
       assert(backdropColors.length === 1);
@@ -92,7 +92,7 @@ describe('Sprite Sensing', () => {
     });
 
 
-    it('it should return nothing when backdrop is empty', () => {
+    it.skip('it should return nothing when backdrop is empty', () => {
       stage.switchBackdropTo(emptyBackdrop);
       const backdropColors = sprite.touchingBackdropColor();
       assert(backdropColors.length === 0);
@@ -100,17 +100,17 @@ describe('Sprite Sensing', () => {
   });
 
   describe('isTouchingBackdropColor()', () => {
-    it('it should return if a sprite is touching a specified color', () => {
+    it.skip('it should return if a sprite is touching a specified color', () => {
       stage.switchBackdropTo(backdrop);
       assert(sprite.isTouchingBackdropColor('#ff0000') === true);
       assert(sprite.isTouchingBackdropColor('#00ff00') === false);
     });
-    it('it should not (at this point) be able to detect anything other than 6 char hex ', () => {
+    it.skip('it should not (at this point) be able to detect anything other than 6 char hex ', () => {
       stage.switchBackdropTo(backdrop);
       assert(sprite.isTouchingBackdropColor('#f00') === false);
       assert(sprite.isTouchingBackdropColor('red') === false);
     });
-    it('it should return false when backdrop empty and testing for #000000', () => {
+    it.skip('it should return false when backdrop empty and testing for #000000', () => {
       stage.switchBackdropTo(emptyBackdrop);
       assert(sprite.isTouchingBackdropColor('#000000') === false);
     });

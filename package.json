@@ -1,6 +1,6 @@
 {
   "name": "blocklike",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Bridging the gap between block programming and JavaScript",
   "scripts": {
     "start": "webpack-dev-server --open",
@@ -8,7 +8,7 @@
     "lint:scripts": "./node_modules/.bin/eslint scripts/*.js --fix --config .eslintrc.json",
     "lint:tests": "./node_modules/.bin/eslint test/*.js --fix --config .eslintrc.json",
     "lint:examples": "./node_modules/.bin/eslint example/*/*.html --fix --config .eslintrc-examples.json",
-    "test": "mocha-webpack --require test/setup.js \"test/**/*.test.js\"",
+    "test": "webpack --output=test/~~out.js --mode=development test/*.test.js && mocha --require test/setup.js --exit test/~~out.js && rm test/~~out.js",
     "test:it": "mocha-webpack --require test/setup.js \"test/**/$TEST.test.js\"",
     "full": "webpack --progress --config webpack.config.js",
     "mini": "webpack --progress --config webpack.config-mini.js && node scripts/mini.js",
@@ -32,7 +32,6 @@
   "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^8.2.3",
-    "canvas": "^1.6.13",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-loader": "^2.2.1",
@@ -41,9 +40,7 @@
     "jsdoc": "^3.6.6",
     "jsdom": "^11.11.0",
     "minami": "^1.2.3",
-    "mocha": "^4.1.0",
-    "mocha-webpack": "^2.0.0-beta.0",
-    "npm": "^6.14.11",
+    "mocha": "^8.4.0",
     "replace-in-file": "^3.4.4",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
