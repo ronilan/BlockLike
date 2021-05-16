@@ -36,24 +36,6 @@ npm run watch
 ##### If you encounter:
 
 ```sh
-Failed at the canvas@1.6.10 install script 'node-gyp rebuild'.
-```
-
-You'll need Cairo and Pango installed on your dev box. BlockLike uses [node-canvas](https://github.com/Automattic/node-canvas) to run tests (dev dependency) and it requires the former.
-
-###### Mac
-
-```sh
-brew install pkg-config cairo pango libpng jpeg giflib
-npm install
-```
-
-###### Other systems 
-See [node-canvas documentation](https://github.com/Automattic/node-canvas).
-
-##### If you encounter:
-
-```sh
 listen EADDRINUSE 127.0.0.1:9000
 ```
 
