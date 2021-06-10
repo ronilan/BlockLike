@@ -15,16 +15,13 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
-          - windows-latest
+          # - windows-latest - current configuration won't run
     name: Test on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-        with:
-          node-version: 16
       - name: Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node_version }}
-          architecture: ${{ matrix.architecture }}
+          node-version: 16
       - run: npm install --no-optional
       - run: npm test
