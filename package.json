@@ -8,7 +8,7 @@
     "lint:scripts": "./node_modules/.bin/eslint scripts/*.js --fix --config .eslintrc.json",
     "lint:tests": "./node_modules/.bin/eslint test/*.js --fix --config .eslintrc.json",
     "lint:examples": "./node_modules/.bin/eslint example/*/*.html --fix --config .eslintrc-examples.json",
-    "test": "webpack --output=test/~~out.js --mode=development test/*.test.js && mocha --require test/setup.js --exit test/~~out.js && rm test/~~out.js",
+    "test": "webpack --output-path=test --output-filename=~~out.js --mode=development ./test/*.test.js && mocha --require test/setup.js --exit test/~~out.js && rm test/~~out.js",
     "test:it": "mocha-webpack --require test/setup.js \"test/**/$TEST.test.js\"",
     "full": "webpack --progress --config webpack.config.js",
     "mini": "webpack --progress --config webpack.config-mini.js && node scripts/mini.js",
@@ -34,6 +34,7 @@
     "@babel/core": "^7.14.5",
     "@babel/eslint-parser": "^7.14.5",
     "@babel/eslint-plugin": "^7.14.5",
+    "assert": "^2.0.0",
     "eslint": "^7.28.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-loader": "^4.0.2",
@@ -44,8 +45,8 @@
     "minami": "^1.2.3",
     "mocha": "^9.0.0",
     "replace-in-file": "^3.4.4",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
   },
   "repository": {
