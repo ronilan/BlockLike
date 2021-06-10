@@ -213,7 +213,7 @@ describe('Sprite Motion', () => {
         assert(sprite.y === 100);
         assert(Date.now() - startAt > 1000);
         done();
-      }, (sec * 1000) + 500 + (sprite.pace * 2));
+      }, (sec * 1000) + 500 + (sprite.pace * 5));
     });
   });
 });
