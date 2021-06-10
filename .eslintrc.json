@@ -1,8 +1,7 @@
 {
     "env": {
         "browser": true,
-        "es6": true,
-        "node": true
+        "es2021": true
     },
     "globals": {
         "blockLike": true,
@@ -10,12 +9,13 @@
     },
     "extends": "airbnb-base",
     "parserOptions": {
-        "sourceType": "module"
+        "ecmaVersion": 12,
+        "requireConfigFile": false
     },
     "plugins": [
         "html"
     ],
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "rules": {
         "indent": [
             "error",

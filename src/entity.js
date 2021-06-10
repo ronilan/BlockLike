@@ -440,7 +440,7 @@ export default class Entity {
     const me = this;
     const msgId = this._generateUUID();
     // save registered listeners for this broadcast.
-    let myListeners = Entity.messageListeners.filter(item => item.msg === msg);
+    let myListeners = Entity.messageListeners.filter((item) => item.msg === msg);
     // dispatch the message
     const event = new window.CustomEvent(msg, { detail: { msgId } });
     document.dispatchEvent(event);
@@ -448,7 +448,7 @@ export default class Entity {
     // listen to those who received the message
     document.addEventListener('blockLike.donewheneeceivemessage', function broadcastMessageWaitListener(e) {
       // if event is for this message remove listenerId from list of listeners.
-      (e.detail.msgId === msgId) ? myListeners = myListeners.filter(item => item.listenerId !== e.detail.listenerId) : null;
+      (e.detail.msgId === msgId) ? myListeners = myListeners.filter((item) => item.listenerId !== e.detail.listenerId) : null;
       // all listeners responded.
       if (!myListeners.length) {
         // remove the event listener
@@ -480,7 +480,7 @@ export default class Entity {
     audio.play();
     this.sounds.push(audio);
     audio.addEventListener('ended', () => {
-      this.sounds = this.sounds.filter(item => item !== audio);
+      this.sounds = this.sounds.filter((item) => item !== audio);
     });
   }
 
@@ -529,7 +529,7 @@ export default class Entity {
     audio.play();
     this.sounds.push(audio);
     audio.addEventListener('ended', () => {
-      this.sounds = this.sounds.filter(item => item !== audio);
+      this.sounds = this.sounds.filter((item) => item !== audio);
       this._releaseWaited(triggeringId);
     });
   }
@@ -602,7 +602,7 @@ export default class Entity {
   * @param {string} name - the css class name to remove.
   */
   removeClass(name) {
-    this.classes = this.classes.filter(item => item !== name);
+    this.classes = this.classes.filter((item) => item !== name);
     this.element ? this.element.update(this) : null;
   }
 

@@ -37,7 +37,7 @@ function replaceUserStringWithBlanks(line) {
 * @return {boolean} - is the method in the string.
 */
 function isMethodInString(arr, str) {
-  return (arr.some(method => str.indexOf(`.${method}(`) !== -1));
+  return (arr.some((method) => str.indexOf(`.${method}(`) !== -1));
 }
 
 /**
@@ -85,7 +85,7 @@ function isEvented(item, entity) {
 * @return {string} - the waitedReturn method found or null.
 */
 function whichWaitedReturn(item, entity) {
-  return entity.waitedReturned.find(method => (item.indexOf(`.${method}(`) !== -1 ? method : false));
+  return entity.waitedReturned.find((method) => (item.indexOf(`.${method}(`) !== -1 ? method : false));
 }
 
 /**
@@ -237,7 +237,7 @@ export default function rewrite(func, entity) {
     code = 'throw \'BlockLike.js Error: Empty loop detected\';';
   } else {
     code = removeComments(removeOuter(code));
-    code = code.split('\n').filter(item => item.trim().length !== 0);
+    code = code.split('\n').filter((item) => item.trim().length !== 0);
 
     // counter for open parentheses.
     let eventedOpenParen = 0;

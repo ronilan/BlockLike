@@ -58,7 +58,7 @@ export default class Sprite extends Entity {
     };
 
     let actual = {};
-    typeof options === 'object' ? actual = Object.assign({}, defaults, options) : actual = defaults;
+    typeof options === 'object' ? actual = { ...defaults, ...options } : actual = defaults;
 
     super(actual.pace);
 
@@ -242,7 +242,7 @@ export default class Sprite extends Entity {
   removeFrom(stage) {
     const curStage = stage;
 
-    curStage.sprites = stage.sprites.filter(item => item !== this);
+    curStage.sprites = stage.sprites.filter((item) => item !== this);
     this.element ? this.element = this.element.delete(this) : null;
   }
 
@@ -733,7 +733,7 @@ export default class Sprite extends Entity {
     if (this.costumes.length > 1) {
       const currentCostumeIndex = this.costumes.indexOf(costume);
       this.costume === costume ? this.costume = this.costumes[(currentCostumeIndex + 1) % this.costumes.length] : null;
-      this.costumes = this.costumes.filter(item => item !== costume);
+      this.costumes = this.costumes.filter((item) => item !== costume);
     } else {
       this.costumes = [];
       this.costume = null;
@@ -916,7 +916,7 @@ export default class Sprite extends Entity {
   * @param {number} change - the percentage change.
   */
   changeSize(change) {
-    this.magnification = this.magnification + change;
+    this.magnification += change;
 
     this._refreshSize();
   }
@@ -1178,7 +1178,7 @@ export default class Sprite extends Entity {
   * @param {number} change - the change in pixels.
   */
   changePenSize(change) {
-    this.penSize = this.penSize + change;
+    this.penSize += change;
   }
 
   /* Sensing */
@@ -1313,10 +1313,10 @@ export default class Sprite extends Entity {
     let result = null;
 
     if (
-      this.x + (this.width / 2) > sprite.x - (sprite.width / 2) &&
-      this.x - (this.width / 2) < sprite.x + (sprite.width / 2) &&
-      this.y + (this.height / 2) > sprite.y - (sprite.height / 2) &&
-      this.y - (this.height / 2) < sprite.y + (sprite.height / 2)
+      this.x + (this.width / 2) > sprite.x - (sprite.width / 2)
+      && this.x - (this.width / 2) < sprite.x + (sprite.width / 2)
+      && this.y + (this.height / 2) > sprite.y - (sprite.height / 2)
+      && this.y - (this.height / 2) < sprite.y + (sprite.height / 2)
     ) {
       this.x >= sprite.x ? result = 'left' : null;
       this.x < sprite.x ? result = 'right' : null;

@@ -28,7 +28,7 @@ export default class Backdrop extends Look {
   */
   constructor(options = {}) {
     const defaults = {};
-    const actual = Object.assign({}, defaults, options);
+    const actual = { ...defaults, ...options };
 
     super();
 

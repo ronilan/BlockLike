@@ -44,7 +44,7 @@ export default class Stage extends Entity {
       pace: 33,
       backdrop: null,
     };
-    const actual = Object.assign({}, defaults, options);
+    const actual = { ...defaults, ...options };
 
     super(actual.pace);
 
@@ -137,7 +137,7 @@ export default class Stage extends Entity {
   */
   removeSprite(sprite) {
     const curSprite = sprite;
-    this.sprites = this.sprites.filter(item => item !== sprite);
+    this.sprites = this.sprites.filter((item) => item !== sprite);
     curSprite.element ? curSprite.element = curSprite.element.delete(curSprite) : null;
   }
 
@@ -229,7 +229,7 @@ export default class Stage extends Entity {
     if (this.backdrops.length > 1) {
       const currentBackdropIndex = this.backdrops.indexOf(backdrop);
       this.backdrop === backdrop ? this.backdrop = this.backdrops[(currentBackdropIndex + 1) % this.backdrops.length] : null;
-      this.backdrops = this.backdrops.filter(item => item !== backdrop);
+      this.backdrops = this.backdrops.filter((item) => item !== backdrop);
     } else {
       this.backdrops = [];
       this.backdrop = null;

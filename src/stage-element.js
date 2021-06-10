@@ -169,7 +169,6 @@ export default class StageElement {
     return null;
   }
 
-
   /**
   * addFlag - puts the flag div infront of everything (shows it)
   *

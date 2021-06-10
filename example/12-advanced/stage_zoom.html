@@ -25,7 +25,6 @@
   const stage = new blockLike.Stage(options); // eslint-disable-line no-new
   const sprite = new blockLike.Sprite();
 
-
   stage.whenKeyPressed('2', function () {
     this.zoom(stage.magnification / 1.1);
   });
@@ -44,7 +43,6 @@
   });
 
   stage.whenKeyPressed('Escape', () => { forever = false; });
-
   </script>
   <script src='../example-helper.js'></script>
 </body>

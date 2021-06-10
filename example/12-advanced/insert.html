@@ -281,11 +281,11 @@
 
   function bump(car) {
     return (
-      car.isTouchingEdge() ||
-      (car !== sport && car.isTouching(sport)) ||
-      (car !== suv && car.isTouching(suv)) ||
-      (car !== truck && car.isTouching(truck)) ||
-      (car !== sedan && car.isTouching(sedan))
+      car.isTouchingEdge()
+    || (car !== sport && car.isTouching(sport))
+    || (car !== suv && car.isTouching(suv))
+    || (car !== truck && car.isTouching(truck))
+    || (car !== sedan && car.isTouching(sedan))
     );
   }
 
@@ -366,7 +366,6 @@
   });
 
   stage.whenKeyPressed('Escape', () => { forever = false; });
-
   </script>
   <script src='../example-helper.js'></script>
 </body>

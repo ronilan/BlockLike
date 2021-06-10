@@ -9,9 +9,7 @@
 
   <script type="text/javascript" src="../../dist/blocklike-1.0.1.min.js"></script>
 
-  <script id="example">
-
-  const stage = new blockLike.Stage();
+  <script id="example">const stage = new blockLike.Stage();
   const sprite = new blockLike.Sprite(null);
 
   const angrySheep = new blockLike.Costume({
@@ -26,7 +24,6 @@
   sprite.whenFlag(function () {
     this.say(`${this.width}x${this.height}`);
   });
-
   </script>
   <script src='../example-helper.js'></script>
 </body>

@@ -7,7 +7,7 @@
 
 const PACKAGE = require('../package.json');
 
-const version = PACKAGE.version;
+const { version } = PACKAGE;
 
 const fs = require('fs');
 const path = require('path');

@@ -42,9 +42,9 @@ export default function enable(stage) {
   });
 
   document.addEventListener('keyup', (e) => {
-    e.key ? me.keysKey = me.keysKey.filter(item => item !== e.key.toLowerCase()) : null;
-    e.code ? me.keysCode = me.keysCode.filter(item => item !== e.code.toLowerCase()) : null;
-    me.keysKeyCode = me.keysKeyCode.filter(item => item !== e.keyCode);
+    e.key ? me.keysKey = me.keysKey.filter((item) => item !== e.key.toLowerCase()) : null;
+    e.code ? me.keysCode = me.keysCode.filter((item) => item !== e.code.toLowerCase()) : null;
+    me.keysKeyCode = me.keysKeyCode.filter((item) => item !== e.keyCode);
   });
 
   me.element.el.addEventListener('mousemove', (e) => {

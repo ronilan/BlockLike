@@ -73,7 +73,7 @@ export default class Look {
   * @param {string} name - the css class name to remove.
   */
   removeClass(name) {
-    this.classes = this.classes.filter(item => item !== name);
+    this.classes = this.classes.filter((item) => item !== name);
   }
 
   /**

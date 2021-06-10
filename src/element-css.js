@@ -19,7 +19,7 @@ export function apply(entity) {
   if (curLooks) {
     curLooks.forEach((b) => {
       b.cssRules.forEach((item) => {
-        const camelCased = item.prop.replace(/-([a-z])/g, g => g[1].toUpperCase());
+        const camelCased = item.prop.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
         el.style[camelCased] = '';
       });
     });
@@ -28,14 +28,14 @@ export function apply(entity) {
   // add current look styles
   if (curLook) {
     curLook.cssRules.forEach((item) => {
-      const camelCased = item.prop.replace(/-([a-z])/g, g => g[1].toUpperCase());
+      const camelCased = item.prop.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
       el.style[camelCased] = item.value;
     });
   }
 
   // Add curEntity styles. Must be done after look styles.
   curEntity.cssRules.forEach((item) => {
-    const camelCased = item.prop.replace(/-([a-z])/g, g => g[1].toUpperCase());
+    const camelCased = item.prop.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
     el.style[camelCased] = item.value;
   });
 }
@@ -53,11 +53,11 @@ export function register(prop, value, entity) {
   const curEntity = entity;
 
   if (typeof prop === 'string' && typeof value === 'string') {
-    const dashed = prop.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
+    const dashed = prop.replace(/([A-Z])/g, ($1) => `-${$1.toLowerCase()}`);
     curEntity.cssRules.push({ prop: dashed, value });
   } else if (typeof prop === 'object' && !value) {
     Object.keys(prop).forEach((key) => {
-      const dashed = key.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
+      const dashed = key.replace(/([A-Z])/g, ($1) => `-${$1.toLowerCase()}`);
       curEntity.cssRules.push({ prop: dashed, value: prop[key] });
     });
   }
