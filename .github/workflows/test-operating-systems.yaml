@@ -1,4 +1,4 @@
-name: Test Various Operating Systems
+name: Push & Pull Request (Test on Various Operating Systems)
 
 on:
   push:
