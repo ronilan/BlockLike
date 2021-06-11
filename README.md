@@ -43,14 +43,6 @@ Something else is using that port.
 
 Open webpack.config.js and change the port setting for the devServer.
 
-### Build
-
-```sh
-npm run build
-```
-
-The build script will build the two library versions (normal and min), generate the third one (mascotless) and republish the docs.
-
 ### Test
 
 All:
@@ -63,11 +55,48 @@ Single test:
 TEST=stage_looks npm run test:it
 ```
 
+### Build
+
+```sh
+npm run build
+```
+
+The build script will build the two library versions (normal and min), generate the third one (mascotless) and republish the docs.
+
+
+### Publish
+
+For most cases.
+
+```sh
+npm version patch
+```
+
+For more festive occasions:
+
+```sh
+npm version minor
+```
+
+Generally speaking, patch a version any time there is a change in the minified distribution, even if the change is not the result of a code change but only of build tools. 
+
+Running version will trigger the version script and will create a tagged commit.
+
+```sh
+git push origin master
+git push --tags  
+
+```
+
+Pushing tags will trigger a GitHub Workflow and will publish the version to the NPM registry
+
 ### Documentation publishing
 
 ```sh
 npm run docs
 ```
+
+Note that building the library will also build the docs.
 
 ## Authors
 
