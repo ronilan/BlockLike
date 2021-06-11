@@ -1,8 +1,9 @@
 name: Build & Publish release 
 
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - "v*"
   workflow_dispatch: # can run manually. npm will reject same version publish
 
 jobs:
