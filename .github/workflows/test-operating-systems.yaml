@@ -1,4 +1,4 @@
-name: Run tests on various Operating Systems
+name: Test Various Operating Systems
 
 on:
   push:
