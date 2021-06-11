@@ -2,6 +2,9 @@
   "name": "blocklike",
   "version": "1.0.1",
   "description": "Bridging the gap between block programming and JavaScript",
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
     "start": "webpack-dev-server --open",
     "watch": "webpack --progress --watch --config webpack.config.js",
