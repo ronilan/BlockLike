@@ -1,6 +1,6 @@
 {
   "name": "blocklike",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Bridging the gap between block programming and JavaScript",
   "files": [
     "dist/*"
