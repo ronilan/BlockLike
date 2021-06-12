@@ -14,7 +14,7 @@
     "test": "webpack --progress --config webpack.config.test.js && mocha --require test/setup.js --exit test/~~out.js && rm test/~~out.js",
     "full": "webpack --progress --config webpack.config.js",
     "mini": "webpack --progress --config webpack.config-mini.js && node scripts/mini.js",
-    "docs": "./node_modules/.bin/jsdoc dist/blocklike-*.*.*.js --destination ./docs --template node_modules/minami --readme Docs-README.md",
+    "docs": "npx jsdoc dist/blocklike-*.*.*.js --destination ./docs --template node_modules/minami --readme Docs-README.md",
     "build": "npm run test && npm run full && npm run mini && npm run docs",
     "version": "node scripts/version.js & npm run build && git add ."
   },

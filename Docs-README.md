@@ -20,3 +20,7 @@ Left side bar lists the four BlockLike.js entities:
 Under each entity is an alphabetically ordered list of all their methods. 
 
 There are examples for each.
+
+## Source code
+
+Blocklike is open sourced and MIT licensed. See https://github.com/ronilan/BlockLike.
