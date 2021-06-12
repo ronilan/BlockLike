@@ -11,7 +11,6 @@ describe('Sprite Sensing', () => {
   stage.addBackdrop(backdrop);
   stage.addBackdrop(emptyBackdrop);
 
-
   const sprite = new blockLike.Sprite();
   const otherSprite = new blockLike.Sprite();
 
@@ -90,7 +89,6 @@ describe('Sprite Sensing', () => {
       assert(backdropColors.length === 1);
       assert(backdropColors[0] === '#ff0000');
     });
-
 
     it.skip('it should return nothing when backdrop is empty', () => {
       stage.switchBackdropTo(emptyBackdrop);

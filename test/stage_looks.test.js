@@ -143,7 +143,6 @@ describe('Stage CSS', () => {
   });
 });
 
-
 describe('Stage Zoom', () => {
   const stage = new blockLike.Stage();
 

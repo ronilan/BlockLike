@@ -111,7 +111,6 @@ describe('rewriter', () => {
       f = rewrite(func, sprite);
       assert(f.toString().indexOf('throw \'BlockLike.js Error: Empty loop detected\'') !== -1);
 
-
       func = function () {
         for (let i = 0; i > -1; i += 1) {
 

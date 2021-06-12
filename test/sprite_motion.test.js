@@ -154,7 +154,6 @@ describe('Sprite Motion', () => {
       sprite.pointTowards(otherSprite);
       assert(sprite.direction === 45);
 
-
       otherSprite.goTo(0, 100);
       sprite.pointTowards(otherSprite);
       assert(sprite.direction === 0);

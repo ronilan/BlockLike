@@ -1,48 +1,49 @@
 const jsdom = require('jsdom');
 
-function mockCanvas (window) {
-    window.HTMLCanvasElement.prototype.getContext = function () {
-        return {
-            constructor: {
-              name: 'CanvasRenderingContext2D'
-            },
-            fillRect: function() {},
-            clearRect: function(){},
-            getImageData: function(x, y, w, h) {
-                return  {
-                    data: new Array(w*h*4)
-                };
-            },
-            putImageData: function() {},
-            createImageData: function(){ return []},
-            setTransform: function(){},
-            drawImage: function(){},
-            save: function(){},
-            fillText: function(){},
-            restore: function(){},
-            beginPath: function(){},
-            moveTo: function(){},
-            lineTo: function(){},
-            closePath: function(){},
-            stroke: function(){},
-            translate: function(){},
-            scale: function(){},
-            rotate: function(){},
-            arc: function(){},
-            fill: function(){},
-            measureText: function(){
-                return { width: 0 };
-            },
-            transform: function(){},
-            rect: function(){},
-            clip: function(){}
-        };
-    }
-
-    window.HTMLCanvasElement.prototype.toDataURL = function () {
-        return "";
-    }
-}
+/**
+  * mockCanvas - Creates a mock canvas. Does nothing but tests pass.
+  *
+  * @param {object} window - the window object (via jsdom)
+  */
+const mockCanvas = (window) => {
+  const context = {
+    constructor: {
+      name: 'CanvasRenderingContext2D',
+    },
+    fillRect() {},
+    clearRect() {},
+    getImageData(x, y, w, h) {
+      return {
+        data: new Array(w * h * 4),
+      };
+    },
+    putImageData() {},
+    createImageData() { return []; },
+    setTransform() {},
+    drawImage() {},
+    save() {},
+    fillText() {},
+    restore() {},
+    beginPath() {},
+    moveTo() {},
+    lineTo() {},
+    closePath() {},
+    stroke() {},
+    translate() {},
+    scale() {},
+    rotate() {},
+    arc() {},
+    fill() {},
+    measureText() {
+      return { width: 0 };
+    },
+    transform() {},
+    rect() {},
+    clip() {},
+  };
+  window.HTMLCanvasElement.prototype.getContext = () => context; // eslint-disable-line no-param-reassign
+  window.HTMLCanvasElement.prototype.toDataURL = () => ''; // eslint-disable-line no-param-reassign
+};
 
 const { JSDOM } = jsdom;
 
@@ -72,6 +73,3 @@ Object.keys(document.defaultView).forEach((property) => {
 global.navigator = {
   userAgent: 'node.js',
 };
-
-
-

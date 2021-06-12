@@ -95,7 +95,6 @@ describe('Sprite Size and Visibility', () => {
     image: '../../images/bear_step.png',
   };
 
-
   const otherCostume = new blockLike.Costume(options);
   sprite.addCostume(otherCostume);
 
@@ -331,4 +330,3 @@ describe('Settings color and CSS', () => {
     });
   });
 });
-

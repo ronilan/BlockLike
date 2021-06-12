@@ -13,7 +13,6 @@ describe('Event Methods', () => {
 
     stage.addSprite(sprite);
 
-
     window.gotEvent = false;
     stage.whenFlag(() => {
       window.gotEvent = true;
@@ -172,7 +171,6 @@ describe('Event Methods', () => {
       assert(window.gotEvent === true);
     });
   });
-
 
   // TODO:
   // - rest of events
