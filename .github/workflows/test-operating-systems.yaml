@@ -15,7 +15,7 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
-          # - windows-latest - current configuration won't run
+          - windows-latest
     name: Test on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
