@@ -11,9 +11,9 @@
 *
 * @return {number} - the number of times found.
 */
-function countChar(str, char) {
-  const regExp = new RegExp(`\\${char}`, 'g');
-  return (str.match(regExp) || []).length;
+function countChar (str, char) {
+  const regExp = new RegExp(`\\${char}`, 'g')
+  return (str.match(regExp) || []).length
 }
 
 /**
@@ -24,8 +24,8 @@ function countChar(str, char) {
 * @param {string} line - a line of code.
 * @return {string} - the line without strings.
 */
-function replaceUserStringWithBlanks(line) {
-  return line.replace(/"(.*?)"|'(.*?)'|`(.*?)`/g, ' ');
+function replaceUserStringWithBlanks (line) {
+  return line.replace(/"(.*?)"|'(.*?)'|`(.*?)`/g, ' ')
 }
 
 /**
@@ -36,8 +36,8 @@ function replaceUserStringWithBlanks(line) {
 *
 * @return {boolean} - is the method in the string.
 */
-function isMethodInString(arr, str) {
-  return (arr.some((method) => str.indexOf(`.${method}(`) !== -1));
+function isMethodInString (arr, str) {
+  return (arr.some((method) => str.indexOf(`.${method}(`) !== -1))
 }
 
 /**
@@ -48,8 +48,8 @@ function isMethodInString(arr, str) {
 *
 * @return {string} - is paced in code.
 */
-function isPaced(item, entity) {
-  return isMethodInString(entity.paced, item);
+function isPaced (item, entity) {
+  return isMethodInString(entity.paced, item)
 }
 
 /**
@@ -60,8 +60,8 @@ function isPaced(item, entity) {
 *
 * @return {string} - is waited in code.
 */
-function isWaited(item, entity) {
-  return isMethodInString(entity.waited, item);
+function isWaited (item, entity) {
+  return isMethodInString(entity.waited, item)
 }
 
 /**
@@ -72,8 +72,8 @@ function isWaited(item, entity) {
 *
 * @return {string} - is evented in code.
 */
-function isEvented(item, entity) {
-  return isMethodInString(entity.evented, item);
+function isEvented (item, entity) {
+  return isMethodInString(entity.evented, item)
 }
 
 /**
@@ -84,8 +84,8 @@ function isEvented(item, entity) {
 *
 * @return {string} - the waitedReturn method found or null.
 */
-function whichWaitedReturn(item, entity) {
-  return entity.waitedReturned.find((method) => (item.indexOf(`.${method}(`) !== -1 ? method : false));
+function whichWaitedReturn (item, entity) {
+  return entity.waitedReturned.find((method) => (item.indexOf(`.${method}(`) !== -1 ? method : false))
 }
 
 /**
@@ -96,9 +96,9 @@ function whichWaitedReturn(item, entity) {
 *
 * @return {string} - a modified line of code.
 */
-function insertPaced(item, entity) {
-  const code = `${item}\n await new Promise(resolve => setTimeout(resolve, ${entity.pace}));`;
-  return entity.pace && isPaced(replaceUserStringWithBlanks(item), entity) ? code : item;
+function insertPaced (item, entity) {
+  const code = `${item}\n await new Promise(resolve => setTimeout(resolve, ${entity.pace}));`
+  return entity.pace && isPaced(replaceUserStringWithBlanks(item), entity) ? code : item
 }
 
 /**
@@ -109,33 +109,33 @@ function insertPaced(item, entity) {
 *
 * @return {string} - a modified (multi)line of code.
 */
-function insertWaited(item, entity) {
-  let found = null;
-  let code;
+function insertWaited (item, entity) {
+  let found = null
+  let code
 
   // look for waited methods.
-  found = isWaited(replaceUserStringWithBlanks(item), entity);
+  found = isWaited(replaceUserStringWithBlanks(item), entity)
 
   // not a normal "waited". look for waitedReturned.
   if (!found) {
-    let theVar = null;
+    let theVar = null
 
-    found = whichWaitedReturn(replaceUserStringWithBlanks(item), entity);
+    found = whichWaitedReturn(replaceUserStringWithBlanks(item), entity)
 
     // code for waitedReturn
     theVar = item.substr(0, item.indexOf('='))
       .replace('let', '')
       .replace('var', '')
       .replace('const', '')
-      .trim();
+      .trim()
 
-    code = `${item.substring(0, item.lastIndexOf(')'))}, '${theVar}', '${entity.triggeringId}')`;
+    code = `${item.substring(0, item.lastIndexOf(')'))}, '${theVar}', '${entity.triggeringId}')`
 
     // invoke is "forgiving". may, or may not, have variables.
-    found === 'invoke' && (item.indexOf(',') === -1) ? code = `${item.substring(0, item.lastIndexOf(')'))}, [], '${theVar}', '${entity.triggeringId}')` : null;
+    found === 'invoke' && (item.indexOf(',') === -1) ? code = `${item.substring(0, item.lastIndexOf(')'))}, [], '${theVar}', '${entity.triggeringId}')` : null
   } else {
     // code for "normal" waited
-    code = `${item.substring(0, item.lastIndexOf(')'))}, '${entity.triggeringId}')`;
+    code = `${item.substring(0, item.lastIndexOf(')'))}, '${entity.triggeringId}')`
   }
 
   // entity.triggeringId creates a unique context to chain the waited methods.
@@ -144,9 +144,9 @@ function insertWaited(item, entity) {
         document.removeEventListener('blockLike.waited.${entity.triggeringId}', waitedListener);
         resolve();
       });
-    });`;
+    });`
 
-  return found ? code : item;
+  return found ? code : item
 }
 
 /**
@@ -158,19 +158,19 @@ function insertWaited(item, entity) {
 * @param {string} item - a line of code.
 * @return {string} - a modified line of code.
 */
-function insertAsync(item) {
-  const exist = item.indexOf('async ');
+function insertAsync (item) {
+  const exist = item.indexOf('async ')
 
   // function declaration
-  let regExp = /function(\s*?[a-zA-Z]\w*\s*?\(|\s*?\()/;
-  let matches = regExp.exec(replaceUserStringWithBlanks(item));
+  let regExp = /function(\s*?[a-zA-Z]\w*\s*?\(|\s*?\()/
+  let matches = regExp.exec(replaceUserStringWithBlanks(item))
 
   // or arrow
   if (!matches) {
-    regExp = /([a-zA-Z]\w*|\(\s*?[a-zA-Z]\w*(,\s*[a-zA-Z]\w*)*\s*?\))\s*?=>/;
-    matches = regExp.exec(replaceUserStringWithBlanks(item));
+    regExp = /([a-zA-Z]\w*|\(\s*?[a-zA-Z]\w*(,\s*[a-zA-Z]\w*)*\s*?\))\s*?=>/
+    matches = regExp.exec(replaceUserStringWithBlanks(item))
   }
-  return exist === -1 && matches ? `${item.substring(0, matches.index)}async ${item.substring(matches.index, item.length)}` : item;
+  return exist === -1 && matches ? `${item.substring(0, matches.index)}async ${item.substring(matches.index, item.length)}` : item
 }
 
 /**
@@ -180,13 +180,13 @@ function insertAsync(item) {
 * @param {string} item - a line of code.
 * @return {string} - a modified line of code.
 */
-function emptyLoopProtection(funcS) {
-  const check = funcS.replace(/\s+/g, '').replace(/\r?\n|\r/g, '');
+function emptyLoopProtection (funcS) {
+  const check = funcS.replace(/\s+/g, '').replace(/\r?\n|\r/g, '')
 
-  const regExp = /while\([\s\S]*\){}|for\([\s\S]*\){}|do{}while\([\s\S]*\)/;
-  const matches = regExp.exec(check);
+  const regExp = /while\([\s\S]*\){}|for\([\s\S]*\){}|do{}while\([\s\S]*\)/
+  const matches = regExp.exec(check)
 
-  return !!matches;
+  return !!matches
 }
 
 /**
@@ -195,8 +195,8 @@ function emptyLoopProtection(funcS) {
 * @param {string} funcS - the function being rewritten.
 * @return {string} - the body of the function.
 */
-function removeOuter(funcS) {
-  return funcS.substring(funcS.indexOf('{') + 1, funcS.lastIndexOf('}'));
+function removeOuter (funcS) {
+  return funcS.substring(funcS.indexOf('{') + 1, funcS.lastIndexOf('}'))
 }
 
 /**
@@ -206,8 +206,8 @@ function removeOuter(funcS) {
 * @param {string} funcS - the function being rewritten.
 * @return {string} - the function without comments.
 */
-function removeComments(funcS) {
-  return funcS.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '');
+function removeComments (funcS) {
+  return funcS.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '')
 }
 
 /**
@@ -216,8 +216,8 @@ function removeComments(funcS) {
 * @param {string} funcS - the function being rewritten.
 * @return {string} - the variable name.
 */
-function getEventObjectVarName(funcS) {
-  return funcS.substring(funcS.indexOf('(') + 1, funcS.indexOf(')'));
+function getEventObjectVarName (funcS) {
+  return funcS.substring(funcS.indexOf('(') + 1, funcS.indexOf(')'))
 }
 
 /**
@@ -228,49 +228,49 @@ function getEventObjectVarName(funcS) {
 * @param - {Object} entity - a sprite or stage object to which the function applies.
 * @return {function} - an async modified function.
 */
-export default function rewrite(func, entity) {
-  let code = func.toString();
-  const theVar = getEventObjectVarName(code);
+export default function rewrite (func, entity) {
+  let code = func.toString()
+  const theVar = getEventObjectVarName(code)
 
   // rewrite the code
   if (emptyLoopProtection(code)) {
-    code = 'throw \'BlockLike.js Error: Empty loop detected\';';
+    code = 'throw \'BlockLike.js Error: Empty loop detected\';'
   } else {
-    code = removeComments(removeOuter(code));
-    code = code.split('\n').filter((item) => item.trim().length !== 0);
+    code = removeComments(removeOuter(code))
+    code = code.split('\n').filter((item) => item.trim().length !== 0)
 
     // counter for open parentheses.
-    let eventedOpenParen = 0;
+    let eventedOpenParen = 0
 
     code = code.map((item) => {
-      const temp = item;
-      let result = temp;
+      const temp = item
+      let result = temp
 
       // internal evented methods are skipped
       if (isEvented(temp, entity) || eventedOpenParen) {
-        eventedOpenParen += (countChar(replaceUserStringWithBlanks(temp), '(') - countChar(replaceUserStringWithBlanks(temp), ')'));
+        eventedOpenParen += (countChar(replaceUserStringWithBlanks(temp), '(') - countChar(replaceUserStringWithBlanks(temp), ')'))
       } else {
         // a method can be one of the following but not more than one
-        result === temp ? result = insertPaced(temp, entity) : null; // more likely
-        result === temp ? result = insertWaited(temp, entity) : null; // less likely
+        result === temp ? result = insertPaced(temp, entity) : null // more likely
+        result === temp ? result = insertWaited(temp, entity) : null // less likely
 
         // and only if not a method will add async to functions
-        result === temp ? result = insertAsync(temp) : null;
+        result === temp ? result = insertAsync(temp) : null
       }
 
-      return result;
-    });
-    code = code.join('\n');
+      return result
+    })
+    code = code.join('\n')
   }
 
   // transform the text into a function
-  const AsyncFunction = Object.getPrototypeOf(async () => {}).constructor;
-  let af = new AsyncFunction(code);
+  const AsyncFunction = Object.getPrototypeOf(async () => {}).constructor
+  let af = new AsyncFunction(code)
 
   // pass the event object to the function if exists.
-  theVar ? af = new AsyncFunction(theVar, code) : null;
+  theVar ? af = new AsyncFunction(theVar, code) : null
 
-  window.blockLike && window.blockLike.debug ? console.log(af) : null; // eslint-disable-line no-console
+  window.blockLike && window.blockLike.debug ? console.log(af) : null // eslint-disable-line no-console
 
-  return af;
+  return af
 }

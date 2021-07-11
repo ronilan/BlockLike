@@ -1,4 +1,4 @@
-import Look from './look';
+import Look from './look'
 
 /**
  * Class representing a Backdrop.
@@ -26,19 +26,19 @@ export default class Backdrop extends Look {
   * @param {string} options.image - a URI (or data URI) for the backdrop image.
   * @param {string} options.color - a css color string ('#ff0000', 'red')
   */
-  constructor(options = {}) {
-    const defaults = {};
-    const actual = { ...defaults, ...options };
+  constructor (options = {}) {
+    const defaults = {}
+    const actual = { ...defaults, ...options }
 
-    super();
+    super()
 
-    this.image = actual.image;
-    this.color = actual.color;
+    this.image = actual.image
+    this.color = actual.color
 
     // preload
     if (this.image) {
-      const image = new window.Image();
-      image.src = this.image;
+      const image = new window.Image()
+      image.src = this.image
     }
   }
 
@@ -55,12 +55,12 @@ export default class Backdrop extends Look {
   *
   * @param {object} stage - which stage to add the backdrop too.
   */
-  addTo(stage) {
-    const curStage = stage;
-    stage.backdrops.push(this);
+  addTo (stage) {
+    const curStage = stage
+    stage.backdrops.push(this)
     // if "bare" set the added as active
-    !stage.backdrop ? curStage.backdrop = stage.backdrops[0] : null;
-    stage.element ? stage.element.update(stage) : null;
+    !stage.backdrop ? curStage.backdrop = stage.backdrops[0] : null
+    stage.element ? stage.element.update(stage) : null
   }
 
   /**
@@ -75,7 +75,7 @@ export default class Backdrop extends Look {
   *
   * @param {object} stage - which stage to remove the backdrop from.
   */
-  removeFrom(stage) {
-    stage.removeBackdrop(this);
+  removeFrom (stage) {
+    stage.removeBackdrop(this)
   }
 }

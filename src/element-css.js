@@ -7,37 +7,37 @@
 *
 * @param {function} entity - a Sprite or Stage.
 */
-export function apply(entity) {
-  const curEntity = entity;
+export function apply (entity) {
+  const curEntity = entity
   // Sprites have Costumes, Stage has Backdrop, figure out which entity it is.
-  const curLook = entity.backdrop || entity.costume;
-  const curLooks = entity.backdrops || entity.costumes;
+  const curLook = entity.backdrop || entity.costume
+  const curLooks = entity.backdrops || entity.costumes
 
-  const el = entity.element.el;
+  const el = entity.element.el
 
   // remove any style applied by any look
   if (curLooks) {
     curLooks.forEach((b) => {
       b.cssRules.forEach((item) => {
-        const camelCased = item.prop.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
-        el.style[camelCased] = '';
-      });
-    });
+        const camelCased = item.prop.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+        el.style[camelCased] = ''
+      })
+    })
   }
 
   // add current look styles
   if (curLook) {
     curLook.cssRules.forEach((item) => {
-      const camelCased = item.prop.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
-      el.style[camelCased] = item.value;
-    });
+      const camelCased = item.prop.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+      el.style[camelCased] = item.value
+    })
   }
 
   // Add curEntity styles. Must be done after look styles.
   curEntity.cssRules.forEach((item) => {
-    const camelCased = item.prop.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
-    el.style[camelCased] = item.value;
-  });
+    const camelCased = item.prop.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+    el.style[camelCased] = item.value
+  })
 }
 
 /**
@@ -49,16 +49,16 @@ export function apply(entity) {
 * @param {string} value - the value for the css property (e.g. #ff8833)
 * @param {function} entity - a Sprite or Stage.
 */
-export function register(prop, value, entity) {
-  const curEntity = entity;
+export function register (prop, value, entity) {
+  const curEntity = entity
 
   if (typeof prop === 'string' && typeof value === 'string') {
-    const dashed = prop.replace(/([A-Z])/g, ($1) => `-${$1.toLowerCase()}`);
-    curEntity.cssRules.push({ prop: dashed, value });
+    const dashed = prop.replace(/([A-Z])/g, ($1) => `-${$1.toLowerCase()}`)
+    curEntity.cssRules.push({ prop: dashed, value })
   } else if (typeof prop === 'object' && !value) {
     Object.keys(prop).forEach((key) => {
-      const dashed = key.replace(/([A-Z])/g, ($1) => `-${$1.toLowerCase()}`);
-      curEntity.cssRules.push({ prop: dashed, value: prop[key] });
-    });
+      const dashed = key.replace(/([A-Z])/g, ($1) => `-${$1.toLowerCase()}`)
+      curEntity.cssRules.push({ prop: dashed, value: prop[key] })
+    })
   }
 }

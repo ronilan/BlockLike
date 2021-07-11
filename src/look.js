@@ -1,4 +1,4 @@
-import * as css from './element-css';
+import * as css from './element-css'
 
 /**
  * Class representing a look.
@@ -11,9 +11,9 @@ export default class Look {
   /**
   * constructor - Look is abstract for Costume and Backdrop.
   */
-  constructor() {
-    this.cssRules = [];
-    this.classes = [];
+  constructor () {
+    this.cssRules = []
+    this.classes = []
   }
 
   /** Looks * */
@@ -34,8 +34,8 @@ export default class Look {
   * @param {string} prop - the css property (e.g. color)
   * @param {string} value - the value for the css property (e.g. #ff8833)
   */
-  css(prop, value = null) {
-    css.register(prop, value, this);
+  css (prop, value = null) {
+    css.register(prop, value, this)
   }
 
   /**
@@ -53,8 +53,8 @@ export default class Look {
   *
   * @param {string} name - the css class name to add.
   */
-  addClass(name) {
-    !this.hasClass(name) ? this.classes.push(name) : null;
+  addClass (name) {
+    !this.hasClass(name) ? this.classes.push(name) : null
   }
 
   /**
@@ -72,8 +72,8 @@ export default class Look {
   *
   * @param {string} name - the css class name to remove.
   */
-  removeClass(name) {
-    this.classes = this.classes.filter((item) => item !== name);
+  removeClass (name) {
+    this.classes = this.classes.filter((item) => item !== name)
   }
 
   /**
@@ -92,7 +92,7 @@ export default class Look {
   * @param {string} name - the css class name.
   * @return {boolean} - is the css class name on the list.
   */
-  hasClass(name) {
-    return this.classes.indexOf(name) !== -1;
+  hasClass (name) {
+    return this.classes.indexOf(name) !== -1
   }
 }

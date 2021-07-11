@@ -1,10 +1,10 @@
-import Entity from './entity';
+import Entity from './entity'
 
-import StageElement from './stage-element';
-import StageSurface from './stage-surface';
-import SpriteElement from './sprite-element';
+import StageElement from './stage-element'
+import StageSurface from './stage-surface'
+import SpriteElement from './sprite-element'
 
-import sensing from './stage-sensing';
+import sensing from './stage-sensing'
 
 /**
  * Class representing a Stage.
@@ -36,48 +36,48 @@ export default class Stage extends Entity {
   * @param {boolean} options.sensing - Enables sensing of mouse location and what keys pressed.
   * If true, will constantly update stage properties: mouseX, mouseY, keysKeyCode, keysKeyCode and keysCode based on user input.
   */
-  constructor(options = {}) {
+  constructor (options = {}) {
     const defaults = {
       width: window.innerWidth,
       height: window.innerHeight,
       parent: document.body,
       pace: 33,
-      backdrop: null,
-    };
-    const actual = { ...defaults, ...options };
+      backdrop: null
+    }
+    const actual = { ...defaults, ...options }
 
-    super(actual.pace);
+    super(actual.pace)
 
     // backdrops
-    this.backdrops = [];
+    this.backdrops = []
 
     if (actual.backdrop) {
-      this.backdrop = actual.backdrop;
-      this.backdrops.push(this.backdrop);
+      this.backdrop = actual.backdrop
+      this.backdrops.push(this.backdrop)
     }
 
-    this.element = new StageElement(actual, this);
-    this.width = actual.width;
-    this.height = actual.height;
+    this.element = new StageElement(actual, this)
+    this.width = actual.width
+    this.height = actual.height
 
-    this.keysCode = [];
-    this.keysKey = [];
-    this.keysKeyCode = [];
+    this.keysCode = []
+    this.keysKey = []
+    this.keysKeyCode = []
 
-    this.sprites = [];
+    this.sprites = []
 
-    this.magnification = 100;
+    this.magnification = 100
 
-    this.cssRules = [];
-    this.classes = [];
+    this.cssRules = []
+    this.classes = []
 
-    this.mouseDown = null;
-    this.mouseX = null;
-    this.mouseY = null;
+    this.mouseDown = null
+    this.mouseX = null
+    this.mouseY = null
 
-    actual.sensing ? sensing(this) : null;
+    actual.sensing ? sensing(this) : null
 
-    this.element.update(this);
+    this.element.update(this)
   }
 
   /**
@@ -88,8 +88,8 @@ export default class Stage extends Entity {
   *
   * stage.delete();
   */
-  delete() {
-    this.element = this.element.delete(this);
+  delete () {
+    this.element = this.element.delete(this)
   }
 
   /** Setup Actions * */
@@ -105,22 +105,22 @@ export default class Stage extends Entity {
   *
   * @param {object} sprite - the sprite to add.
   */
-  addSprite(sprite) {
-    const curSprite = sprite;
+  addSprite (sprite) {
+    const curSprite = sprite
 
-    curSprite.element = new SpriteElement(sprite, this);
-    curSprite.surface = new StageSurface(this);
+    curSprite.element = new SpriteElement(sprite, this)
+    curSprite.surface = new StageSurface(this)
 
-    curSprite.element.flag = this.element.flag;
-    curSprite.againstBackdrop = this.element.backdropContainer;
+    curSprite.element.flag = this.element.flag
+    curSprite.againstBackdrop = this.element.backdropContainer
 
-    curSprite.stageWidth = this.width;
-    curSprite.stageHeight = this.height;
+    curSprite.stageWidth = this.width
+    curSprite.stageHeight = this.height
 
-    this.sprites.push(curSprite);
-    curSprite.z = this.sprites.length;
+    this.sprites.push(curSprite)
+    curSprite.z = this.sprites.length
 
-    sprite.element.update(curSprite);
+    sprite.element.update(curSprite)
   }
 
   /**
@@ -135,10 +135,10 @@ export default class Stage extends Entity {
   *
   * @param {object} sprite - the sprite to add.
   */
-  removeSprite(sprite) {
-    const curSprite = sprite;
-    this.sprites = this.sprites.filter((item) => item !== sprite);
-    curSprite.element ? curSprite.element = curSprite.element.delete(curSprite) : null;
+  removeSprite (sprite) {
+    const curSprite = sprite
+    this.sprites = this.sprites.filter((item) => item !== sprite)
+    curSprite.element ? curSprite.element = curSprite.element.delete(curSprite) : null
   }
 
   /** looks * */
@@ -154,11 +154,11 @@ export default class Stage extends Entity {
   *
   * @param {object} backdrop - the backdrop to add.
   */
-  addBackdrop(backdrop) {
-    this.backdrops.push(backdrop);
+  addBackdrop (backdrop) {
+    this.backdrops.push(backdrop)
     // if "bare" set the added as active
-    !this.backdrop ? this.backdrop = this.backdrops[0] : null;
-    this.element ? this.element.update(this) : null;
+    !this.backdrop ? this.backdrop = this.backdrops[0] : null
+    this.element ? this.element.update(this) : null
   }
 
   /**
@@ -173,11 +173,11 @@ export default class Stage extends Entity {
   *
   * @param {object} backdrop - the backdrop to switch too.
   */
-  switchBackdropTo(backdrop) {
-    const currentBackdropIndex = this.backdrops.indexOf(backdrop);
-    currentBackdropIndex !== -1 ? this.backdrop = this.backdrops[currentBackdropIndex] : null;
+  switchBackdropTo (backdrop) {
+    const currentBackdropIndex = this.backdrops.indexOf(backdrop)
+    currentBackdropIndex !== -1 ? this.backdrop = this.backdrops[currentBackdropIndex] : null
 
-    this.element ? this.element.update(this) : null;
+    this.element ? this.element.update(this) : null
   }
 
   /**
@@ -192,8 +192,8 @@ export default class Stage extends Entity {
   *
   * @param {number} index - the backdrop to switch too.
   */
-  switchBackdropToNum(index) {
-    this.switchBackdropTo(this.backdrops[index]);
+  switchBackdropToNum (index) {
+    this.switchBackdropTo(this.backdrops[index])
   }
 
   /**
@@ -206,11 +206,11 @@ export default class Stage extends Entity {
   * stage.addBackdrop(backdrop);
   * stage.nextBackdrop();
   */
-  nextBackdrop() {
-    const currentBackdropIndex = this.backdrops.indexOf(this.backdrop);
-    this.backdrop = this.backdrops[(currentBackdropIndex + 1) % this.backdrops.length];
+  nextBackdrop () {
+    const currentBackdropIndex = this.backdrops.indexOf(this.backdrop)
+    this.backdrop = this.backdrops[(currentBackdropIndex + 1) % this.backdrops.length]
 
-    this.element ? this.element.update(this) : null;
+    this.element ? this.element.update(this) : null
   }
 
   /**
@@ -225,16 +225,16 @@ export default class Stage extends Entity {
   *
   * @param {object} backdrop - the backdrop to remove.
   */
-  removeBackdrop(backdrop) {
+  removeBackdrop (backdrop) {
     if (this.backdrops.length > 1) {
-      const currentBackdropIndex = this.backdrops.indexOf(backdrop);
-      this.backdrop === backdrop ? this.backdrop = this.backdrops[(currentBackdropIndex + 1) % this.backdrops.length] : null;
-      this.backdrops = this.backdrops.filter((item) => item !== backdrop);
+      const currentBackdropIndex = this.backdrops.indexOf(backdrop)
+      this.backdrop === backdrop ? this.backdrop = this.backdrops[(currentBackdropIndex + 1) % this.backdrops.length] : null
+      this.backdrops = this.backdrops.filter((item) => item !== backdrop)
     } else {
-      this.backdrops = [];
-      this.backdrop = null;
+      this.backdrops = []
+      this.backdrop = null
     }
-    this.element ? this.element.update(this) : null;
+    this.element ? this.element.update(this) : null
   }
 
   /**
@@ -250,16 +250,16 @@ export default class Stage extends Entity {
   *
   * @param {number} index - the backdrop to remove.
   */
-  removeBackdropNum(index) {
-    this.removeBackdrop(this.backdrops[index]);
+  removeBackdropNum (index) {
+    this.removeBackdrop(this.backdrops[index])
   }
 
   /**
   * refresh - Forces a sprite refresh.
   * Note: service method to be used if costume was manipulated directly.
   */
-  refresh() {
-    this.element ? this.element.update(this) : null;
+  refresh () {
+    this.element ? this.element.update(this) : null
   }
 
   /**
@@ -272,9 +272,9 @@ export default class Stage extends Entity {
   *
   * @param {number} percent - the percentage to set.
   */
-  zoom(percent) {
-    this.magnification = percent;
-    this.element.update(this);
+  zoom (percent) {
+    this.magnification = percent
+    this.element.update(this)
   }
 
   /** Sprites * */
@@ -285,14 +285,14 @@ export default class Stage extends Entity {
   * @private
   * @param {number} index - the backdrop to switch too.
   */
-  _refreshSprites() {
-    let i = 0;
+  _refreshSprites () {
+    let i = 0
     this.sprites.forEach((item) => {
-      const sprite = item;
-      i += 1;
-      sprite.z = i;
-      sprite.element ? sprite.element.update(sprite) : null;
-    });
+      const sprite = item
+      i += 1
+      sprite.z = i
+      sprite.element ? sprite.element.update(sprite) : null
+    })
   }
 
   /**
@@ -309,13 +309,13 @@ export default class Stage extends Entity {
   *
   * @param {object} sprite - the sprite to move.
   */
-  sendSpriteBackwards(sprite) {
-    const index = this.sprites.indexOf(sprite);
+  sendSpriteBackwards (sprite) {
+    const index = this.sprites.indexOf(sprite)
     if (index > 0) {
-      this.sprites[index] = this.sprites[index - 1]; // move one up
-      this.sprites[index - 1] = sprite; // me subject down
+      this.sprites[index] = this.sprites[index - 1] // move one up
+      this.sprites[index - 1] = sprite // me subject down
     }
-    this._refreshSprites();
+    this._refreshSprites()
   }
 
   /**
@@ -332,13 +332,13 @@ export default class Stage extends Entity {
   *
   * @param {object} sprite - the sprite to move.
   */
-  sendSpriteForward(sprite) {
-    const index = this.sprites.indexOf(sprite);
+  sendSpriteForward (sprite) {
+    const index = this.sprites.indexOf(sprite)
     if (index < this.sprites.length - 1 && index !== -1) {
-      this.sprites[index] = this.sprites[index + 1]; // move one down
-      this.sprites[index + 1] = sprite; // me subject up
+      this.sprites[index] = this.sprites[index + 1] // move one down
+      this.sprites[index + 1] = sprite // me subject up
     }
-    this._refreshSprites();
+    this._refreshSprites()
   }
 
   /**
@@ -355,13 +355,13 @@ export default class Stage extends Entity {
   *
   * @param {object} sprite - the sprite to move.
   */
-  sendSpriteToFront(sprite) {
-    const index = this.sprites.indexOf(sprite);
+  sendSpriteToFront (sprite) {
+    const index = this.sprites.indexOf(sprite)
     if (index !== -1) {
-      this.sprites.splice(index, 1);
-      this.sprites.push(sprite);
+      this.sprites.splice(index, 1)
+      this.sprites.push(sprite)
     }
-    this._refreshSprites();
+    this._refreshSprites()
   }
 
   /**
@@ -378,13 +378,13 @@ export default class Stage extends Entity {
   *
   * @param {object} sprite - the sprite to move.
   */
-  sendSpriteToBack(sprite) {
-    const index = this.sprites.indexOf(sprite);
+  sendSpriteToBack (sprite) {
+    const index = this.sprites.indexOf(sprite)
     if (index !== -1) {
-      this.sprites.splice(index, 1);
-      this.sprites.unshift(sprite);
+      this.sprites.splice(index, 1)
+      this.sprites.unshift(sprite)
     }
-    this._refreshSprites();
+    this._refreshSprites()
   }
 
   /* sensing */
@@ -402,19 +402,19 @@ export default class Stage extends Entity {
   * @param {string} userKey - the key pressed. May be the code or the character itself (A or 65)
   * @param {function} func - a function to rewrite and execute.
   */
-  isKeyPressed(userKey) {
-    let match = false;
-    let check;
+  isKeyPressed (userKey) {
+    let match = false
+    let check
 
-    typeof userKey === 'string' ? check = userKey.toLowerCase() : check = userKey;
+    typeof userKey === 'string' ? check = userKey.toLowerCase() : check = userKey
     // Make sure each property is supported by browsers.
     // Note: user may write incompatible code.
-    this.keysKey.indexOf(check) !== -1 ? match = true : null;
-    this.keysCode.indexOf(check) !== -1 ? match = true : null;
-    this.keysKeyCode.indexOf(check) !== -1 ? match = true : null;
+    this.keysKey.indexOf(check) !== -1 ? match = true : null
+    this.keysCode.indexOf(check) !== -1 ? match = true : null
+    this.keysKeyCode.indexOf(check) !== -1 ? match = true : null
 
-    !this.sensing ? console.log('BlockLike.js Notice: isKeyPressed() ingnored. Stage sensing not enabled.') : null; // eslint-disable-line no-console
+    !this.sensing ? console.log('BlockLike.js Notice: isKeyPressed() ingnored. Stage sensing not enabled.') : null // eslint-disable-line no-console
 
-    return match;
+    return match
   }
 }

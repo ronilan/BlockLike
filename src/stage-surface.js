@@ -9,8 +9,8 @@ export default class StageSurface {
   *
   * @param {object} stage - the stage on which the sprite is drawing.
   */
-  constructor(stage) {
-    this.context = stage.element.context;
+  constructor (stage) {
+    this.context = stage.element.context
   }
 
   /**
@@ -19,21 +19,21 @@ export default class StageSurface {
   *
   * @param {object} sprite - the sprite drawing the line.
   */
-  draw(sprite) {
+  draw (sprite) {
     if (sprite.drawing) {
-      this.context.beginPath();
-      this.context.moveTo((sprite.stageWidth / 2) + sprite.x, (sprite.stageHeight / 2) + (sprite.y * -1));
-      this.context.lineTo((sprite.stageWidth / 2) + sprite.prevX, (sprite.stageHeight / 2) + (sprite.prevY * -1));
-      this.context.lineWidth = sprite.penSize;
-      this.context.strokeStyle = sprite.penColor;
-      this.context.stroke();
+      this.context.beginPath()
+      this.context.moveTo((sprite.stageWidth / 2) + sprite.x, (sprite.stageHeight / 2) + (sprite.y * -1))
+      this.context.lineTo((sprite.stageWidth / 2) + sprite.prevX, (sprite.stageHeight / 2) + (sprite.prevY * -1))
+      this.context.lineWidth = sprite.penSize
+      this.context.strokeStyle = sprite.penColor
+      this.context.stroke()
     }
   }
 
   /**
   * clear - clears the canvas
   */
-  clear(sprite) {
-    this.context.clearRect(0, 0, sprite.stageWidth, sprite.stageHeight);
+  clear (sprite) {
+    this.context.clearRect(0, 0, sprite.stageWidth, sprite.stageHeight)
   }
 }

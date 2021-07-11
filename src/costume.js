@@ -1,4 +1,4 @@
-import Look from './look';
+import Look from './look'
 
 /**
  * Class representing a Costume.
@@ -26,31 +26,31 @@ export default class Costume extends Look {
   * @param {string} options.image - a URI (or data URI) for the costume image.
   * @param {string} options.color - a css color string ('#ff0000', 'red')
   */
-  constructor(options = {}) {
+  constructor (options = {}) {
     const defaults = {
       width: 100,
       height: 100,
-      color: null,
-    };
-    const actual = { ...defaults, ...options };
+      color: null
+    }
+    const actual = { ...defaults, ...options }
 
-    super();
+    super()
 
-    this.width = actual.width;
-    this.height = actual.height;
-    this.visibleWidth = actual.width;
-    this.visibleHeight = actual.height;
+    this.width = actual.width
+    this.height = actual.height
+    this.visibleWidth = actual.width
+    this.visibleHeight = actual.height
 
-    this.image = actual.image;
-    this.color = actual.color;
+    this.image = actual.image
+    this.color = actual.color
 
     // preload
     if (this.image) {
-      const image = new window.Image();
-      image.src = this.image;
+      const image = new window.Image()
+      image.src = this.image
     }
 
-    this.innerHTML = '';
+    this.innerHTML = ''
   }
 
   /** Setup Actions * */
@@ -66,18 +66,18 @@ export default class Costume extends Look {
   *
   * @param {object} sprite - which sprite to add the costume too.
   */
-  addTo(sprite) {
-    const curSprite = sprite;
-    sprite.costumes.push(this);
+  addTo (sprite) {
+    const curSprite = sprite
+    sprite.costumes.push(this)
 
     // if "bare" set the added as active.
     if (!sprite.costume) {
-      curSprite.costume = sprite.costumes[0];
-      curSprite.width = sprite.costume.visibleWidth;
-      curSprite.height = sprite.costume.visibleHeight;
+      curSprite.costume = sprite.costumes[0]
+      curSprite.width = sprite.costume.visibleWidth
+      curSprite.height = sprite.costume.visibleHeight
     }
 
-    sprite.element ? sprite.element.update(sprite) : null;
+    sprite.element ? sprite.element.update(sprite) : null
   }
 
   /**
@@ -92,8 +92,8 @@ export default class Costume extends Look {
   *
   * @param {object} sprite - which sprite to remove the costume from.
   */
-  removeFrom(sprite) {
-    sprite.removeCostume(this);
+  removeFrom (sprite) {
+    sprite.removeCostume(this)
   }
 
   /** Looks * */
@@ -108,20 +108,20 @@ export default class Costume extends Look {
   *
   * costume.resizeToImage();
   */
-  resizeToImage() {
+  resizeToImage () {
     // register the image size from the file
     if (this.image) {
-      const image = new window.Image();
-      const me = this;
+      const image = new window.Image()
+      const me = this
 
-      image.src = this.image;
+      image.src = this.image
 
       image.addEventListener('load', () => {
-        me.width = image.width;
-        me.height = image.height;
-        me.visibleWidth = me.width;
-        me.visibleHeight = me.height;
-      });
+        me.width = image.width
+        me.height = image.height
+        me.visibleWidth = me.width
+        me.visibleHeight = me.height
+      })
     }
   }
 
@@ -138,8 +138,8 @@ export default class Costume extends Look {
   *
   * @param {string} html - the html to insert.
   */
-  inner(html) {
-    this.innerHTML = html;
+  inner (html) {
+    this.innerHTML = html
   }
 
   /**
@@ -152,13 +152,13 @@ export default class Costume extends Look {
   *
   * @param {object} el - the DOM element.
   */
-  insert(el) {
-    const iel = el.cloneNode(true);
-    iel.style.display = 'block';
-    iel.style.visibility = 'inherit';
+  insert (el) {
+    const iel = el.cloneNode(true)
+    iel.style.display = 'block'
+    iel.style.visibility = 'inherit'
 
-    this.image = null;
-    this.color = 'transparent';
-    this.innerHTML = iel.outerHTML;
+    this.image = null
+    this.color = 'transparent'
+    this.innerHTML = iel.outerHTML
   }
 }

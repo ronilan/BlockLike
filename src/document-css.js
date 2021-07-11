@@ -13,7 +13,7 @@ html, body{
   margin:0;
   padding:0;
 }
-`;
+`
 
 export const uiCSS = `
 .blocklike-flag {
@@ -27,7 +27,7 @@ export const uiCSS = `
   border: 2px solid #666;
   border-radius: 65px;
 }
-`;
+`
 
 export const thinkCSS = `
 .blocklike-think {
@@ -68,7 +68,7 @@ export const thinkCSS = `
   border-radius: 15px;
   content: "";
 }
-`;
+`
 
 export const sayCSS = `
 .blocklike-ask,
@@ -113,7 +113,7 @@ export const sayCSS = `
   border: 16px solid;
   border-color: #fafafa transparent transparent #fafafa;
 }
-`;
+`
 
 export const askCSS = `
 .blocklike-ask input {
@@ -130,4 +130,4 @@ export const askCSS = `
   padding: 0 5px;
   margin: 0;
 }
-`;
+`
