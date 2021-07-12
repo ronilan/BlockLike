@@ -9,22 +9,22 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage({ sensing: true });
-  const sprite = new blockLike.Sprite();
+    const stage = new blockLike.Stage({ sensing: true })
+    const sprite = new blockLike.Sprite()
 
-  sprite.addTo(stage);
+    sprite.addTo(stage)
 
-  sprite.whenFlag(function () {
-    while (forever) {
-      this.wait(0.1);
+    sprite.whenFlag(function () {
+      while (forever) {
+        this.wait(0.1)
 
-      this.say(`Mouse Down: ${stage.mouseDown}`);
-    }
-  });
-  
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+        this.say(`Mouse Down: ${stage.mouseDown}`)
+      }
+    })
+
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

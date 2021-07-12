@@ -10,19 +10,19 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let stage = new blockLike.Stage({
-    backdrop: new blockLike.Backdrop({
-      color: '#A2DAFF',
-    }),
-  });
+    let stage = new blockLike.Stage({
+      backdrop: new blockLike.Backdrop({
+        color: '#A2DAFF'
+      })
+    })
 
-  stage.whenFlag(() => {
-    this.wait(5);
-    this.delete();
-    console.log(this, stage);
-    stage = null;
-    console.log(this, stage);
-  });
+    stage.whenFlag(() => {
+      this.wait(5)
+      this.delete()
+      console.log(this, stage)
+      stage = null
+      console.log(this, stage)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

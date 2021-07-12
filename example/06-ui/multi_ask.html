@@ -10,33 +10,33 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
-  const sprite1 = new blockLike.Sprite();
-  const sprite2 = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const sprite1 = new blockLike.Sprite()
+    const sprite2 = new blockLike.Sprite()
 
-  sprite1.addTo(stage);
-  sprite2.addTo(stage);
+    sprite1.addTo(stage)
+    sprite2.addTo(stage)
 
-  let firstname1;
-  let lastname1;
+    let firstname1
+    let lastname1
 
-  let firstname2;
-  let lastname2;
+    let firstname2
+    let lastname2
 
-  sprite1.move(-100, 50);
-  sprite2.goTo(100, -50);
+    sprite1.move(-100, 50)
+    sprite2.goTo(100, -50)
 
-  sprite1.whenClicked(() => {
-    firstname1 = sprite1.ask('First Name?');
-    lastname1 = sprite1.ask('Last Name?');
-    this.say(`${firstname1} ${lastname1}`);
-  });
+    sprite1.whenClicked(() => {
+      firstname1 = sprite1.ask('First Name?')
+      lastname1 = sprite1.ask('Last Name?')
+      this.say(`${firstname1} ${lastname1}`)
+    })
 
-  sprite2.whenClicked(() => {
-    firstname2 = sprite2.ask('First Name?');
-    lastname2 = sprite2.ask('Last Name?');
-    this.say(`${firstname2} ${lastname2}`);
-  });
+    sprite2.whenClicked(() => {
+      firstname2 = sprite2.ask('First Name?')
+      lastname2 = sprite2.ask('Last Name?')
+      this.say(`${firstname2} ${lastname2}`)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

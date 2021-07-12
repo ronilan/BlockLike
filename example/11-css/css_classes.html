@@ -30,45 +30,45 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite(null);
+    const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite(null)
 
-  const green = new blockLike.Costume({
-    width: 166,
-    height: 166,
-    color: '#A2DA00',
-    image: 'https://www.blocklike.org/images/sheep_step.png',
-  });
+    const green = new blockLike.Costume({
+      width: 166,
+      height: 166,
+      color: '#A2DA00',
+      image: 'https://www.blocklike.org/images/sheep_step.png'
+    })
 
-  const blue = new blockLike.Costume({
-    width: 166,
-    height: 166,
-    color: '#A2DAFF',
-    image: 'https://www.blocklike.org/images/sheep.png',
-  });
+    const blue = new blockLike.Costume({
+      width: 166,
+      height: 166,
+      color: '#A2DAFF',
+      image: 'https://www.blocklike.org/images/sheep.png'
+    })
 
-  blue.addTo(sprite);
-  sprite.addCostume(green);
+    blue.addTo(sprite)
+    sprite.addCostume(green)
 
-  stage.addClass('backdrop-gray');
-  sprite.addClass('circle');
+    stage.addClass('backdrop-gray')
+    sprite.addClass('circle')
 
-  blue.addClass('blue');
-  green.addClass('green');
+    blue.addClass('blue')
+    green.addClass('green')
 
-  stage.addSprite(sprite);
-  // shrink image
-  sprite.element.el.firstChild.style.width = '100px';
-  sprite.element.el.firstChild.style.height = '100px';
+    stage.addSprite(sprite)
+    // shrink image
+    sprite.element.el.firstChild.style.width = '100px'
+    sprite.element.el.firstChild.style.height = '100px'
 
-  sprite.whenClicked(function () {
-    this.nextCostume();
-  });
+    sprite.whenClicked(function () {
+      this.nextCostume()
+    })
 
-  stage.whenClicked(function () {
-    this.hasClass('backdrop-gray') ? this.removeClass('backdrop-gray') : this.addClass('backdrop-gray');
-    this.hasClass('backdrop-black') ? this.removeClass('backdrop-black') : this.addClass('backdrop-black');
-  });
+    stage.whenClicked(function () {
+      this.hasClass('backdrop-gray') ? this.removeClass('backdrop-gray') : this.addClass('backdrop-gray')
+      this.hasClass('backdrop-black') ? this.removeClass('backdrop-black') : this.addClass('backdrop-black')
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

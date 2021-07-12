@@ -8,21 +8,20 @@
   <body>
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
-  <script id="example">let forever = true;
+  <script id="example">let forever = true
+    const stage = new blockLike.Stage({ sensing: true })
+    const sprite = new blockLike.Sprite()
 
-  const stage = new blockLike.Stage({ sensing: true });
-  const sprite = new blockLike.Sprite();
+    sprite.addTo(stage)
 
-  sprite.addTo(stage);
+    sprite.whenFlag(function () {
+      while (forever) {
+        this.wait(0.1)
+        this.say(`Mouse X: ${stage.mouseX}<br /> Mouse Y: ${stage.mouseY}`)
+      }
+    })
 
-  sprite.whenFlag(function () {
-    while (forever) {
-      this.wait(0.1);
-      this.say(`Mouse X: ${stage.mouseX}<br /> Mouse Y: ${stage.mouseY}`);
-    }
-  });
-  
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

@@ -10,14 +10,14 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage({ sensing: true });
-  const sprite = new blockLike.Sprite();
-  
-  sprite.addTo(stage);
-  
-  stage.whenClicked(function () {
-    sprite.say(sprite.distanceTo(this.mouseX, this.mouseY));
-  });
+    const stage = new blockLike.Stage({ sensing: true })
+    const sprite = new blockLike.Sprite()
+
+    sprite.addTo(stage)
+
+    stage.whenClicked(function () {
+      sprite.say(sprite.distanceTo(this.mouseX, this.mouseY))
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

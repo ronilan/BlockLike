@@ -10,19 +10,19 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sprite1 = new blockLike.Sprite();
+    const sprite1 = new blockLike.Sprite()
 
-  stage.addSprite(sprite1);
+    stage.addSprite(sprite1)
 
-  sprite1.whenClicked(function () {
-    if (this.magnification >= 200) {
-      this.setSize(50);
-    } else {
-      this.changeSize(10);
-    }
-  });
+    sprite1.whenClicked(function () {
+      if (this.magnification >= 200) {
+        this.setSize(50)
+      } else {
+        this.changeSize(10)
+      }
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

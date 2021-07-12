@@ -10,38 +10,38 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite()
 
-  // this will be ignored as the sprite is not on stage yet.
-  sprite.think('hi');
-  stage.addSprite(sprite);
+    // this will be ignored as the sprite is not on stage yet.
+    sprite.think('hi')
+    stage.addSprite(sprite)
 
-  sprite.whenFlag(function () {
-    this.think('I will count forever!');
-    this.wait(1);
-    this.think('I will count forever, and ever and ever!');
-    this.wait(1);
-    this.think('I will count forever, and ever and ever! and ever and ever!!!');
-    this.wait(1);
-    let i = 0;
-    while (forever) {
-      i += 1;
-      this.say(i);
-    }
-  });
+    sprite.whenFlag(function () {
+      this.think('I will count forever!')
+      this.wait(1)
+      this.think('I will count forever, and ever and ever!')
+      this.wait(1)
+      this.think('I will count forever, and ever and ever! and ever and ever!!!')
+      this.wait(1)
+      let i = 0
+      while (forever) {
+        i += 1
+        this.say(i)
+      }
+    })
 
-  sprite.whenClicked(function () {
-    this.changeSize(10);
-  });
+    sprite.whenClicked(function () {
+      this.changeSize(10)
+    })
 
-  sprite.whenKeyPressed(' ', function () {
-    this.showing ? this.hide() : this.show();
-  });
+    sprite.whenKeyPressed(' ', function () {
+      this.showing ? this.hide() : this.show()
+    })
 
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

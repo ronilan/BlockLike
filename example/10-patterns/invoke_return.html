@@ -10,50 +10,50 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sprite1 = new blockLike.Sprite();
+    const sprite1 = new blockLike.Sprite()
 
-  sprite1.addTo(stage);
+    sprite1.addTo(stage)
 
-  let returned;
+    let returned
 
-  function pattern(sides, size, times) {
-    const start = Date.now();
-    for (let i = 0; i < times; i += 1) {
-      this.penDown();
-      for (let j = 0; j < sides; j += 1) {
-        this.move(size);
-        this.turnRight(360 / sides);
+    function pattern (sides, size, times) {
+      const start = Date.now()
+      for (let i = 0; i < times; i += 1) {
+        this.penDown()
+        for (let j = 0; j < sides; j += 1) {
+          this.move(size)
+          this.turnRight(360 / sides)
+        }
+        this.penUp()
+        this.turnRight(360 / times)
       }
-      this.penUp();
-      this.turnRight(360 / times);
+      return Date.now() - start
     }
-    return Date.now() - start;
-  }
 
-  function talk(text) {
-    this.say(text);
-    this.wait(1);
-    this.say();
-    return `I said ${text}`;
-  }
+    function talk (text) {
+      this.say(text)
+      this.wait(1)
+      this.say()
+      return `I said ${text}`
+    }
 
-  function jump() {
-    this.changeY(100);
-    this.wait(0.5);
-    this.changeY(-100);
-    return 'I jumped';
-  }
+    function jump () {
+      this.changeY(100)
+      this.wait(0.5)
+      this.changeY(-100)
+      return 'I jumped'
+    }
 
-  sprite1.whenFlag(() => {
-    returned = this.invoke(jump);
-    this.thinkWait(returned, 2);
-    returned = this.invoke(talk, 'hi');
-    this.thinkWait(returned, 2);
-    returned = this.invoke(pattern, [5, 50, 12]);
-    this.thinkWait(`I took ${returned} milliseconds to draw`, 2);
-  });
+    sprite1.whenFlag(() => {
+      returned = this.invoke(jump)
+      this.thinkWait(returned, 2)
+      returned = this.invoke(talk, 'hi')
+      this.thinkWait(returned, 2)
+      returned = this.invoke(pattern, [5, 50, 12])
+      this.thinkWait(`I took ${returned} milliseconds to draw`, 2)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

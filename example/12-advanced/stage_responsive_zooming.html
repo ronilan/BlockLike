@@ -10,72 +10,72 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage({
-    width: 667,
-    height: 375,
-    backdrop: new blockLike.Backdrop({
-      color: '#A2DAFF',
-    }),
-  });
+    const stage = new blockLike.Stage({
+      width: 667,
+      height: 375,
+      backdrop: new blockLike.Backdrop({
+        color: '#A2DAFF'
+      })
+    })
 
-  const sprite1 = new blockLike.Sprite();
-  const sprite2 = new blockLike.Sprite();
+    const sprite1 = new blockLike.Sprite()
+    const sprite2 = new blockLike.Sprite()
 
-  function resize() {
-    const ratioWidth = window.innerWidth / stage.width;
-    const ratioHeight = window.innerHeight / stage.height;
+    function resize () {
+      const ratioWidth = window.innerWidth / stage.width
+      const ratioHeight = window.innerHeight / stage.height
 
-    ratioWidth < ratioHeight ? stage.zoom(ratioWidth * 100) : stage.zoom(ratioHeight * 100);
-  }
-
-  // listen to resize event
-  window.addEventListener('resize', () => {
-    resize();
-  });
-
-  // listen to rotation event
-  window.addEventListener('orientationchange', () => {
-    resize();
-  });
-  
-  let side = null;
-
-  stage.addSprite(sprite2);
-  stage.addSprite(sprite1);
-  
-  stage.whenLoaded(() => {
-    resize();
-  });
-
-  sprite1.whenFlag(function () {
-    let moveDir = 1;
-    while (forever) {
-      side = sprite1.touchingEdge();
-      if (side) {
-        this.say(side);
-        moveDir *= -1;
-      }
-
-      sprite1.changeX(10 * moveDir);
+      ratioWidth < ratioHeight ? stage.zoom(ratioWidth * 100) : stage.zoom(ratioHeight * 100)
     }
-  });
 
-  sprite2.whenFlag(function () {
-    let moveDir = 1;
-    while (forever) {
-      side = sprite2.touchingEdge();
-      if (side) {
-        this.say(side);
-        moveDir *= -1;
+    // listen to resize event
+    window.addEventListener('resize', () => {
+      resize()
+    })
+
+    // listen to rotation event
+    window.addEventListener('orientationchange', () => {
+      resize()
+    })
+
+    let side = null
+
+    stage.addSprite(sprite2)
+    stage.addSprite(sprite1)
+
+    stage.whenLoaded(() => {
+      resize()
+    })
+
+    sprite1.whenFlag(function () {
+      let moveDir = 1
+      while (forever) {
+        side = sprite1.touchingEdge()
+        if (side) {
+          this.say(side)
+          moveDir *= -1
+        }
+
+        sprite1.changeX(10 * moveDir)
       }
+    })
 
-      sprite2.changeY(10 * moveDir);
-    }
-  });
+    sprite2.whenFlag(function () {
+      let moveDir = 1
+      while (forever) {
+        side = sprite2.touchingEdge()
+        if (side) {
+          this.say(side)
+          moveDir *= -1
+        }
 
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+        sprite2.changeY(10 * moveDir)
+      }
+    })
+
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

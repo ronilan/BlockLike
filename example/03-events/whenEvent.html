@@ -10,40 +10,40 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sprite1 = new blockLike.Sprite();
-  const sprite2 = new blockLike.Sprite();
+    const sprite1 = new blockLike.Sprite()
+    const sprite2 = new blockLike.Sprite()
 
-  stage.addSprite(sprite2);
-  stage.addSprite(sprite1);
+    stage.addSprite(sprite2)
+    stage.addSprite(sprite1)
 
-  stage.whenEvent('mousemove', () => {
-    sprite1.turnRight(1);
-    sprite2.turnLeft(1);
-  });
+    stage.whenEvent('mousemove', () => {
+      sprite1.turnRight(1)
+      sprite2.turnLeft(1)
+    })
 
-  sprite1.whenEvent('mouseover', function (e) {
-    this.say('tickle');
-    console.log(this);
-    console.log(e);
-  });
+    sprite1.whenEvent('mouseover', function (e) {
+      this.say('tickle')
+      console.log(this)
+      console.log(e)
+    })
 
-  sprite1.whenEvent('mouseout', function () {
-    this.say();
-  });
+    sprite1.whenEvent('mouseout', function () {
+      this.say()
+    })
 
-  sprite1.whenEvent('dblclick', function () {
-    this.say('double click');
-  });
+    sprite1.whenEvent('dblclick', function () {
+      this.say('double click')
+    })
 
-  sprite1.whenEvent('keyup', function (e) {
-    this.say(`${e.key} up`);
-  });
+    sprite1.whenEvent('keyup', function (e) {
+      this.say(`${e.key} up`)
+    })
 
-  sprite1.whenEvent('keydown', function (e) {
-    this.say(`${e.key} down`);
-  });
+    sprite1.whenEvent('keydown', function (e) {
+      this.say(`${e.key} down`)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

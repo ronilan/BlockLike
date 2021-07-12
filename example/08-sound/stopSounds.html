@@ -9,19 +9,20 @@
 
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
-  <script id="example">const stage = new blockLike.Stage();
+  <script id="example">
+    const stage = new blockLike.Stage()
 
-  const sprite1 = new blockLike.Sprite();
+    const sprite1 = new blockLike.Sprite()
 
-  stage.addSprite(sprite1);
+    stage.addSprite(sprite1)
 
-  stage.whenClicked(() => {
-    this.playSound('../../sounds/beat.wav');
-  });
+    stage.whenClicked(() => {
+      this.playSound('../../sounds/beat.wav')
+    })
 
-  stage.whenKeyPressed('Escape', () => {
-    this.stopSounds();
-  });
+    stage.whenKeyPressed('Escape', () => {
+      this.stopSounds()
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

@@ -24,103 +24,103 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  /* eslint-disable max-classes-per-file */
-  let forever = true;
+    /* eslint-disable max-classes-per-file */
+    let forever = true
 
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  class TextInput extends blockLike.Sprite {
-    constructor(options = {}) {
-      super(options);
-      const defaults = {
-        value: '',
-      };
-      const actual = { ...defaults, ...options };
+    class TextInput extends blockLike.Sprite {
+      constructor (options = {}) {
+        super(options)
+        const defaults = {
+          value: ''
+        }
+        const actual = { ...defaults, ...options }
 
-      const el = document.createElement('INPUT');
-      el.setAttribute('type', 'text');
-      el.setAttribute('value', actual.value);
+        const el = document.createElement('INPUT')
+        el.setAttribute('type', 'text')
+        el.setAttribute('value', actual.value)
 
-      this.value = actual.value;
+        this.value = actual.value
 
-      this.insert(el);
+        this.insert(el)
+      }
+
+      getValue () {
+        return this.element.el.children[0].value
+      }
+    
+      setValue (val) {
+        this.element.el.children[0].value = val
+      }
     }
 
-    getValue() {
-      return this.element.el.children[0].value;
+    class Slider extends blockLike.Sprite {
+      constructor (options = {}) {
+        super(options)
+        const defaults = {
+          min: 0,
+          max: 100,
+          step: 1,
+          value: 0
+        }
+        const actual = { ...defaults, ...options }
+
+        const el = document.createElement('INPUT')
+        el.setAttribute('type', 'range')
+        el.setAttribute('min', actual.min)
+        el.setAttribute('max', actual.max)
+        el.setAttribute('step', actual.step)
+        el.setAttribute('value', actual.value)
+
+        this.value = actual.value
+
+        this.insert(el)
+      }
+    
+      getValue () {
+        return this.element.el.children[0].value
+      }
+    
+      setValue (val) {
+        this.element.el.children[0].value = val
+      }
     }
-  
-    setValue(val) {
-      this.element.el.children[0].value = val;
-    }
-  }
 
-  class Slider extends blockLike.Sprite {
-    constructor(options = {}) {
-      super(options);
-      const defaults = {
-        min: 0,
-        max: 100,
-        step: 1,
-        value: 0,
-      };
-      const actual = { ...defaults, ...options };
+    const sprite = new blockLike.Sprite()
+    sprite.changeY(150)
+    const slider = new Slider({ min: -90, max: 90, step: 10 })
+    const text = new TextInput({ value: slider.value })
+    text.changeY(-50)
 
-      const el = document.createElement('INPUT');
-      el.setAttribute('type', 'range');
-      el.setAttribute('min', actual.min);
-      el.setAttribute('max', actual.max);
-      el.setAttribute('step', actual.step);
-      el.setAttribute('value', actual.value);
+    stage.addSprite(text)
+    stage.addSprite(slider)
+    stage.addSprite(sprite)
 
-      this.value = actual.value;
+    slider.element.el.children[0].className = 'slider'
+    text.element.el.children[0].className = 'text'
 
-      this.insert(el);
-    }
-  
-    getValue() {
-      return this.element.el.children[0].value;
-    }
-  
-    setValue(val) {
-      this.element.el.children[0].value = val;
-    }
-  }
+    slider.whenEvent('change', function () {
+      sprite.sayWait(this.getValue(), 0.5)
+    })
 
-  const sprite = new blockLike.Sprite();
-  sprite.changeY(150);
-  const slider = new Slider({ min: -90, max: 90, step: 10 });
-  const text = new TextInput({ value: slider.value });
-  text.changeY(-50);
+    slider.whenEvent('mousemove', function () {
+      text.setValue(this.getValue())
+    })
 
-  stage.addSprite(text);
-  stage.addSprite(slider);
-  stage.addSprite(sprite);
+    stage.whenEvent('dblclick', () => {
+      slider.setValue(0)
+      text.setValue(slider.getValue())
+    })
 
-  slider.element.el.children[0].className = 'slider';
-  text.element.el.children[0].className = 'text';
+    sprite.whenLoaded(function () {
+      while (forever) {
+        this.wait(0.5)
+        this.turnRight(parseInt(text.getValue(), 10))
+      }
+    })
 
-  slider.whenEvent('change', function () {
-    sprite.sayWait(this.getValue(), 0.5);
-  });
-
-  slider.whenEvent('mousemove', function () {
-    text.setValue(this.getValue());
-  });
-
-  stage.whenEvent('dblclick', () => {
-    slider.setValue(0);
-    text.setValue(slider.getValue());
-  });
-
-  sprite.whenLoaded(function () {
-    while (forever) {
-      this.wait(0.5);
-      this.turnRight(parseInt(text.getValue(), 10));
-    }
-  });
-
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

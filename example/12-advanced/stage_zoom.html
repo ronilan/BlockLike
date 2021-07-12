@@ -10,39 +10,39 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const options = {
-    width: 600,
-    height: 450,
-    backdrop: new blockLike.Backdrop({
-      color: '#A2DAFF',
-    }),
-    sensing: true,
+    const options = {
+      width: 600,
+      height: 450,
+      backdrop: new blockLike.Backdrop({
+        color: '#A2DAFF'
+      }),
+      sensing: true
 
-  };
-
-  const stage = new blockLike.Stage(options); // eslint-disable-line no-new
-  const sprite = new blockLike.Sprite();
-
-  stage.whenKeyPressed('2', function () {
-    this.zoom(stage.magnification / 1.1);
-  });
-
-  stage.whenKeyPressed('1', function () {
-    this.zoom(stage.magnification * 1.1);
-  });
-
-  sprite.addTo(stage);
-
-  sprite.whenFlag(function () {
-    while (forever) {
-      this.wait(0.1);
-      this.say(`Mouse X: ${stage.mouseX}<br /> Mouse Y: ${stage.mouseY}`);
     }
-  });
 
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    const stage = new blockLike.Stage(options) // eslint-disable-line no-new
+    const sprite = new blockLike.Sprite()
+
+    stage.whenKeyPressed('2', function () {
+      this.zoom(stage.magnification / 1.1)
+    })
+
+    stage.whenKeyPressed('1', function () {
+      this.zoom(stage.magnification * 1.1)
+    })
+
+    sprite.addTo(stage)
+
+    sprite.whenFlag(function () {
+      while (forever) {
+        this.wait(0.1)
+        this.say(`Mouse X: ${stage.mouseX}<br /> Mouse Y: ${stage.mouseY}`)
+      }
+    })
+
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

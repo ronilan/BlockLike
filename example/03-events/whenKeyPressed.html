@@ -10,31 +10,31 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sprite1 = new blockLike.Sprite();
-  const sprite2 = new blockLike.Sprite();
+    const sprite1 = new blockLike.Sprite()
+    const sprite2 = new blockLike.Sprite()
 
-  stage.addSprite(sprite2);
-  stage.addSprite(sprite1);
+    stage.addSprite(sprite2)
+    stage.addSprite(sprite1)
 
-  sprite1.whenFlag(() => {
-    this.say('press space, 1 and/or 2');
-    sprite2.changeY(150);
-  });
+    sprite1.whenFlag(() => {
+      this.say('press space, 1 and/or 2')
+      sprite2.changeY(150)
+    })
 
-  stage.whenKeyPressed(32, () => {
-    sprite1.say('space is attached to stage');
-  });
+    stage.whenKeyPressed(32, () => {
+      sprite1.say('space is attached to stage')
+    })
 
-  sprite1.whenKeyPressed('1', () => {
-    this.say('1 is attached to sprite1');
-  });
+    sprite1.whenKeyPressed('1', () => {
+      this.say('1 is attached to sprite1')
+    })
 
-  sprite1.whenKeyPressed('2', () => {
-    this.move(200);
-    sprite2.say('2 is attached to 2 but moves 1');
-  });
+    sprite1.whenKeyPressed('2', () => {
+      this.move(200)
+      sprite2.say('2 is attached to 2 but moves 1')
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

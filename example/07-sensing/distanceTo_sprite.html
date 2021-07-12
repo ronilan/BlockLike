@@ -10,56 +10,56 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite();
-  const player = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite()
+    const player = new blockLike.Sprite()
 
-  stage.addSprite(player);
+    stage.addSprite(player)
 
-  const colorSheep = new blockLike.Costume({
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Sheep.svg/240px-Sheep.svg.png',
-  });
-  sprite.addCostume(colorSheep);
-  sprite.nextCostume();
-  
-  stage.addSprite(sprite);
-  sprite.goTo(0, 100);
+    const colorSheep = new blockLike.Costume({
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Sheep.svg/240px-Sheep.svg.png'
+    })
+    sprite.addCostume(colorSheep)
+    sprite.nextCostume()
 
-  stage.sendSpriteToFront(player);
+    stage.addSprite(sprite)
+    sprite.goTo(0, 100)
 
-  function senseDistance() {
-    const dist = player.distanceTo(sprite.x, sprite.y);
-    player.say(`My center is ${dist} pixels away from their center.`);
-  }
+    stage.sendSpriteToFront(player)
 
-  player.whenKeyPressed(39, () => {
-    this.changeX(10);
-    senseDistance();
-  });
+    function senseDistance () {
+      const dist = player.distanceTo(sprite.x, sprite.y)
+      player.say(`My center is ${dist} pixels away from their center.`)
+    }
 
-  player.whenKeyPressed(37, () => {
-    this.changeX(-10);
-    senseDistance();
-  });
-  
-  player.whenKeyPressed(38, () => {
-    this.changeY(10);
-    senseDistance();
-  });
+    player.whenKeyPressed(39, () => {
+      this.changeX(10)
+      senseDistance()
+    })
 
-  player.whenKeyPressed(40, () => {
-    this.changeY(-10);
-    senseDistance();
-  });
-  function randX() {
-    return (Math.random() * (stage.width / 2)) - (stage.width / 2);
-  }
-  function randY() {
-    return (Math.random() * (stage.height / 2)) - (stage.height / 2);
-  }
-  sprite.whenClicked(() => {
-    this.goTo(randX(), randY());
-  });
+    player.whenKeyPressed(37, () => {
+      this.changeX(-10)
+      senseDistance()
+    })
+
+    player.whenKeyPressed(38, () => {
+      this.changeY(10)
+      senseDistance()
+    })
+
+    player.whenKeyPressed(40, () => {
+      this.changeY(-10)
+      senseDistance()
+    })
+    function randX () {
+      return (Math.random() * (stage.width / 2)) - (stage.width / 2)
+    }
+    function randY () {
+      return (Math.random() * (stage.height / 2)) - (stage.height / 2)
+    }
+    sprite.whenClicked(() => {
+      this.goTo(randX(), randY())
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

@@ -10,19 +10,19 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const vancouver = new blockLike.Backdrop({ image: 'https://upload.wikimedia.org/wikipedia/commons/6/69/Vancouverskyline.jpg' });
-  const blue = new blockLike.Backdrop({ color: '#496ba3' });
-  const platforms = new blockLike.Backdrop({ image: '../../images/backdrop.png' });
+    const vancouver = new blockLike.Backdrop({ image: 'https://upload.wikimedia.org/wikipedia/commons/6/69/Vancouverskyline.jpg' })
+    const blue = new blockLike.Backdrop({ color: '#496ba3' })
+    const platforms = new blockLike.Backdrop({ image: '../../images/backdrop.png' })
 
-  stage.addBackdrop(vancouver);
-  stage.addBackdrop(blue);
-  stage.addBackdrop(platforms);
+    stage.addBackdrop(vancouver)
+    stage.addBackdrop(blue)
+    stage.addBackdrop(platforms)
 
-  stage.whenClicked(() => {
-    stage.nextBackdrop();
-  });
+    stage.whenClicked(() => {
+      stage.nextBackdrop()
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

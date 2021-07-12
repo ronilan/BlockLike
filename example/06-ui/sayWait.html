@@ -10,15 +10,15 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite()
 
-  stage.addSprite(sprite);
+    stage.addSprite(sprite)
 
-  sprite.whenClicked(() => {
-    const text = 'It is not the consciousness of men that determines their being, but, on the contrary, their social being that determines their consciousness.';
-    sprite.sayWait(text, text.length / 20);
-  });
+    sprite.whenClicked(() => {
+      const text = 'It is not the consciousness of men that determines their being, but, on the contrary, their social being that determines their consciousness.'
+      sprite.sayWait(text, text.length / 20)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

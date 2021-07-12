@@ -10,43 +10,43 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage();
-  const sprite1 = new blockLike.Sprite();
-  const sprite2 = new blockLike.Sprite();
-  let side = null;
+    const stage = new blockLike.Stage()
+    const sprite1 = new blockLike.Sprite()
+    const sprite2 = new blockLike.Sprite()
+    let side = null
 
-  stage.addSprite(sprite2);
-  stage.addSprite(sprite1);
-  
-  sprite1.whenFlag(function () {
-    let moveDir = 1;
-    while (forever) {
-      side = this.touchingEdge();
-      if (side) {
-        this.say(side);
-        moveDir *= -1;
+    stage.addSprite(sprite2)
+    stage.addSprite(sprite1)
+
+    sprite1.whenFlag(function () {
+      let moveDir = 1
+      while (forever) {
+        side = this.touchingEdge()
+        if (side) {
+          this.say(side)
+          moveDir *= -1
+        }
+
+        this.changeX(10 * moveDir)
       }
+    })
 
-      this.changeX(10 * moveDir);
-    }
-  });
+    sprite2.whenFlag(function () {
+      let moveDir = 1
+      while (forever) {
+        side = this.touchingEdge()
+        if (side) {
+          this.say(side)
+          moveDir *= -1
+        }
 
-  sprite2.whenFlag(function () {
-    let moveDir = 1;
-    while (forever) {
-      side = this.touchingEdge();
-      if (side) {
-        this.say(side);
-        moveDir *= -1;
+        this.changeY(10 * moveDir)
       }
+    })
 
-      this.changeY(10 * moveDir);
-    }
-  });
-
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

@@ -10,26 +10,26 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite({ pace: 10 });
+    const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite({ pace: 10 })
 
-  stage.addSprite(sprite);
+    stage.addSprite(sprite)
 
-  sprite.whenFlag(() => {
-    let wait = 1;
+    sprite.whenFlag(() => {
+      let wait = 1
 
-    while (forever) {
-      this.turnRight(5);
-      this.wait(wait);
+      while (forever) {
+        this.turnRight(5)
+        this.wait(wait)
 
-      wait *= 0.95;
-    }
-  });
+        wait *= 0.95
+      }
+    })
 
-  // escape a forever loop
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    // escape a forever loop
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

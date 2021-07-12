@@ -10,45 +10,45 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sprite = new blockLike.Sprite(null);
-  const circle = new blockLike.Costume({ image: null, width: 100, height: 100 });
+    const sprite = new blockLike.Sprite(null)
+    const circle = new blockLike.Costume({ image: null, width: 100, height: 100 })
 
-  sprite.addTo(stage);
-  circle.addTo(sprite);
+    sprite.addTo(stage)
+    circle.addTo(sprite)
 
-  sprite.whenFlag(() => {
-    while (forever) {
-      this.clone();
-      this.wait(0.01);
-    }
-  });
-
-  sprite.whenCloned(() => {
-    this.alive = true;
-
-    this.pointInDirection(Math.floor(Math.random() * 360));
-    this.costume.color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-    this.css({ 'border-radius': '50px', opacity: '0.5' });
-
-    this.setSize(Math.random() * 100);
-
-    this.addTo(stage);
-
-    while (this.alive) {
-      forever ? this.move(10) : null;
-
-      if (this.touchingEdge()) {
-        this.removeFrom(stage);
-        this.alive = false;
+    sprite.whenFlag(() => {
+      while (forever) {
+        this.clone()
+        this.wait(0.01)
       }
-    }
-  });
+    })
 
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    sprite.whenCloned(() => {
+      this.alive = true
+
+      this.pointInDirection(Math.floor(Math.random() * 360))
+      this.costume.color = `#${Math.floor(Math.random() * 16777215).toString(16)}`
+      this.css({ 'border-radius': '50px', opacity: '0.5' })
+
+      this.setSize(Math.random() * 100)
+
+      this.addTo(stage)
+
+      while (this.alive) {
+        forever ? this.move(10) : null
+
+        if (this.touchingEdge()) {
+          this.removeFrom(stage)
+          this.alive = false
+        }
+      }
+    })
+
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

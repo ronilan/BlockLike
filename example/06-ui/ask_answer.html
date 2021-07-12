@@ -10,29 +10,29 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite()
 
-  stage.addSprite(sprite);
+    stage.addSprite(sprite)
 
-  let answer;
+    let answer
 
-  sprite.whenClicked(function () {
-    let i = 30;
+    sprite.whenClicked(function () {
+      let i = 30
 
-    this.think('yay! I am a sheep! I am a sheep! I am a sheep!');
-    this.wait(0.5);
-    answer = this.ask('Do you want to see me dance?');
+      this.think('yay! I am a sheep! I am a sheep! I am a sheep!')
+      this.wait(0.5)
+      answer = this.ask('Do you want to see me dance?')
 
-    if (answer.toLowerCase() === 'yes' || answer.toLowerCase() === 'y') {
-      while (i > 0) {
-        this.turnRight(20);
-        this.move(20 + Math.floor(Math.random() * 10));
-        this.say(`I'm at: ${this.x} ${this.y}`);
-        i -= 1;
+      if (answer.toLowerCase() === 'yes' || answer.toLowerCase() === 'y') {
+        while (i > 0) {
+          this.turnRight(20)
+          this.move(20 + Math.floor(Math.random() * 10))
+          this.say(`I'm at: ${this.x} ${this.y}`)
+          i -= 1
+        }
       }
-    }
-  });
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

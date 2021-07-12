@@ -10,49 +10,49 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sprite = new blockLike.Sprite();
-  const costume = new blockLike.Costume();
+    const sprite = new blockLike.Sprite()
+    const costume = new blockLike.Costume()
 
-  costume.addTo(sprite);
-  sprite.css('border', '5px solid');
-  costume.css('border-radius', '50px');
+    costume.addTo(sprite)
+    sprite.css('border', '5px solid')
+    costume.css('border-radius', '50px')
 
-  sprite.nextCostume();
-  sprite.addTo(stage);
+    sprite.nextCostume()
+    sprite.addTo(stage)
 
-  let count = 0;
+    let count = 0
 
-  sprite.whenFlag(() => {
-    while (forever) {
-      this.clone();
-      this.wait(0.5);
-    }
-  });
-
-  sprite.whenCloned(() => {
-    count += 1;
-    this.alive = true;
-
-    this.addTo(stage);
-
-    this.css('border', `${(count % 6)}px solid`);
-    this.css('border-radius', `${(count % 6) * 10}px`);
-
-    while (this.alive) {
-      forever ? this.move(10) : null;
-
-      if (this.touchingEdge()) {
-        this.removeFrom(stage);
-        this.alive = false;
+    sprite.whenFlag(() => {
+      while (forever) {
+        this.clone()
+        this.wait(0.5)
       }
-    }
-  });
+    })
 
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    sprite.whenCloned(() => {
+      count += 1
+      this.alive = true
+
+      this.addTo(stage)
+
+      this.css('border', `${(count % 6)}px solid`)
+      this.css('border-radius', `${(count % 6) * 10}px`)
+
+      while (this.alive) {
+        forever ? this.move(10) : null
+
+        if (this.touchingEdge()) {
+          this.removeFrom(stage)
+          this.alive = false
+        }
+      }
+    })
+
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

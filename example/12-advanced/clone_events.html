@@ -10,56 +10,56 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite()
 
-  sprite.addTo(stage);
+    sprite.addTo(stage)
 
-  sprite.whenClicked(() => {
-    this.clone();
-  });
+    sprite.whenClicked(() => {
+      this.clone()
+    })
 
-  sprite.whenCloned(() => {
-    this.alive = false;
+    sprite.whenCloned(() => {
+      this.alive = false
 
-    this.pointInDirection(Math.floor(Math.random() * 360));
-    this.move(100);
-    this.setSize(80);
-    this.addTo(stage);
+      this.pointInDirection(Math.floor(Math.random() * 360))
+      this.move(100)
+      this.setSize(80)
+      this.addTo(stage)
 
-    // nested events must be attached only after clone is added to stage
-    this.whenClicked(function () {
-      // protecting from "click spamming".
-      if (!this.alive) {
-        this.alive = true;
+      // nested events must be attached only after clone is added to stage
+      this.whenClicked(function () {
+        // protecting from "click spamming".
+        if (!this.alive) {
+          this.alive = true
 
-        // the thing that gets cloned to which whenCloned refers.
-        const clone = this;
-        this.whenEvent('mouseover', function () {
-          this.clone();
-        });
-        clone.whenCloned(function () {
-          this.addTo(stage);
-          this.setSize(50);
-        });
+          // the thing that gets cloned to which whenCloned refers.
+          const clone = this
+          this.whenEvent('mouseover', function () {
+            this.clone()
+          })
+          clone.whenCloned(function () {
+            this.addTo(stage)
+            this.setSize(50)
+          })
 
-        // kee "this" moving
-        while (this.alive) {
-          forever ? this.move(10) : null;
-          this.wait(0.1);
+          // kee "this" moving
+          while (this.alive) {
+            forever ? this.move(10) : null
+            this.wait(0.1)
 
-          if (this.touchingEdge()) {
-            this.removeFrom(stage);
-            this.alive = false;
+            if (this.touchingEdge()) {
+              this.removeFrom(stage)
+              this.alive = false
+            }
           }
         }
-      }
-    });
-  });
+      })
+    })
 
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

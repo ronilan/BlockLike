@@ -10,63 +10,63 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  let stage = new blockLike.Stage();
+    let stage = new blockLike.Stage()
 
-  const sprite1 = new blockLike.Sprite();
-  const sprite2 = new blockLike.Sprite();
+    const sprite1 = new blockLike.Sprite()
+    const sprite2 = new blockLike.Sprite()
 
-  function responsive() {
-    // remove the stage
-    stage.delete();
-    // recreate it
-    stage = new blockLike.Stage();
-    // add the sprites. They are "alive and aware".
-    stage.addSprite(sprite2);
-    stage.addSprite(sprite1);
-    // set them in a way that maks sense to newly sized stage
-    sprite1.goTo(0, 0);
-    sprite2.goTo(0, 0);
-  }
-
-  // listen to resize event
-  window.addEventListener('resize', () => {
-    responsive();
-  });
-  
-  let side = null;
-
-  stage.addSprite(sprite2);
-  stage.addSprite(sprite1);
-  
-  sprite1.whenFlag(function () {
-    let moveDir = 1;
-    while (forever) {
-      side = sprite1.touchingEdge();
-      if (side) {
-        this.say(side);
-        moveDir *= -1;
-      }
-
-      sprite1.changeX(10 * moveDir);
+    function responsive () {
+      // remove the stage
+      stage.delete()
+      // recreate it
+      stage = new blockLike.Stage()
+      // add the sprites. They are "alive and aware".
+      stage.addSprite(sprite2)
+      stage.addSprite(sprite1)
+      // set them in a way that maks sense to newly sized stage
+      sprite1.goTo(0, 0)
+      sprite2.goTo(0, 0)
     }
-  });
 
-  sprite2.whenFlag(function () {
-    let moveDir = 1;
-    while (forever) {
-      side = sprite2.touchingEdge();
-      if (side) {
-        this.say(side);
-        moveDir *= -1;
+    // listen to resize event
+    window.addEventListener('resize', () => {
+      responsive()
+    })
+
+    let side = null
+
+    stage.addSprite(sprite2)
+    stage.addSprite(sprite1)
+
+    sprite1.whenFlag(function () {
+      let moveDir = 1
+      while (forever) {
+        side = sprite1.touchingEdge()
+        if (side) {
+          this.say(side)
+          moveDir *= -1
+        }
+
+        sprite1.changeX(10 * moveDir)
       }
+    })
 
-      sprite2.changeY(10 * moveDir);
-    }
-  });
+    sprite2.whenFlag(function () {
+      let moveDir = 1
+      while (forever) {
+        side = sprite2.touchingEdge()
+        if (side) {
+          this.say(side)
+          moveDir *= -1
+        }
 
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+        sprite2.changeY(10 * moveDir)
+      }
+    })
+
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

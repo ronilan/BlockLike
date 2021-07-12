@@ -10,40 +10,40 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite();
-  const player = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite()
+    const player = new blockLike.Sprite()
 
-  stage.addSprite(player);
+    stage.addSprite(player)
 
-  stage.addSprite(sprite);
-  sprite.move(100, 100);
+    stage.addSprite(sprite)
+    sprite.move(100, 100)
 
-  stage.sendSpriteToFront(player);
-  function senseTouching() {
-    const touch = player.isTouching(sprite);
-    touch ? player.say('Touching them!') : player.say();
-  }
+    stage.sendSpriteToFront(player)
+    function senseTouching () {
+      const touch = player.isTouching(sprite)
+      touch ? player.say('Touching them!') : player.say()
+    }
 
-  player.whenKeyPressed(39, () => {
-    this.changeX(10);
-    senseTouching();
-  });
-  
-  player.whenKeyPressed(37, () => {
-    this.changeX(-10);
-    senseTouching();
-  });
+    player.whenKeyPressed(39, () => {
+      this.changeX(10)
+      senseTouching()
+    })
 
-  player.whenKeyPressed(38, () => {
-    this.changeY(10);
-    senseTouching();
-  });
+    player.whenKeyPressed(37, () => {
+      this.changeX(-10)
+      senseTouching()
+    })
 
-  player.whenKeyPressed(40, () => {
-    this.changeY(-10);
-    senseTouching();
-  });
+    player.whenKeyPressed(38, () => {
+      this.changeY(10)
+      senseTouching()
+    })
+
+    player.whenKeyPressed(40, () => {
+      this.changeY(-10)
+      senseTouching()
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

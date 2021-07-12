@@ -10,19 +10,19 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite()
 
-  stage.addSprite(sprite);
+    stage.addSprite(sprite)
 
-  sprite.whenFlag(function () {
-    alert('I say someting.'); // eslint-disable-line no-alert
-    this.wait(2);
-    this.say('I waited. Next I\'ll ask a question');
-    this.wait(2);
-    const answer = prompt('what is your name?'); // eslint-disable-line no-alert
-    this.say(`your name is: ${answer}`);
-  });
+    sprite.whenFlag(function () {
+      alert('I say someting.') // eslint-disable-line no-alert
+      this.wait(2)
+      this.say('I waited. Next I\'ll ask a question')
+      this.wait(2)
+      const answer = prompt('what is your name?') // eslint-disable-line no-alert
+      this.say(`your name is: ${answer}`)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

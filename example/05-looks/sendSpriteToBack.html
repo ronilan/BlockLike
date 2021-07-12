@@ -10,42 +10,42 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const yellow = new blockLike.Sprite({
-    costume: new blockLike.Costume({
-      color: 'yellow',
-    }),
-  });
-  const red = new blockLike.Sprite({
-    costume: new blockLike.Costume({
-      color: 'red',
-    }),
-  });
-  const blue = new blockLike.Sprite({
-    costume: new blockLike.Costume({
-      color: 'blue',
-    }),
-  });
+    const yellow = new blockLike.Sprite({
+      costume: new blockLike.Costume({
+        color: 'yellow'
+      })
+    })
+    const red = new blockLike.Sprite({
+      costume: new blockLike.Costume({
+        color: 'red'
+      })
+    })
+    const blue = new blockLike.Sprite({
+      costume: new blockLike.Costume({
+        color: 'blue'
+      })
+    })
 
-  stage.addSprite(yellow);
-  stage.addSprite(red);
-  stage.addSprite(blue);
+    stage.addSprite(yellow)
+    stage.addSprite(red)
+    stage.addSprite(blue)
 
-  yellow.goTo(70, 30);
-  blue.goTo(50, -50);
+    yellow.goTo(70, 30)
+    blue.goTo(50, -50)
 
-  yellow.whenClicked(() => {
-    stage.sendSpriteToBack(this);
-  });
+    yellow.whenClicked(() => {
+      stage.sendSpriteToBack(this)
+    })
 
-  red.whenClicked(() => {
-    stage.sendSpriteToBack(this);
-  });
+    red.whenClicked(() => {
+      stage.sendSpriteToBack(this)
+    })
 
-  blue.whenClicked(() => {
-    stage.sendSpriteToBack(this);
-  });
+    blue.whenClicked(() => {
+      stage.sendSpriteToBack(this)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

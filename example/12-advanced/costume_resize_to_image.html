@@ -10,53 +10,53 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite();
-  const bwSheep = new blockLike.Costume({
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Sheep_in_gray.svg',
-    width: 309 / 3,
-    height: 336 / 3,
-  });
+    const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite()
+    const bwSheep = new blockLike.Costume({
+      image: 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Sheep_in_gray.svg',
+      width: 309 / 3,
+      height: 336 / 3
+    })
 
-  const colorSheep = new blockLike.Costume({
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Sheep.svg/240px-Sheep.svg.png',
-  });
+    const colorSheep = new blockLike.Costume({
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Sheep.svg/240px-Sheep.svg.png'
+    })
 
-  const angrySheep = new blockLike.Costume({
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Emojione_1F411.svg/200px-Emojione_1F411.svg.png',
-  });
-  angrySheep.resizeToImage();
+    const angrySheep = new blockLike.Costume({
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Emojione_1F411.svg/200px-Emojione_1F411.svg.png'
+    })
+    angrySheep.resizeToImage()
 
-  bwSheep.addTo(sprite);
-  colorSheep.addTo(sprite);
-  angrySheep.addTo(sprite);
-  sprite.addTo(stage);
+    bwSheep.addTo(sprite)
+    colorSheep.addTo(sprite)
+    angrySheep.addTo(sprite)
+    sprite.addTo(stage)
 
-  sprite.whenClicked(function () {
-    this.nextCostume();
-    this.say(`${this.width}x${this.height}`);
-  });
+    sprite.whenClicked(function () {
+      this.nextCostume()
+      this.say(`${this.width}x${this.height}`)
+    })
 
-  sprite.whenKeyPressed('=', function () {
-    this.changeSize(5);
-    this.say(`${this.width}x${this.height}`);
-  });
+    sprite.whenKeyPressed('=', function () {
+      this.changeSize(5)
+      this.say(`${this.width}x${this.height}`)
+    })
 
-  sprite.whenKeyPressed('-', function () {
-    this.changeSize(-5);
-    this.say(`${this.width}x${this.height}`);
-  });
+    sprite.whenKeyPressed('-', function () {
+      this.changeSize(-5)
+      this.say(`${this.width}x${this.height}`)
+    })
 
-  sprite.whenFlag(function () {
-    this.say(`${this.width}x${this.height}`);
-  });
+    sprite.whenFlag(function () {
+      this.say(`${this.width}x${this.height}`)
+    })
 
-  sprite.whenKeyPressed('!', function () {
-    // when costume is resized at "run time" sprite must be refreshed.
-    this.costume.resizeToImage();
-    this.refresh();
-    this.say(`${this.width}x${this.height}`);
-  });
+    sprite.whenKeyPressed('!', function () {
+      // when costume is resized at "run time" sprite must be refreshed.
+      this.costume.resizeToImage()
+      this.refresh()
+      this.say(`${this.width}x${this.height}`)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

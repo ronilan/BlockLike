@@ -10,46 +10,46 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  class PatternMaker extends blockLike.Sprite {
-    constructor(options = {}) {
-      super(options);
+    class PatternMaker extends blockLike.Sprite {
+      constructor (options = {}) {
+        super(options)
 
-      this.waited.push('pattern');
+        this.waited.push('pattern')
 
-      console.log('I am extended', this); // eslint-disable-line no-console
-    }
-
-    // paced methods can be safley called from within the class.
-    // they are not "paced" though.
-    pattern(sec, sides, size, times, triggeringId = null) {
-      for (let i = 0; i < times; i += 1) {
-        this.penDown();
-        for (let j = 0; j < sides; j += 1) {
-          this.move(size);
-          this.turnRight(360 / sides);
-        }
-        this.penUp();
-        this.turnRight(360 / times);
+        console.log('I am extended', this) // eslint-disable-line no-console
       }
-      setTimeout(() => {
-        this._releaseWaited(triggeringId);
-      }, sec * 1000);
+
+      // paced methods can be safley called from within the class.
+      // they are not "paced" though.
+      pattern (sec, sides, size, times, triggeringId = null) {
+        for (let i = 0; i < times; i += 1) {
+          this.penDown()
+          for (let j = 0; j < sides; j += 1) {
+            this.move(size)
+            this.turnRight(360 / sides)
+          }
+          this.penUp()
+          this.turnRight(360 / times)
+        }
+        setTimeout(() => {
+          this._releaseWaited(triggeringId)
+        }, sec * 1000)
+      }
     }
-  }
 
-  const sprite1 = new PatternMaker({ pace: 1000 });
+    const sprite1 = new PatternMaker({ pace: 1000 })
 
-  stage.addSprite(sprite1);
+    stage.addSprite(sprite1)
 
-  sprite1.whenFlag(function () {
-    this.pattern(3, 5, 50, 12);
-    this.setPenColor('#ff0000');
-    this.pattern(3, 5, 50, 12);
-    this.setPenColor('#00ff00');
-    this.pattern(3, 5, 50, 12);
-  });
+    sprite1.whenFlag(function () {
+      this.pattern(3, 5, 50, 12)
+      this.setPenColor('#ff0000')
+      this.pattern(3, 5, 50, 12)
+      this.setPenColor('#00ff00')
+      this.pattern(3, 5, 50, 12)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

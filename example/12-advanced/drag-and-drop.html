@@ -9,78 +9,78 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const options = {
-    sensing: true,
-    width: 600,
-    height: 450,
-    backdrop: new blockLike.Backdrop({
-      color: '#A2DAFF',
-    }),
-  };
+    const options = {
+      sensing: true,
+      width: 600,
+      height: 450,
+      backdrop: new blockLike.Backdrop({
+        color: '#A2DAFF'
+      })
+    }
 
-  let drag = false;
+    let drag = false
 
-  const stage = new blockLike.Stage(options);
-  const sprite = new blockLike.Sprite();
-  sprite.addTo(stage);
+    const stage = new blockLike.Stage(options)
+    const sprite = new blockLike.Sprite()
+    sprite.addTo(stage)
 
-  const bear = new blockLike.Sprite();
-  bear.addCostume(new blockLike.Costume({
-    image: '../../images/bear.png',
-  }));
-  bear.removeCostumeNum(0);
-  bear.addTo(stage);
+    const bear = new blockLike.Sprite()
+    bear.addCostume(new blockLike.Costume({
+      image: '../../images/bear.png'
+    }))
+    bear.removeCostumeNum(0)
+    bear.addTo(stage)
 
-  let score = -1;
+    let score = -1
 
-  function positionBear() {
-    score += 1;
-    const x = ((Math.random() * stage.width) - (stage.width / 2));
-    const y = ((Math.random() * stage.height) - (stage.height / 2));
-    bear.glide(1, x, y);
-    bear.say(`Tag me! <br/> You have ${score} points`);
-  }
+    function positionBear () {
+      score += 1
+      const x = ((Math.random() * stage.width) - (stage.width / 2))
+      const y = ((Math.random() * stage.height) - (stage.height / 2))
+      bear.glide(1, x, y)
+      bear.say(`Tag me! <br/> You have ${score} points`)
+    }
 
-  function dragSheep() {
-    drag = true;
+    function dragSheep () {
+      drag = true
 
-    while (drag) {
-      this.wait(0.1);
-      this.goTo(stage.mouseX, stage.mouseY);
+      while (drag) {
+        this.wait(0.1)
+        this.goTo(stage.mouseX, stage.mouseY)
 
-      if (this.isTouching(bear) && drag) {
-        this.invoke(positionBear);
-        drag = false;
+        if (this.isTouching(bear) && drag) {
+          this.invoke(positionBear)
+          drag = false
+        }
       }
     }
-  }
 
-  stage.whenFlag(() => {
-    positionBear();
-    sprite.say('Drag me to tag the bear!');
-    sprite.wait(1);
-    sprite.say();
-  });
+    stage.whenFlag(() => {
+      positionBear()
+      sprite.say('Drag me to tag the bear!')
+      sprite.wait(1)
+      sprite.say()
+    })
 
-  sprite.whenEvent('touchstart', function () {
-    this.invoke(dragSheep);
-  });
+    sprite.whenEvent('touchstart', function () {
+      this.invoke(dragSheep)
+    })
 
-  sprite.whenEvent('touchend', () => {
-    drag = false;
-  });
+    sprite.whenEvent('touchend', () => {
+      drag = false
+    })
 
-  sprite.whenEvent('mousedown', function () {
-    this.invoke(dragSheep);
-  });
+    sprite.whenEvent('mousedown', function () {
+      this.invoke(dragSheep)
+    })
 
-  sprite.whenEvent('mouseup', () => {
-    drag = false;
-  });
+    sprite.whenEvent('mouseup', () => {
+      drag = false
+    })
 
-  document.addEventListener('drag', (e) => {
-    e.preventDefault();
-  });
+    document.addEventListener('drag', (e) => {
+      e.preventDefault()
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

@@ -9,21 +9,21 @@
 
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
-  <script id="example">const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite(null);
+  <script id="example">const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite(null)
 
-  const angrySheep = new blockLike.Costume({
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Emojione_1F411.svg/200px-Emojione_1F411.svg.png',
-  });
+    const angrySheep = new blockLike.Costume({
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Emojione_1F411.svg/200px-Emojione_1F411.svg.png'
+    })
 
-  angrySheep.addTo(sprite);
-  sprite.resizeToImage();
+    angrySheep.addTo(sprite)
+    sprite.resizeToImage()
 
-  sprite.addTo(stage);
+    sprite.addTo(stage)
 
-  sprite.whenFlag(function () {
-    this.say(`${this.width}x${this.height}`);
-  });
+    sprite.whenFlag(function () {
+      this.say(`${this.width}x${this.height}`)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

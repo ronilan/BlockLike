@@ -10,52 +10,52 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sprite = new blockLike.Sprite(null);
+    const sprite = new blockLike.Sprite(null)
 
-  sprite.addTo(stage);
+    sprite.addTo(stage)
 
-  sprite.whenFlag(() => {
-    // paced but not waited for.
-    function spriteFactory() {
-      const s = new blockLike.Sprite({
-        costume: new blockLike.Costume({
-          image: null,
-          width: 100,
-          height: 100,
-        }),
-      });
+    sprite.whenFlag(() => {
+      // paced but not waited for.
+      function spriteFactory () {
+        const s = new blockLike.Sprite({
+          costume: new blockLike.Costume({
+            image: null,
+            width: 100,
+            height: 100
+          })
+        })
 
-      s.alive = true;
+        s.alive = true
 
-      s.pointInDirection(Math.floor(Math.random() * 360));
-      s.costume.color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-      s.css({ 'border-radius': '50px', opacity: '0.5' });
+        s.pointInDirection(Math.floor(Math.random() * 360))
+        s.costume.color = `#${Math.floor(Math.random() * 16777215).toString(16)}`
+        s.css({ 'border-radius': '50px', opacity: '0.5' })
 
-      s.setSize(Math.random() * 100);
+        s.setSize(Math.random() * 100)
 
-      s.addTo(stage);
+        s.addTo(stage)
 
-      while (s.alive) {
-        forever ? s.move(10) : null;
+        while (s.alive) {
+          forever ? s.move(10) : null
 
-        if (s.touchingEdge()) {
-          s.removeFrom(stage);
-          s.alive = false;
+          if (s.touchingEdge()) {
+            s.removeFrom(stage)
+            s.alive = false
+          }
         }
       }
-    }
 
-    while (forever) {
-      spriteFactory();
-      this.wait(0.01);
-    }
-  });
+      while (forever) {
+        spriteFactory()
+        this.wait(0.01)
+      }
+    })
 
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

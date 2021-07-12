@@ -10,14 +10,14 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite()
 
-  stage.addSprite(sprite);
+    stage.addSprite(sprite)
 
-  sprite.whenFlag(() => {
-    this.say('Hello World!');
-  });
+    sprite.whenFlag(() => {
+      this.say('Hello World!')
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

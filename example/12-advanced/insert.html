@@ -234,138 +234,138 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sedan = new blockLike.Sprite({
-    costume: new blockLike.Costume({
-      width: 60,
-      height: 30,
-    }),
-  });
-  sedan.insert(document.getElementById('sedan'));
+    const sedan = new blockLike.Sprite({
+      costume: new blockLike.Costume({
+        width: 60,
+        height: 30
+      })
+    })
+    sedan.insert(document.getElementById('sedan'))
 
-  const sport = new blockLike.Sprite({
-    costume: new blockLike.Costume({
-      width: 60,
-      height: 30,
-    }),
-  });
-  sport.insert(document.getElementById('sport'));
+    const sport = new blockLike.Sprite({
+      costume: new blockLike.Costume({
+        width: 60,
+        height: 30
+      })
+    })
+    sport.insert(document.getElementById('sport'))
 
-  const truck = new blockLike.Sprite({
-    costume: new blockLike.Costume({
-      width: 60,
-      height: 30,
-    }),
-  });
-  truck.insert(document.getElementById('truck'));
+    const truck = new blockLike.Sprite({
+      costume: new blockLike.Costume({
+        width: 60,
+        height: 30
+      })
+    })
+    truck.insert(document.getElementById('truck'))
 
-  const suv = new blockLike.Sprite({
-    costume: new blockLike.Costume({
-      width: 60,
-      height: 30,
-    }),
-  });
-  suv.insert(document.getElementById('suv'));
-  
-  sport.goTo(100, 0);
-  truck.goTo(-100, 0);
-  sedan.goTo(100, -100);
+    const suv = new blockLike.Sprite({
+      costume: new blockLike.Costume({
+        width: 60,
+        height: 30
+      })
+    })
+    suv.insert(document.getElementById('suv'))
 
-  stage.addSprite(sport);
-  stage.addSprite(suv);
-  stage.addSprite(truck);
-  stage.addSprite(sedan);
+    sport.goTo(100, 0)
+    truck.goTo(-100, 0)
+    sedan.goTo(100, -100)
 
-  function bump(car) {
-    return (
-      car.isTouchingEdge()
-    || (car !== sport && car.isTouching(sport))
-    || (car !== suv && car.isTouching(suv))
-    || (car !== truck && car.isTouching(truck))
-    || (car !== sedan && car.isTouching(sedan))
-    );
-  }
+    stage.addSprite(sport)
+    stage.addSprite(suv)
+    stage.addSprite(truck)
+    stage.addSprite(sedan)
 
-  sport.pointInDirection(225);
-  sport.whenFlag(function () {
-    this.setPenColor('red');
-    this.penDown();
-    while (forever) {
-      if (!bump(this)) {
-        this.move(10);
-      } else {
-        this.move(-30);
-        this.turnLeft(200);
-      }
+    function bump (car) {
+      return (
+        car.isTouchingEdge() ||
+      (car !== sport && car.isTouching(sport)) ||
+      (car !== suv && car.isTouching(suv)) ||
+      (car !== truck && car.isTouching(truck)) ||
+      (car !== sedan && car.isTouching(sedan))
+      )
     }
-  });
 
-  truck.pointInDirection(135);
-  truck.whenFlag(function () {
-    this.setPenColor('gray');
-    this.penDown();
-    while (forever) {
-      if (!bump(this)) {
-        this.move(5);
-      } else {
-        this.move(-15);
-        this.turnLeft(200);
+    sport.pointInDirection(225)
+    sport.whenFlag(function () {
+      this.setPenColor('red')
+      this.penDown()
+      while (forever) {
+        if (!bump(this)) {
+          this.move(10)
+        } else {
+          this.move(-30)
+          this.turnLeft(200)
+        }
       }
-    }
-  });
+    })
 
-  sedan.pointInDirection(45);
-  sedan.whenFlag(function () {
-    this.setPenColor('blue');
-    this.penDown();
-    while (forever) {
-      if (!bump(this)) {
-        this.move(5);
-      } else {
-        this.move(-15);
-        this.turnLeft(160);
+    truck.pointInDirection(135)
+    truck.whenFlag(function () {
+      this.setPenColor('gray')
+      this.penDown()
+      while (forever) {
+        if (!bump(this)) {
+          this.move(5)
+        } else {
+          this.move(-15)
+          this.turnLeft(200)
+        }
       }
-    }
-  });
+    })
 
-  suv.speed = 0;
-  suv.whenFlag(function () {
-    this.setPenColor('navy');
-    this.penDown();
-    while (forever) {
-      if (!bump(this)) {
-        this.move(this.speed);
-      } else {
-        this.move(-this.speed - 10);
-        this.turnLeft(180);
+    sedan.pointInDirection(45)
+    sedan.whenFlag(function () {
+      this.setPenColor('blue')
+      this.penDown()
+      while (forever) {
+        if (!bump(this)) {
+          this.move(5)
+        } else {
+          this.move(-15)
+          this.turnLeft(160)
+        }
       }
-    }
-  });
+    })
 
-  suv.whenKeyPressed(39, () => {
-    suv.turnRight(5);
-  });
-  
-  suv.whenKeyPressed(37, () => {
-    suv.turnLeft(5);
-  });
+    suv.speed = 0
+    suv.whenFlag(function () {
+      this.setPenColor('navy')
+      this.penDown()
+      while (forever) {
+        if (!bump(this)) {
+          this.move(this.speed)
+        } else {
+          this.move(-this.speed - 10)
+          this.turnLeft(180)
+        }
+      }
+    })
 
-  suv.whenKeyPressed(32, () => {
-    this.speed += 1;
-  });
+    suv.whenKeyPressed(39, () => {
+      suv.turnRight(5)
+    })
 
-  suv.whenKeyPressed('b', () => {
-    this.speed -= 10;
-  });
+    suv.whenKeyPressed(37, () => {
+      suv.turnLeft(5)
+    })
 
-  stage.whenClicked(() => {
-    suv.showing ? suv.hide() : suv.show();
-  });
+    suv.whenKeyPressed(32, () => {
+      this.speed += 1
+    })
 
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    suv.whenKeyPressed('b', () => {
+      this.speed -= 10
+    })
+
+    stage.whenClicked(() => {
+      suv.showing ? suv.hide() : suv.show()
+    })
+
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

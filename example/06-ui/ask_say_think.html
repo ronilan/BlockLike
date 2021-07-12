@@ -10,38 +10,38 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
-  const sprite1 = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const sprite1 = new blockLike.Sprite()
 
-  // variables to capture user input must be defined in the global scope.
-  let fname;
-  let lname;
+    // variables to capture user input must be defined in the global scope.
+    let fname
+    let lname
 
-  stage.addSprite(sprite1);
+    stage.addSprite(sprite1)
 
-  sprite1.whenFlag(function () {
-    this.glide(1, 100, 0);
+    sprite1.whenFlag(function () {
+      this.glide(1, 100, 0)
 
-    this.think('This is a thought...');
-    this.wait(1);
+      this.think('This is a thought...')
+      this.wait(1)
 
-    this.say('I just had a thought');
-    this.wait(1);
+      this.say('I just had a thought')
+      this.wait(1)
 
-    fname = sprite1.ask('What\'s your first name?');
-    this.say(fname);
-    this.wait(1);
+      fname = sprite1.ask('What\'s your first name?')
+      this.say(fname)
+      this.wait(1)
 
-    lname = sprite1.ask('What\'s your last name?');
-    this.say(lname);
-    this.wait(1);
+      lname = sprite1.ask('What\'s your last name?')
+      this.say(lname)
+      this.wait(1)
 
-    this.glide(1, 100, 100);
-    this.say(`Your name is ${fname} ${lname}`);
-    this.glide(1, 100, 0);
+      this.glide(1, 100, 100)
+      this.say(`Your name is ${fname} ${lname}`)
+      this.glide(1, 100, 0)
 
-    this.say();
-  });
+      this.say()
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

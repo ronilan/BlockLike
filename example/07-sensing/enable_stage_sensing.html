@@ -9,26 +9,26 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage({ sensing: true });
-  const sprite = new blockLike.Sprite();
+    const stage = new blockLike.Stage({ sensing: true })
+    const sprite = new blockLike.Sprite()
 
-  sprite.addTo(stage);
+    sprite.addTo(stage)
 
-  sprite.whenFlag(function () {
-    while (forever) {
-      this.wait(1);
-      console.log(stage.mouseX, stage.mouseY);
-      console.log(stage.keysKey, stage.keysCode, stage.keysKeyCode);
-    }
-  });
+    sprite.whenFlag(function () {
+      while (forever) {
+        this.wait(1)
+        console.log(stage.mouseX, stage.mouseY)
+        console.log(stage.keysKey, stage.keysCode, stage.keysKeyCode)
+      }
+    })
 
-  stage.whenClicked(() => {
+    stage.whenClicked(() => {
 
-  });
-  
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    })
+
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

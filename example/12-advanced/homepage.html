@@ -10,123 +10,123 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage({ parent: document.getElementById('home-stage') });
-  const sprite = new blockLike.Sprite();
+    const stage = new blockLike.Stage({ parent: document.getElementById('home-stage') })
+    const sprite = new blockLike.Sprite()
 
-  const backdrop = new blockLike.Backdrop({
-    color: '#434343',
-  });
-  const costume = new blockLike.Costume({
-    image: 'https://www.blocklike.org/images/sheep_step.png',
-  });
+    const backdrop = new blockLike.Backdrop({
+      color: '#434343'
+    })
+    const costume = new blockLike.Costume({
+      image: 'https://www.blocklike.org/images/sheep_step.png'
+    })
 
-  const confetti = new blockLike.Sprite('https://www.blocklike.org/images/confetti.svg');
+    const confetti = new blockLike.Sprite('https://www.blocklike.org/images/confetti.svg')
 
-  stage.addBackdrop(backdrop);
-  stage.nextBackdrop();
+    stage.addBackdrop(backdrop)
+    stage.nextBackdrop()
 
-  sprite.addTo(stage);
-  sprite.addCostume(costume);
+    sprite.addTo(stage)
+    sprite.addCostume(costume)
 
-  confetti.addTo(stage);
-  confetti.hide();
+    confetti.addTo(stage)
+    confetti.hide()
 
-  sprite.setRotationStyle('left-right');
-  sprite.setPenColor('#eee');
-  sprite.setPenSize(5);
+    sprite.setRotationStyle('left-right')
+    sprite.setPenColor('#eee')
+    sprite.setPenSize(5)
 
-  const bahhh = 'https://www.blocklike.org/sounds/bleat.wav';
-  let answer;
+    const bahhh = 'https://www.blocklike.org/sounds/bleat.wav'
+    let answer
 
-  sprite.whenFlag(function () {
-    sprite.goTo(0, -100);
-    for (let i = 1; i <= 10; i += 1) {
-      const os = Array(i).join('o');
-      this.sayWait(`Hello${os} World!`, 0.2);
-    }
-    this.sayWait('Arrow keys move me!', 2);
-  });
-
-  function pattern(sides, size, times) {
-    for (let i = 0; i < times; i += 1) {
-      this.penDown();
-      for (let j = 0; j < sides; j += 1) {
-        this.move(size);
-        this.turnRight(360 / sides);
+    sprite.whenFlag(function () {
+      sprite.goTo(0, -100)
+      for (let i = 1; i <= 10; i += 1) {
+        const os = Array(i).join('o')
+        this.sayWait(`Hello${os} World!`, 0.2)
       }
-      this.penUp();
-      this.turnRight(360 / times);
+      this.sayWait('Arrow keys move me!', 2)
+    })
+
+    function pattern (sides, size, times) {
+      for (let i = 0; i < times; i += 1) {
+        this.penDown()
+        for (let j = 0; j < sides; j += 1) {
+          this.move(size)
+          this.turnRight(360 / sides)
+        }
+        this.penUp()
+        this.turnRight(360 / times)
+      }
     }
-  }
 
-  sprite.whenClicked(function () {
-    answer = this.ask('I will draw! How many sides?');
-    if (answer < 10 && answer > 2) {
-      this.changeY(100);
-      this.invoke(pattern, [answer, 50, 12]);
-      this.changeY(-100);
-    } else {
-      this.say('3 to 9 sides only...');
+    sprite.whenClicked(function () {
+      answer = this.ask('I will draw! How many sides?')
+      if (answer < 10 && answer > 2) {
+        this.changeY(100)
+        this.invoke(pattern, [answer, 50, 12])
+        this.changeY(-100)
+      } else {
+        this.say('3 to 9 sides only...')
+      }
+    })
+
+    sprite.whenKeyPressed(32, function () {
+      for (let i = 0; i < 4; i += 1) {
+        this.changeSize(-10)
+        this.wait(0.2)
+      }
+      this.penClear()
+      this.setSize(100)
+    })
+
+    function edgeBump (s) {
+      if (s.isTouchingEdge()) {
+        s.playSound(bahhh)
+        s.turnRight(180)
+        s.move(20)
+      }
     }
-  });
 
-  sprite.whenKeyPressed(32, function () {
-    for (let i = 0; i < 4; i += 1) {
-      this.changeSize(-10);
-      this.wait(0.2);
+    sprite.whenKeyPressed(39, function () {
+      this.changeX(20)
+      this.pointInDirection(90)
+      this.nextCostume()
+      edgeBump(sprite)
+    })
+
+    sprite.whenKeyPressed(37, function () {
+      this.changeX(-20)
+      this.pointInDirection(270)
+      this.nextCostume()
+      edgeBump(sprite)
+    })
+
+    confetti.whenFlag(function () {
+      while (true) { // eslint-disable-line no-constant-condition
+        this.clone()
+        this.wait(0.5)
+      }
+    })
+
+    function randomX () {
+      return (Math.random() * stage.width) - (stage.width / 2)
     }
-    this.penClear();
-    this.setSize(100);
-  });
 
-  function edgeBump(s) {
-    if (s.isTouchingEdge()) {
-      s.playSound(bahhh);
-      s.turnRight(180);
-      s.move(20);
+    function randomHue () {
+      return Math.floor(Math.random() * 360)
     }
-  }
 
-  sprite.whenKeyPressed(39, function () {
-    this.changeX(20);
-    this.pointInDirection(90);
-    this.nextCostume();
-    edgeBump(sprite);
-  });
-
-  sprite.whenKeyPressed(37, function () {
-    this.changeX(-20);
-    this.pointInDirection(270);
-    this.nextCostume();
-    edgeBump(sprite);
-  });
-
-  confetti.whenFlag(function () {
-    while (true) { // eslint-disable-line no-constant-condition
-      this.clone();
-      this.wait(0.5);
-    }
-  });
-
-  function randomX() {
-    return (Math.random() * stage.width) - (stage.width / 2);
-  }
-
-  function randomHue() {
-    return Math.floor(Math.random() * 360);
-  }
-
-  confetti.whenCloned(function () {
-    stage.sendSpriteToBack(this);
-    this.goTo(randomX(), stage.height / 2);
-    this.turnRight(Math.random() * 75);
-    this.css('filter', `hue-rotate(${randomHue()}deg)`);
-    this.addTo(stage);
-    this.show();
-    this.glide(5, randomX(), -stage.height / 2);
-    this.wait(5);
-    this.removeFrom(stage);
-  });
+    confetti.whenCloned(function () {
+      stage.sendSpriteToBack(this)
+      this.goTo(randomX(), stage.height / 2)
+      this.turnRight(Math.random() * 75)
+      this.css('filter', `hue-rotate(${randomHue()}deg)`)
+      this.addTo(stage)
+      this.show()
+      this.glide(5, randomX(), -stage.height / 2)
+      this.wait(5)
+      this.removeFrom(stage)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

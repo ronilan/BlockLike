@@ -10,39 +10,39 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sprite = new blockLike.Sprite();
+    const sprite = new blockLike.Sprite()
 
-  sprite.addTo(stage);
+    sprite.addTo(stage)
 
-  sprite.whenFlag(() => {
-    while (forever) {
-      this.clone();
-      this.wait(0.1);
-    }
-  });
-
-  sprite.whenCloned(() => {
-    this.alive = true;
-
-    this.pointInDirection(Math.floor(Math.random() * 360));
-    this.addTo(stage);
-
-    while (this.alive) {
-      forever ? this.move(10) : null;
-      this.wait(0.5);
-
-      if (this.touchingEdge()) {
-        this.removeFrom(stage);
-        this.alive = false;
+    sprite.whenFlag(() => {
+      while (forever) {
+        this.clone()
+        this.wait(0.1)
       }
-    }
-  });
+    })
 
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    sprite.whenCloned(() => {
+      this.alive = true
+
+      this.pointInDirection(Math.floor(Math.random() * 360))
+      this.addTo(stage)
+
+      while (this.alive) {
+        forever ? this.move(10) : null
+        this.wait(0.5)
+
+        if (this.touchingEdge()) {
+          this.removeFrom(stage)
+          this.alive = false
+        }
+      }
+    })
+
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

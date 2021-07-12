@@ -10,39 +10,39 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sprite2 = new blockLike.Sprite();
-  const sprite1 = new blockLike.Sprite();
+    const sprite2 = new blockLike.Sprite()
+    const sprite1 = new blockLike.Sprite()
 
-  stage.addSprite(sprite2);
-  stage.addSprite(sprite1);
+    stage.addSprite(sprite2)
+    stage.addSprite(sprite1)
 
-  sprite1.whenFlag(function () {
-    this.goTo(100, 100);
-  });
+    sprite1.whenFlag(function () {
+      this.goTo(100, 100)
+    })
 
-  sprite1.whenReceiveMessage('move', function () {
-    this.wait(0.5);
-    this.move(-10);
-    this.sayWait('done', 1);
-  });
+    sprite1.whenReceiveMessage('move', function () {
+      this.wait(0.5)
+      this.move(-10)
+      this.sayWait('done', 1)
+    })
 
-  sprite2.whenFlag(function () {
-    this.goTo(-100, -100);
-  });
+    sprite2.whenFlag(function () {
+      this.goTo(-100, -100)
+    })
 
-  sprite2.whenReceiveMessage('move', function () {
-    this.wait(3);
-    this.move(10);
-    this.sayWait('done', 1);
-  });
+    sprite2.whenReceiveMessage('move', function () {
+      this.wait(3)
+      this.move(10)
+      this.sayWait('done', 1)
+    })
 
-  stage.whenClicked(() => {
-    stage.broadcastMessage('move');
-    sprite1.say('not done');
-    sprite2.say('not done');
-  });
+    stage.whenClicked(() => {
+      stage.broadcastMessage('move')
+      sprite1.say('not done')
+      sprite2.say('not done')
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

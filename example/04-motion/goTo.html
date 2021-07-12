@@ -10,23 +10,23 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sprite1 = new blockLike.Sprite();
-  const sprite2 = new blockLike.Sprite();
+    const sprite1 = new blockLike.Sprite()
+    const sprite2 = new blockLike.Sprite()
 
-  stage.addSprite(sprite1);
-  stage.addSprite(sprite2);
+    stage.addSprite(sprite1)
+    stage.addSprite(sprite2)
 
-  sprite1.whenFlag(function () {
-    this.wait(1);
-    this.goTo(70, 70);
-  });
+    sprite1.whenFlag(function () {
+      this.wait(1)
+      this.goTo(70, 70)
+    })
 
-  sprite2.whenFlag(function () {
-    this.wait(1);
-    this.goTo(-70, -70);
-  });
+    sprite2.whenFlag(function () {
+      this.wait(1)
+      this.goTo(-70, -70)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

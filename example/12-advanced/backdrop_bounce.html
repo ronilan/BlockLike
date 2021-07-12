@@ -10,54 +10,54 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
-  const player = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const player = new blockLike.Sprite()
 
-  const backdrop1 = new blockLike.Backdrop({ image: '../../images/backdrop.png' });
+    const backdrop1 = new blockLike.Backdrop({ image: '../../images/backdrop.png' })
 
-  backdrop1.addTo(stage);
-  stage.nextBackdrop();
+    backdrop1.addTo(stage)
+    stage.nextBackdrop()
 
-  player.setY(stage.height / 2);
-  stage.addSprite(player);
+    player.setY(stage.height / 2)
+    stage.addSprite(player)
 
-  let moving = true;
-  let velocity = 0;
+    let moving = true
+    let velocity = 0
 
-  function loop() {
-    while (moving) {
-      velocity -= 0.5;
-      player.changeY(velocity);
-      if (player.isTouchingBackdropColor('#666666')) {
-        velocity = 10;
-        player.changeY(velocity);
+    function loop () {
+      while (moving) {
+        velocity -= 0.5
+        player.changeY(velocity)
+        if (player.isTouchingBackdropColor('#666666')) {
+          velocity = 10
+          player.changeY(velocity)
+        }
+        if (player.isTouchingBackdropColor('#ff9400')) {
+          moving = false
+        }
       }
+    }
+
+    player.whenKeyPressed(39, () => {
+      player.changeX(10)
+    })
+
+    player.whenKeyPressed(37, () => {
+      player.changeX(-10)
+    })
+
+    player.whenKeyPressed(38, function () {
       if (player.isTouchingBackdropColor('#ff9400')) {
-        moving = false;
+        player.changeY(10)
+        velocity = 20
+        moving = true
+        this.invoke(loop)
       }
-    }
-  }
+    })
 
-  player.whenKeyPressed(39, () => {
-    player.changeX(10);
-  });
-
-  player.whenKeyPressed(37, () => {
-    player.changeX(-10);
-  });
-
-  player.whenKeyPressed(38, function () {
-    if (player.isTouchingBackdropColor('#ff9400')) {
-      player.changeY(10);
-      velocity = 20;
-      moving = true;
-      this.invoke(loop);
-    }
-  });
-  
-  player.whenFlag(function () {
-    this.invoke(loop);
-  });
+    player.whenFlag(function () {
+      this.invoke(loop)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

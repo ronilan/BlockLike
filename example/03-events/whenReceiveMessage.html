@@ -10,33 +10,33 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sprite2 = new blockLike.Sprite();
-  const sprite1 = new blockLike.Sprite();
+    const sprite2 = new blockLike.Sprite()
+    const sprite1 = new blockLike.Sprite()
 
-  stage.addSprite(sprite2);
-  stage.addSprite(sprite1);
+    stage.addSprite(sprite2)
+    stage.addSprite(sprite1)
 
-  sprite1.whenFlag(function () {
-    this.goTo(100, 100);
-  });
+    sprite1.whenFlag(function () {
+      this.goTo(100, 100)
+    })
 
-  sprite1.whenReceiveMessage('move', function () {
-    this.move(-10);
-  });
+    sprite1.whenReceiveMessage('move', function () {
+      this.move(-10)
+    })
 
-  sprite2.whenFlag(function () {
-    this.goTo(-100, -100);
-  });
+    sprite2.whenFlag(function () {
+      this.goTo(-100, -100)
+    })
 
-  sprite2.whenReceiveMessage('move', function () {
-    this.move(10);
-  });
+    sprite2.whenReceiveMessage('move', function () {
+      this.move(10)
+    })
 
-  stage.whenClicked(() => {
-    stage.broadcastMessage('move');
-  });
+    stage.whenClicked(() => {
+      stage.broadcastMessage('move')
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

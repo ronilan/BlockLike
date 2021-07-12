@@ -10,47 +10,47 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite()
 
-  const pink = new blockLike.Sprite({
-    color: 'pink',
-    width: 75,
-  });
+    const pink = new blockLike.Sprite({
+      color: 'pink',
+      width: 75
+    })
 
-  const greenBear = new blockLike.Sprite({
-    color: 'lightgreen',
-    image: '../../images/bear.png',
-    height: 75,
-  });
+    const greenBear = new blockLike.Sprite({
+      color: 'lightgreen',
+      image: '../../images/bear.png',
+      height: 75
+    })
 
-  const dog = new blockLike.Sprite({
-    image: '../../images/dog.png',
-    width: 75,
-    height: 75,
-  });
+    const dog = new blockLike.Sprite({
+      image: '../../images/dog.png',
+      width: 75,
+      height: 75
+    })
 
-  const bare = new blockLike.Sprite({
-    width: 20,
-    height: 25,
-    image: null,
+    const bare = new blockLike.Sprite({
+      width: 20,
+      height: 25,
+      image: null
 
-  });
+    })
 
-  sprite.addTo(stage);
+    sprite.addTo(stage)
 
-  pink.goTo(0, -220);
-  pink.addTo(stage);
+    pink.goTo(0, -220)
+    pink.addTo(stage)
 
-  greenBear.goTo(0, -110);
-  greenBear.addTo(stage);
+    greenBear.goTo(0, -110)
+    greenBear.addTo(stage)
 
-  dog.goTo(0, 110);
-  dog.addTo(stage);
+    dog.goTo(0, 110)
+    dog.addTo(stage)
 
-  bare.goTo(0, 220);
-  bare.addTo(stage);
-  bare.say(`I am ${bare.width}px by ${bare.height}px sprite with no costume`);
+    bare.goTo(0, 220)
+    bare.addTo(stage)
+    bare.say(`I am ${bare.width}px by ${bare.height}px sprite with no costume`)
   </script>
   <script src='../example-helper.js'></script>
 </body>

@@ -10,54 +10,54 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sheep = new blockLike.Sprite();
-  const bear = new blockLike.Sprite();
-  const dog = new blockLike.Sprite();
+    const sheep = new blockLike.Sprite()
+    const bear = new blockLike.Sprite()
+    const dog = new blockLike.Sprite()
 
-  sheep.addCostume(new blockLike.Costume({
-    image: '../../images/sheep_step.png',
-  }));
+    sheep.addCostume(new blockLike.Costume({
+      image: '../../images/sheep_step.png'
+    }))
 
-  bear.addCostume(new blockLike.Costume({
-    image: '../../images/bear.png',
-  }));
-  bear.addCostume(new blockLike.Costume({
-    image: '../../images/bear_step.png',
-  }));
-  bear.removeCostumeNum(0);
+    bear.addCostume(new blockLike.Costume({
+      image: '../../images/bear.png'
+    }))
+    bear.addCostume(new blockLike.Costume({
+      image: '../../images/bear_step.png'
+    }))
+    bear.removeCostumeNum(0)
 
-  dog.addCostume(new blockLike.Costume({
-    image: '../../images/dog.png',
-  }));
-  dog.addCostume(new blockLike.Costume({
-    image: '../../images/dog_step.png',
-  }));
-  dog.removeCostumeNum(0);
+    dog.addCostume(new blockLike.Costume({
+      image: '../../images/dog.png'
+    }))
+    dog.addCostume(new blockLike.Costume({
+      image: '../../images/dog_step.png'
+    }))
+    dog.removeCostumeNum(0);
 
-  [sheep, bear, dog].forEach((item, index) => {
-    stage.addSprite(item);
-    item.changeY(-150 + (index * 150));
-    item.changeSize(index * 20);
-    item.setRotationStyle('left-right');
-  });
+    [sheep, bear, dog].forEach((item, index) => {
+      stage.addSprite(item)
+      item.changeY(-150 + (index * 150))
+      item.changeSize(index * 20)
+      item.setRotationStyle('left-right')
+    })
 
-  stage.whenLoaded(function () {
-    while (forever) {
-      this.wait(0.4);
+    stage.whenLoaded(function () {
+      while (forever) {
+        this.wait(0.4);
 
-      [sheep, bear, dog].forEach((item) => {
-        item.nextCostume();
-        item.move(10 + Math.floor(Math.random() * 10));
-        item.isTouchingEdge() ? item.turnRight(180) : null;
-      });
-    }
-  });
+        [sheep, bear, dog].forEach((item) => {
+          item.nextCostume()
+          item.move(10 + Math.floor(Math.random() * 10))
+          item.isTouchingEdge() ? item.turnRight(180) : null
+        })
+      }
+    })
 
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

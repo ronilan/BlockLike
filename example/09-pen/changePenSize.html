@@ -10,20 +10,20 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sprite = new blockLike.Sprite();
-  sprite.addTo(stage);
+    const sprite = new blockLike.Sprite()
+    sprite.addTo(stage)
 
-  sprite.whenFlag(() => {
-    this.penDown();
+    sprite.whenFlag(() => {
+      this.penDown()
 
-    for (let j = 0; j < 6; j += 1) {
-      this.changePenSize(j * 2);
-      this.move(100);
-      this.turnRight(360 / 6);
-    }
-  });
+      for (let j = 0; j < 6; j += 1) {
+        this.changePenSize(j * 2)
+        this.move(100)
+        this.turnRight(360 / 6)
+      }
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

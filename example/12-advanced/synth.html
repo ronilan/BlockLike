@@ -11,31 +11,31 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/audiosynth/1.0.0/audiosynth.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage();
-  const sprite1 = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const sprite1 = new blockLike.Sprite()
 
-  const piano = Synth.createInstrument('piano');
-  const organ = Synth.createInstrument('organ');
+    const piano = Synth.createInstrument('piano')
+    const organ = Synth.createInstrument('organ')
 
-  stage.addSprite(sprite1);
+    stage.addSprite(sprite1)
 
-  sprite1.whenFlag(function () {
-    let i = 0;
-    let n = -1;
+    sprite1.whenFlag(function () {
+      let i = 0
+      let n = -1
 
-    while (forever) {
-      i = (i + 1) % 4;
-      n = (n + 1) % 7;
-      this.turnRight(5);
-      piano.play('C', i, 2);
-      this.wait(0.5);
-      organ.play(String.fromCharCode(n + 65), i, 2);
-    }
-  });
+      while (forever) {
+        i = (i + 1) % 4
+        n = (n + 1) % 7
+        this.turnRight(5)
+        piano.play('C', i, 2)
+        this.wait(0.5)
+        organ.play(String.fromCharCode(n + 65), i, 2)
+      }
+    })
 
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

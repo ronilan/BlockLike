@@ -8,31 +8,30 @@
   <body>
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
-  <script id="example">let forever = true;
+  <script id="example">let forever = true
+    const stage = new blockLike.Stage({ sensing: true })
+    const sprite = new blockLike.Sprite()
 
-  const stage = new blockLike.Stage({ sensing: true });
-  const sprite = new blockLike.Sprite();
+    sprite.addTo(stage)
 
-  sprite.addTo(stage);
+    sprite.whenFlag(function () {
+      while (forever) {
+        this.wait(1)
+        console.log(stage.keysCode, stage.keysKey, stage.keysKeyCode)
+        const space = stage.isKeyPressed(32)
+        const A = stage.isKeyPressed('A')
+        const arrow = stage.isKeyPressed('ArrowUp')
 
-  sprite.whenFlag(function () {
-    while (forever) {
-      this.wait(1);
-      console.log(stage.keysCode, stage.keysKey, stage.keysKeyCode);
-      const space = stage.isKeyPressed(32);
-      const A = stage.isKeyPressed('A');
-      const arrow = stage.isKeyPressed('ArrowUp');
+        const text = `
+          Space key: ${space}<br />
+          a key: ${A}<br />
+          Arrow up: ${arrow}`
 
-      const text = `
-      Space key: ${space}<br />
-      a key: ${A}<br />
-      Arrow up: ${arrow}`;
+        this.say(text)
+      }
+    })
 
-      this.say(text);
-    }
-  });
-  
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

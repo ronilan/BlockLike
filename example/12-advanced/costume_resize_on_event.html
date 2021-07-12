@@ -10,90 +10,90 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage({ sensing: true });
-  stage.css('cursor', 'crosshair');
+    const stage = new blockLike.Stage({ sensing: true })
+    stage.css('cursor', 'crosshair')
 
-  const sprite = new blockLike.Sprite({
-    costume: new blockLike.Costume({
-      width: 2,
-      height: 2,
-    }),
-  });
-  sprite.css('border', '1px dotted #222');
+    const sprite = new blockLike.Sprite({
+      costume: new blockLike.Costume({
+        width: 2,
+        height: 2
+      })
+    })
+    sprite.css('border', '1px dotted #222')
 
-  sprite.hide();
-  sprite.addTo(stage);
+    sprite.hide()
+    sprite.addTo(stage)
 
-  let startX = 0;
-  let startY = 0;
-  let active = false;
+    let startX = 0
+    let startY = 0
+    let active = false
 
-  // UI
+    // UI
 
-  function start() {
-    active = true;
-    sprite.show();
+    function start () {
+      active = true
+      sprite.show()
 
-    startX = this.mouseX;
-    startY = this.mouseY;
+      startX = this.mouseX
+      startY = this.mouseY
 
-    sprite.setX(startX);
-    sprite.setY(startY);
-  }
-
-  function draw() {
-    if (active) {
-      sprite.costume.width = Math.abs(this.mouseX - startX) * 2;
-      sprite.costume.height = Math.abs(this.mouseY - startY) * 2;
-      // when costume is resized at "run time" sprite must be refreshed.
-      sprite.refresh();
+      sprite.setX(startX)
+      sprite.setY(startY)
     }
-  }
 
-  function end() {
-    active = false;
-    sprite.clone();
+    function draw () {
+      if (active) {
+        sprite.costume.width = Math.abs(this.mouseX - startX) * 2
+        sprite.costume.height = Math.abs(this.mouseY - startY) * 2
+        // when costume is resized at "run time" sprite must be refreshed.
+        sprite.refresh()
+      }
+    }
 
-    sprite.costume.width = 2;
-    sprite.costume.height = 2;
-    // when costume is resized at "run time" sprite must be refreshed.
-    sprite.refresh();
-  }
+    function end () {
+      active = false
+      sprite.clone()
 
-  stage.whenEvent('mousedown', function () {
-    this.invoke(start);
-  });
+      sprite.costume.width = 2
+      sprite.costume.height = 2
+      // when costume is resized at "run time" sprite must be refreshed.
+      sprite.refresh()
+    }
 
-  stage.whenEvent('touchstart', function () {
-    this.invoke(start);
-  });
+    stage.whenEvent('mousedown', function () {
+      this.invoke(start)
+    })
 
-  stage.whenEvent('mousemove', function () {
-    this.invoke(draw);
-  });
+    stage.whenEvent('touchstart', function () {
+      this.invoke(start)
+    })
 
-  stage.whenEvent('touchmove', function () {
-    this.invoke(draw);
-  });
+    stage.whenEvent('mousemove', function () {
+      this.invoke(draw)
+    })
 
-  stage.whenEvent('mouseup', () => {
-    this.invoke(end);
-  });
+    stage.whenEvent('touchmove', function () {
+      this.invoke(draw)
+    })
 
-  stage.whenEvent('touchend', () => {
-    this.invoke(end);
-  });
+    stage.whenEvent('mouseup', () => {
+      this.invoke(end)
+    })
 
-  sprite.whenCloned(() => {
-    this.costume.color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-    this.css('border', 'none');
-    this.addTo(stage);
-  });
+    stage.whenEvent('touchend', () => {
+      this.invoke(end)
+    })
 
-  stage.whenKeyPressed('Escape', () => {
-    active = false;
-    sprite.hide();
-  });
+    sprite.whenCloned(() => {
+      this.costume.color = `#${Math.floor(Math.random() * 16777215).toString(16)}`
+      this.css('border', 'none')
+      this.addTo(stage)
+    })
+
+    stage.whenKeyPressed('Escape', () => {
+      active = false
+      sprite.hide()
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

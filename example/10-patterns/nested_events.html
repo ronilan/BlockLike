@@ -10,37 +10,37 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite()
 
-  sprite.addTo(stage);
+    sprite.addTo(stage)
 
-  sprite.whenLoaded(function () {
-    this.say('Nested events. Listening to click events.');
-  });
+    sprite.whenLoaded(function () {
+      this.say('Nested events. Listening to click events.')
+    })
 
-  sprite.whenClicked(function () {
-    this.say('Clicked.');
-    this.turnRight(90);
-    this.wait(0.5);
-    this.turnLeft(90);
+    sprite.whenClicked(function () {
+      this.say('Clicked.')
+      this.turnRight(90)
+      this.wait(0.5)
+      this.turnLeft(90)
 
-    this.whenKeyPressed('z', function () {
-      this.say('The z key pressed.');
-      this.move(10);
-      this.wait(0.5);
-      this.move(-10);
+      this.whenKeyPressed('z', function () {
+        this.say('The z key pressed.')
+        this.move(10)
+        this.wait(0.5)
+        this.move(-10)
 
-      this.whenEvent('mouseover', function () {
-        this.say('Mouse over.');
-        this.setSize(50);
-        this.wait(0.5);
-        this.setSize(100);
-      });
-      this.say('Also listening to mouse move over sprite.');
-    });
-    this.say('Also listening to z key press.', 2);
-  });
+        this.whenEvent('mouseover', function () {
+          this.say('Mouse over.')
+          this.setSize(50)
+          this.wait(0.5)
+          this.setSize(100)
+        })
+        this.say('Also listening to mouse move over sprite.')
+      })
+      this.say('Also listening to z key press.', 2)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

@@ -10,50 +10,50 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  let forever = true;
+    let forever = true
 
-  const stage = new blockLike.Stage();
+    const stage = new blockLike.Stage()
 
-  const sheep = new blockLike.Sprite();
-  const bear = new blockLike.Sprite();
+    const sheep = new blockLike.Sprite()
+    const bear = new blockLike.Sprite()
 
-  sheep.addCostume(new blockLike.Costume({
-    image: '../../images/sheep_step.png',
-  }));
+    sheep.addCostume(new blockLike.Costume({
+      image: '../../images/sheep_step.png'
+    }))
 
-  bear.addCostume(new blockLike.Costume({
-    image: '../../images/bear.png',
-  }));
-  bear.addCostume(new blockLike.Costume({
-    image: '../../images/bear_step.png',
-  }));
-  console.log(bear.costumes);
-  bear.removeCostumeNum(0);
-  console.log(bear.costumes);
+    bear.addCostume(new blockLike.Costume({
+      image: '../../images/bear.png'
+    }))
+    bear.addCostume(new blockLike.Costume({
+      image: '../../images/bear_step.png'
+    }))
+    console.log(bear.costumes)
+    bear.removeCostumeNum(0)
+    console.log(bear.costumes)
 
-  sheep.addTo(stage);
-  bear.addTo(stage);
+    sheep.addTo(stage)
+    bear.addTo(stage)
 
-  sheep.whenClicked(() => {
-    this.move(5);
-    this.nextCostume();
-  });
+    sheep.whenClicked(() => {
+      this.move(5)
+      this.nextCostume()
+    })
 
-  bear.whenClicked(() => {
-    this.move(5);
-    this.nextCostume();
-  });
+    bear.whenClicked(() => {
+      this.move(5)
+      this.nextCostume()
+    })
 
-  bear.whenFlag(() => {
-    bear.goTo(100, 0);
-    while (forever) {
-      this.move(5);
-      this.wait(0.2);
-      this.nextCostume();
-    }
-  });
+    bear.whenFlag(() => {
+      bear.goTo(100, 0)
+      while (forever) {
+        this.move(5)
+        this.wait(0.2)
+        this.nextCostume()
+      }
+    })
 
-  stage.whenKeyPressed('Escape', () => { forever = false; });
+    stage.whenKeyPressed('Escape', () => { forever = false })
   </script>
   <script src='../example-helper.js'></script>
 </body>

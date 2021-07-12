@@ -9,23 +9,23 @@
 
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
-  <script id="example">const stage = new blockLike.Stage();
-  const sprite = new blockLike.Sprite();
+  <script id="example">const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite()
 
-  const bearbear = new blockLike.Costume({
-    image: '../../images/bear.png',
-  });
+    const bearbear = new blockLike.Costume({
+      image: '../../images/bear.png'
+    })
 
-  sprite.addCostume(bearbear);
-  sprite.addTo(stage);
+    sprite.addCostume(bearbear)
+    sprite.addTo(stage)
 
-  sprite.whenClicked(() => {
-    this.switchCostumeTo(bearbear);
-  });
+    sprite.whenClicked(() => {
+      this.switchCostumeTo(bearbear)
+    })
 
-  stage.whenClicked(() => {
-    sprite.switchCostumeToNum(0);
-  });
+    stage.whenClicked(() => {
+      sprite.switchCostumeToNum(0)
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>

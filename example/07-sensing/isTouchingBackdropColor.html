@@ -10,42 +10,42 @@
   <script type="text/javascript" src="../../dist/blocklike-1.0.4.min.js"></script>
 
   <script id="example">
-  const stage = new blockLike.Stage();
-  const player = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const player = new blockLike.Sprite()
 
-  const backdrop1 = new blockLike.Backdrop({ image: '../../images/colorwheel.svg' });
+    const backdrop1 = new blockLike.Backdrop({ image: '../../images/colorwheel.svg' })
 
-  backdrop1.addTo(stage);
+    backdrop1.addTo(stage)
 
-  stage.addSprite(player);
+    stage.addSprite(player)
 
-  function senseColor() {
-    if (player.isTouchingBackdropColor('#0247fe')) {
-      player.say('Touching Blue #0247fe');
-    } else {
-      player.say('Not touching Blue #0247fe');
+    function senseColor () {
+      if (player.isTouchingBackdropColor('#0247fe')) {
+        player.say('Touching Blue #0247fe')
+      } else {
+        player.say('Not touching Blue #0247fe')
+      }
     }
-  }
 
-  player.whenKeyPressed(39, () => {
-    this.changeX(10);
-    senseColor();
-  });
-  
-  player.whenKeyPressed(37, () => {
-    this.changeX(-10);
-    senseColor();
-  });
-  
-  player.whenKeyPressed(38, () => {
-    this.changeY(10);
-    senseColor();
-  });
-  
-  player.whenKeyPressed(40, () => {
-    this.changeY(-10);
-    senseColor();
-  });
+    player.whenKeyPressed(39, () => {
+      this.changeX(10)
+      senseColor()
+    })
+
+    player.whenKeyPressed(37, () => {
+      this.changeX(-10)
+      senseColor()
+    })
+
+    player.whenKeyPressed(38, () => {
+      this.changeY(10)
+      senseColor()
+    })
+
+    player.whenKeyPressed(40, () => {
+      this.changeY(-10)
+      senseColor()
+    })
   </script>
   <script src='../example-helper.js'></script>
 </body>
