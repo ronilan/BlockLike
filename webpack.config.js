@@ -26,7 +26,7 @@ module.exports = {
     library: 'blockLike',
   },
   devServer: {
-    contentBase: path.join(__dirname, ""),
+    static: path.join(__dirname, ""),
     compress: true,
     host: '0.0.0.0',//your ip address
     port: 9000
