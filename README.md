@@ -10,9 +10,9 @@ See [BlockLike.org](https://www.blocklike.org) for details, [docs](https://www.b
 
 ## Get Started
 
-The easiest way to start with BlockLike.js is using CodePen.IO. Alternatively, you can create an index.html file and include BlockLike.js with the script tag.
+The easiest way to start with BlockLike.js is using CodePen or replit. Alternatively, you can create an index.html file and include BlockLike.js with the script tag.
 
-The [website](https://www.blocklike.org/#getstarted) has a one-click setup for CodePen and [instructions](https://www.blocklike.org/#getstarted) how to load the most recent version off of a CDN.
+The [website](https://www.blocklike.org/#getstarted) has a one-click setup for CodePen and [instructions](https://www.blocklike.org/#getstarted) how to set up replit and how to load the most recent version off of a CDN.
 
 ## Development
 
