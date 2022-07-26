@@ -1,7 +1,7 @@
-const path = require('path');
+const path = require('path')
 
-const PACKAGE = require('./package.json');
-const version = PACKAGE.version;
+const PACKAGE = require('./package.json')
+const version = PACKAGE.version
 
 module.exports = {
   entry: './src/lib.js',
@@ -14,21 +14,21 @@ module.exports = {
         include: path.resolve(process.cwd(), 'src'),
         enforce: 'pre',
         options: {
-          fix: true,
-        },
-      },
+          fix: true
+        }
+      }
     ]
   },
   devtool: 'inline-source-map',
   output: {
     filename: `blocklike-${version}.js`,
     path: path.resolve(__dirname, 'dist'),
-    library: 'blockLike',
+    library: 'blockLike'
   },
   devServer: {
-    static: path.join(__dirname, ""),
+    static: path.join(__dirname, ''),
     compress: true,
-    host: '0.0.0.0',//your ip address
+    host: '0.0.0.0', // your ip address
     port: 9000
   }
-};
+}

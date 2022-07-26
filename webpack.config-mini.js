@@ -1,7 +1,7 @@
-const path = require('path');
+const path = require('path')
 
-const PACKAGE = require('./package.json');
-const version = PACKAGE.version;
+const PACKAGE = require('./package.json')
+const version = PACKAGE.version
 
 module.exports = {
   entry: './src/lib.js',
@@ -14,15 +14,15 @@ module.exports = {
         include: path.resolve(process.cwd(), 'src'),
         enforce: 'pre',
         options: {
-          fix: true,
-        },
-      },
+          fix: true
+        }
+      }
     ]
   },
   output: {
     filename: `blocklike-${version}.min.js`,
     path: path.resolve(__dirname, 'dist'),
-    library: 'blockLike',
+    library: 'blockLike'
   },
-  watch: false,
-};
+  watch: false
+}
