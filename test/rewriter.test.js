@@ -321,6 +321,30 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout') === -1)
       sprite.pace = 33
     })
+    it('should add a paced promise resolve to the end of any while block', () => {
+        let func, f
+
+        func = function () {
+            while(true) {
+                if(this.isKeyPressed('ArrowLeft')) {
+                    this.changeX(-20);
+                }
+            }
+        }
+
+        //checking if there are 2 occurances since the paced function itself should add a resolve and another should be added to the end of the while block aswell
+        f = rewrite(func, sprite)
+        assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0));'))
+
+        func = function () {
+            while(true) {
+                this.changeX(-20);
+            }
+        }
+
+        f = rewrite(func, sprite)
+        assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0));'))
+    })
   })
 
   describe('waited methods', () => {
