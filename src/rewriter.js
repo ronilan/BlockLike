@@ -89,6 +89,15 @@ function whichWaitedReturn (item, entity) {
 }
 
 /**
+   * getPacedPromiseLine - Gets the await promise resolve line for paced code.
+   * @param {entity} entity - the entity triggering the method.
+   * @returns {string} - the promise resolve line string.
+   */
+function getPacedPromiseLine (entity) {
+  return `await new Promise(resolve => setTimeout(resolve, ${entity.pace}));`
+}
+
+/**
 * insertPaced - inserts a timed await line after any method that is on the list of paced methods.
 *
 * @param {string} item - a line of code.
@@ -97,7 +106,7 @@ function whichWaitedReturn (item, entity) {
 * @return {string} - a modified line of code.
 */
 function insertPaced (item, entity) {
-  const code = `${item}\n await new Promise(resolve => setTimeout(resolve, ${entity.pace}));`
+  const code = `${item}\n${getPacedPromiseLine(entity)}`
   return entity.pace && isPaced(replaceUserStringWithBlanks(item), entity) ? code : item
 }
 
@@ -241,6 +250,7 @@ export default function rewrite (func, entity) {
 
     // counter for open parentheses.
     let eventedOpenParen = 0
+    let hasPacedCode = false
 
     code = code.map((item) => {
       const temp = item
@@ -250,6 +260,7 @@ export default function rewrite (func, entity) {
       if (isEvented(temp, entity) || eventedOpenParen) {
         eventedOpenParen += (countChar(replaceUserStringWithBlanks(temp), '(') - countChar(replaceUserStringWithBlanks(temp), ')'))
       } else {
+        if (isPaced(temp, entity)) hasPacedCode = true
         // a method can be one of the following but not more than one
         result === temp ? result = insertPaced(temp, entity) : null // more likely
         result === temp ? result = insertWaited(temp, entity) : null // less likely
@@ -260,6 +271,21 @@ export default function rewrite (func, entity) {
 
       return result
     })
+
+    // Always insert a paced promise resolve at the end of a while block if a while block is present and the function already includes paced code
+    // Without this the below code will cause a browser crash
+    /*
+      stage.whenFlag(function () {
+        while(true) {
+          if(stage.isKeyPressed('ArrowLeft')) {
+            sprite.changeX(-20);
+          }
+        }
+      });
+    */
+    const whileIndex = code.findIndex(line => line.match(/while\(.*\)/g))
+    if (whileIndex !== -1 && hasPacedCode) code.splice(code.length - 1 - whileIndex, 0, getPacedPromiseLine(entity))// insert before the while loop closes
+
     code = code.join('\n')
   }
 
