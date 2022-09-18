@@ -89,6 +89,24 @@ function whichWaitedReturn (item, entity) {
 }
 
 /**
+* insertLoopProtection- inserts a zero timed await line after a while deceleration.
+*
+* @param {string} item - a line of code.
+* @param {entity} entity - the entity triggering the method.
+*
+* @return {string} - a modified line of code.
+*/
+function insertLoopProtection (item, entity) {
+  const check = item.replace(/\s+/g, '')
+
+  const regExp = /while\([\S]*\){|for\([\S]*\){|do[\S]*{/
+  const matches = regExp.exec(check)
+
+  const code = `${item}\n await new Promise(resolve => setTimeout(resolve, 0));`
+  return matches ? code : item
+}
+
+/**
 * insertPaced - inserts a timed await line after any method that is on the list of paced methods.
 *
 * @param {string} item - a line of code.
@@ -241,6 +259,7 @@ export default function rewrite (func, entity) {
 
     // counter for open parentheses.
     let eventedOpenParen = 0
+    // let hasPacedCode = false
 
     code = code.map((item) => {
       const temp = item
@@ -250,6 +269,7 @@ export default function rewrite (func, entity) {
       if (isEvented(temp, entity) || eventedOpenParen) {
         eventedOpenParen += (countChar(replaceUserStringWithBlanks(temp), '(') - countChar(replaceUserStringWithBlanks(temp), ')'))
       } else {
+        // if (isPaced(temp, entity)) hasPacedCode = true
         // a method can be one of the following but not more than one
         result === temp ? result = insertPaced(temp, entity) : null // more likely
         result === temp ? result = insertWaited(temp, entity) : null // less likely
@@ -258,8 +278,13 @@ export default function rewrite (func, entity) {
         result === temp ? result = insertAsync(temp) : null
       }
 
+      // insert a paced promise resolve at the start of a loop block (under certain conditions)
+      // this causes the code to skip an event loop and prevents endless loops
+      result = insertLoopProtection(result, entity)
+
       return result
     })
+
     code = code.join('\n')
   }
 

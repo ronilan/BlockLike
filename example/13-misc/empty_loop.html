@@ -11,30 +11,29 @@
 
   <script id="example">
   /* eslint-disable */
-  
-    const stage = new blockLike.Stage();
-    const sprite1 = new blockLike.Sprite();
+    const stage = new blockLike.Stage()
+    const sprite1 = new blockLike.Sprite()
 
-    sprite1.addTo(stage);
+    sprite1.addTo(stage)
 
     sprite1.whenClicked(() => {
       while (true) {
 
       }
-    });
+    })
 
     stage.whenEvent('mousemove', (e) => {
       do {
-        sprite1.say(`${e.x} ${e.y}`);
-        sprite1.wait(1);
-      } while (true);
-    });
+        sprite1.say(`${e.x} ${e.y}`)
+        sprite1.wait(1)
+      } while (true)
+    })
 
     sprite1.whenLoaded(() => {
       while (true) {
-        sprite1.turnRight(2);
+        sprite1.turnRight(2)
       }
-    });
+    })
 
   </script>
   <script src='../example-helper.js'></script>

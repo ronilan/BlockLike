@@ -7,6 +7,7 @@ import rewrite from '../src/rewriter'
 const assert = require('assert')
 
 describe('rewriter', () => {
+  const stage = new blockLike.Sprite()
   const sprite = new blockLike.Sprite()
   const otherSprite = new blockLike.Sprite()
 
@@ -29,7 +30,7 @@ describe('rewriter', () => {
       assert(f.constructor.name === 'AsyncFunction')
     })
 
-    it('should detect and mainatin a single variable if passed', () => {
+    it('should detect and maintain a single variable if passed', () => {
       let func
       let f
 
@@ -56,9 +57,9 @@ describe('rewriter', () => {
     })
   })
 
-  describe('loop protection', () => {
+  describe('empty loop protection', () => {
     /* eslint-disable no-constant-condition, no-empty, for-direction */
-    it('should add an error throw after any empty while statment', () => {
+    it('should add an error throw after any empty while statement', () => {
       let func
       let f
 
@@ -79,7 +80,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('throw \'BlockLike.js Error: Empty loop detected\'') !== -1)
     })
 
-    it('should not add an error throw after non-empty while statment', () => {
+    it('should not add an error throw after non-empty while statement', () => {
       let func
       let f
 
@@ -100,7 +101,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('throw \'BlockLike.js Error: Empty loop detected\'') === -1)
     })
 
-    it('should add an error throw after any empty for statment', () => {
+    it('should add an error throw after any empty for statement', () => {
       let func
       let f
 
@@ -121,7 +122,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('throw \'BlockLike.js Error: Empty loop detected\'') !== -1)
     })
 
-    it('should not add an error throw after non-empty for statment', () => {
+    it('should not add an error throw after non-empty for statement', () => {
       let func
       let f
 
@@ -142,7 +143,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('throw \'BlockLike.js Error: Empty loop detected\'') === -1)
     })
 
-    it('should add an error throw after any empty do statment', () => {
+    it('should add an error throw after any empty do statement', () => {
       let func
       let f
 
@@ -163,7 +164,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('throw \'BlockLike.js Error: Empty loop detected\'') !== -1)
     })
 
-    it('should not add an error throw after non-empty do statment', () => {
+    it('should not add an error throw after non-empty do statement', () => {
       let func
       let f
 
@@ -187,8 +188,119 @@ describe('rewriter', () => {
     /* eslint-enable no-constant-condition, no-empty, for-direction */
   })
 
+  describe('loop protection', () => {
+    /* eslint-disable no-constant-condition, no-empty, for-direction */
+    it('should add a paced promise resolve to any while block', () => {
+      let func, f
+
+      func = function () {
+        while (true) {
+          this.changeX(-20)
+        }
+      }
+
+      f = rewrite(func, sprite)
+      assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0));') !== -1)
+
+      func = function () {
+        while (true) {
+          if (stage.isKeyPressed('ArrowLeft')) {
+            this.changeX(-20)
+          }
+        }
+      }
+
+      f = rewrite(func, sprite)
+      assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0));') !== -1)
+    })
+
+    it('should add a paced promise resolve to any for block', () => {
+      let func, f
+
+      func = function () {
+        for (let i = 0; i < Infinity; i += 1) {
+          this.changeX(-20)
+        }
+      }
+
+      f = rewrite(func, sprite)
+      assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0));') !== -1)
+
+      func = function () {
+        for (let i = 0; i < Infinity; i += 1) {
+          if (stage.isKeyPressed('ArrowLeft')) {
+            this.changeX(-20)
+          }
+        }
+      }
+
+      f = rewrite(func, sprite)
+      assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0));') !== -1)
+    })
+
+    it('should add a paced promise resolve to any do block', () => {
+      let func, f
+
+      func = function () {
+        do {
+          this.changeX(-20)
+        } while (true)
+      }
+
+      f = rewrite(func, sprite)
+      assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0));') !== -1)
+
+      func = function () {
+        do {
+          if (stage.isKeyPressed('ArrowLeft')) {
+            this.changeX(-20)
+          }
+        } while (true)
+      }
+
+      f = rewrite(func, sprite)
+      assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0));') !== -1)
+    })
+
+    it.skip('should ignore "legal but cleverly formatted" loop blocks', () => {
+      let func, f
+
+      func = function () {
+        while (true) 
+        {
+          this.changeX(-20)
+        }
+      }
+
+      f = rewrite(func, sprite)
+      assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0));') === -1)
+
+      func = function ()
+      {
+        for (let i = 0; i < Infinity; i += 1) {
+          this.changeX(-20)
+        }
+      }
+
+      f = rewrite(func, sprite)
+      assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0));') !== -1)
+
+      func = function () {
+        do 
+        {
+          this.changeX(-20)
+        } while (true)
+      }
+
+      f = rewrite(func, sprite)
+      assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0));') !== -1)
+
+    })
+    /* eslint-enable no-constant-condition, no-empty, for-direction */
+  })
+
   describe('paced methods', () => {
-    it('should add a timed out await statment after goTo', () => {
+    it('should add a timed out await statement after goTo', () => {
       const func = function () {
         this.goTo(100, 100)
       }
@@ -197,7 +309,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 33))') !== -1)
     })
 
-    it('should add a timed out await statment after move', () => {
+    it('should add a timed out await statement after move', () => {
       const func = function () {
         this.move(100)
       }
@@ -206,7 +318,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 33))') !== -1)
     })
 
-    it('should add a timed out await statment after changeX', () => {
+    it('should add a timed out await statement after changeX', () => {
       const func = function () {
         this.changeX(100)
       }
@@ -215,7 +327,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 33))') !== -1)
     })
 
-    it('should add a timed out await statment after changeY', () => {
+    it('should add a timed out await statement after changeY', () => {
       const func = function () {
         this.changeY(100)
       }
@@ -224,7 +336,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 33))') !== -1)
     })
 
-    it('should add a timed out await statment after goTowards', () => {
+    it('should add a timed out await statement after goTowards', () => {
       const func = function () {
         this.goTowards(otherSprite)
       }
@@ -233,7 +345,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 33))') !== -1)
     })
 
-    it('should add a timed out await statment after turnRight', () => {
+    it('should add a timed out await statement after turnRight', () => {
       const func = function () {
         this.turnRight(90)
       }
@@ -242,7 +354,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 33))') !== -1)
     })
 
-    it('should add a timed out await statment after turnLeft', () => {
+    it('should add a timed out await statement after turnLeft', () => {
       const func = function () {
         this.turnLeft(90)
       }
@@ -251,7 +363,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 33))') !== -1)
     })
 
-    it('should add a timed out await statment after pointInDirection', () => {
+    it('should add a timed out await statement after pointInDirection', () => {
       const func = function () {
         this.pointInDirection(90)
       }
@@ -260,7 +372,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 33))') !== -1)
     })
 
-    it('should add a timed out await statment after pointTowards', () => {
+    it('should add a timed out await statement after pointTowards', () => {
       const func = function () {
         this.pointTowards(otherSprite)
       }
@@ -269,7 +381,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 33))') !== -1)
     })
 
-    it('should add a timed out await statment after say', () => {
+    it('should add a timed out await statement after say', () => {
       const func = function () {
         this.say('slow down')
       }
@@ -278,7 +390,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 33))') !== -1)
     })
 
-    it('should add a timed out await statment after think', () => {
+    it('should add a timed out await statement after think', () => {
       const func = function () {
         this.think('slow down')
       }
@@ -324,7 +436,7 @@ describe('rewriter', () => {
   })
 
   describe('waited methods', () => {
-    it('should add a timed out await statment after wait', () => {
+    it('should add a timed out await statement after wait', () => {
       let func
       let f
       let time
@@ -363,7 +475,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('this.wait(time * 10, \'just-random-string\')') !== -1)
     })
 
-    it('should add a timed out await statment after glide', () => {
+    it('should add a timed out await statement after glide', () => {
       const func = function () {
         this.glide(9, 100, 100)
       }
@@ -381,7 +493,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('this.glide(9, 100, 100, \'just-random-string\')') !== -1)
     })
 
-    it('should add a timed out await statment after sayWait', () => {
+    it('should add a timed out await statement after sayWait', () => {
       const func = function () {
         this.sayWait('hello', 3)
       }
@@ -399,7 +511,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('this.sayWait(\'hello\', 3, \'just-random-string\')') !== -1)
     })
 
-    it('should add a timed out await statment after thinkWait', () => {
+    it('should add a timed out await statement after thinkWait', () => {
       const func = function () {
         this.thinkWait('hello', 3)
       }
@@ -417,7 +529,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('this.thinkWait(\'hello\', 3, \'just-random-string\')') !== -1)
     })
 
-    it('should add a timed out await statment after playSoundUntilDone', () => {
+    it('should add a timed out await statement after playSoundUntilDone', () => {
       const func = function () {
         this.playSoundUntilDone('../../sounds/bleat.wav')
       }
@@ -434,7 +546,7 @@ describe('rewriter', () => {
       const f = rewrite(func, sprite)
       assert(f.toString().indexOf('this.playSoundUntilDone(\'../../sounds/bleat.wav\', \'just-random-string\')') !== -1)
     })
-    it('should add a timed out await statment after broadcastMessageWait', () => {
+    it('should add a timed out await statement after broadcastMessageWait', () => {
       const func = function () {
         this.broadcastMessageWait('go')
       }
@@ -454,7 +566,7 @@ describe('rewriter', () => {
   })
 
   describe('waitedReturned methods', () => {
-    it('should add a timed out await statment after invoke', () => {
+    it('should add a timed out await statement after invoke', () => {
       let returned // eslint-disable-line no-unused-vars
       function myFunc () { // eslint-disable-line require-jsdoc
         return 'yay'
@@ -502,7 +614,7 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('this.invoke(myFunc, \'value\', \'returned\', \'just-random-string\')') !== -1)
     })
 
-    it('should add a timed out await statment after ask', () => {
+    it('should add a timed out await statement after ask', () => {
       let answer // eslint-disable-line no-unused-vars
 
       const func = function () {

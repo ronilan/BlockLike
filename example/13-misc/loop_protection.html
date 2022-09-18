@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - Empty Loop</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.5.min.js"></script>
+
+  <script id="example">
+    const stage = new blockLike.Stage({ sensing: true })
+    
+    const sprite1 = new blockLike.Sprite()
+    const sprite2 = new blockLike.Sprite()
+    const sprite3 = new blockLike.Sprite()
+
+    sprite1.addTo(stage)
+    sprite2.addTo(stage)
+    sprite3.addTo(stage)
+
+    sprite1.changeX(200)
+    sprite1.say('while')
+
+    sprite2.say('for')
+
+    sprite3.changeX(-200)
+    sprite3.say('do')
+
+    sprite1.whenClicked(function () {
+      this.say('looping...')
+      while (true) {
+        if (stage.isKeyPressed('ArrowLeft')) {
+          this.changeX(-20)
+        }
+      }
+    })
+
+    sprite2.whenClicked(function () {
+      this.say('looping...')
+      for (let i = 0; i < Infinity; i += 1) {
+        if (stage.isKeyPressed('ArrowLeft')) {
+          this.changeX(-20)
+        }
+      }
+    })
+
+    sprite3.whenClicked(function () {
+      this.say('looping...')
+      do {
+        if (stage.isKeyPressed('ArrowLeft')) {
+          this.changeX(-20)
+        }
+      } while (true)
+    })
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>
