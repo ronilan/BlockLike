@@ -260,6 +260,27 @@ export default function rewrite (func, entity) {
 
       return result
     })
+
+    /*
+      stage.whenFlag(function () {
+        while(true) {
+          if(stage.isKeyPressed('ArrowLeft')) {
+            sprite.changeX(-20);
+          }
+        }
+      });
+    */
+
+    //Always force while loops to wait one event tick to stop the browser crashing
+    const whileIndex = code.findIndex(line => line.match(/while\(.*\)/g))
+    if (whileIndex !== -1) {
+      code.splice(
+        code.length-1-whileIndex, // insert before the while loop closes
+        0,
+        '\n await new Promise(resolve => setTimeout(resolve, 0));'
+      )
+    }
+
     code = code.join('\n')
   }
 
