@@ -149,6 +149,9 @@ function insertWaited (item, entity) {
 
     code = `${item.substring(0, item.lastIndexOf(')'))}, '${theVar}', '${entity.triggeringId}')`
 
+    // ask needs an added delay to avoid capturing key press that may have trigger its own showing.
+    found === 'ask' ? code = `await new Promise(resolve => setTimeout(resolve, 0));\n ${code}` : null
+
     // invoke is "forgiving". may, or may not, have variables.
     found === 'invoke' && (item.indexOf(',') === -1) ? code = `${item.substring(0, item.lastIndexOf(')'))}, [], '${theVar}', '${entity.triggeringId}')` : null
   } else {

@@ -324,7 +324,6 @@ export default class Entity {
       e.keyCode === check ? match = true : null
       if (match) {
         me._exec(func, [e])
-        e.preventDefault()
       }
     })
   }

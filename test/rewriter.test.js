@@ -266,8 +266,7 @@ describe('rewriter', () => {
       let func, f
 
       func = function () {
-        while (true) 
-        {
+        while (true) {
           this.changeX(-20)
         }
       }
@@ -275,8 +274,7 @@ describe('rewriter', () => {
       f = rewrite(func, sprite)
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0));') === -1)
 
-      func = function ()
-      {
+      func = function () {
         for (let i = 0; i < Infinity; i += 1) {
           this.changeX(-20)
         }
@@ -286,15 +284,13 @@ describe('rewriter', () => {
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0));') !== -1)
 
       func = function () {
-        do 
-        {
+        do {
           this.changeX(-20)
         } while (true)
       }
 
       f = rewrite(func, sprite)
       assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0));') !== -1)
-
     })
     /* eslint-enable no-constant-condition, no-empty, for-direction */
   })
@@ -613,7 +609,16 @@ describe('rewriter', () => {
       f = rewrite(func, sprite)
       assert(f.toString().indexOf('this.invoke(myFunc, \'value\', \'returned\', \'just-random-string\')') !== -1)
     })
+    it('should add a zero timed out await statement before ask', () => {
+      let answer // eslint-disable-line no-unused-vars
 
+      const func = function () {
+        answer = this.ask('How are you')
+      }
+
+      const f = rewrite(func, sprite)
+      assert(f.toString().indexOf('await new Promise(resolve => setTimeout(resolve, 0))') !== -1)
+    })
     it('should add a timed out await statement after ask', () => {
       let answer // eslint-disable-line no-unused-vars
 

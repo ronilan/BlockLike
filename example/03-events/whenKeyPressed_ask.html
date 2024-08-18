@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>BlockLike.js Example - whenKeyPressed</title>
+  </head>
+  <body>
+
+  <script type="text/javascript" src="../../dist/blocklike-1.0.6.js"></script>
+
+  <script id="example">
+    const stage = new blockLike.Stage()
+    const sprite = new blockLike.Sprite()
+
+    let asking = false
+
+    sprite.addTo(stage)
+
+    sprite.say('Click me OR Press "a"')
+
+    sprite.whenClicked(() => {
+      asking = true
+      const answer = sprite.ask('What\'s your name?')
+      asking = false
+      this.say(`Your name is: ${answer}`)
+    })
+
+    sprite.whenKeyPressed('a', () => {
+      if (!asking) {
+        this.say('a')
+        this.changeY(100)
+        this.wait(0.5)
+        this.changeY(-100)
+        this.say('')
+      }
+    })
+  </script>
+  <script src='../example-helper.js'></script>
+</body>
+</html>
