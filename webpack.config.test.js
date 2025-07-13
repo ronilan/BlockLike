@@ -7,6 +7,9 @@ const version = PACKAGE.version
 module.exports = {
   entry: { test: glob.sync('./test/*.test.js') },
   mode: 'development',
+  resolve: {
+    preferRelative: true
+  },
   devtool: 'inline-source-map',
   output: {
     filename: '~~out.js',
