@@ -6,7 +6,7 @@
     "dist/*"
   ],
   "scripts": {
-    "start": "webpack serve",
+    "start": "webpack serve --config webpack.config.js",
     "watch": "webpack --progress --watch --config webpack.config.js",
     "lint:scripts": "./node_modules/.bin/eslint scripts/*.js --fix --config .eslintrc.js",
     "lint:tests": "./node_modules/.bin/eslint test/*.js --fix --config .eslintrc.js",
@@ -51,8 +51,8 @@
     "mocha": "^11.1.0",
     "replace-in-file": "^6.3.2",
     "webpack": "^5.38.1",
-    "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^4.3.1"
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
   },
   "repository": {
     "type": "git",
