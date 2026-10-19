@@ -19,6 +19,10 @@ module.exports = {
       }
     ]
   },
+  watchOptions: {
+    ignored: /node_modules/,
+    poll: false
+  },
   devtool: 'inline-source-map',
   output: {
     filename: `blocklike-${version}.js`,
@@ -26,9 +30,23 @@ module.exports = {
     library: 'blockLike'
   },
   devServer: {
-    static: path.join(__dirname, ''),
+    static: {
+      directory: path.join(__dirname, ''),
+      // chokidar v5 (webpack-dev-server v6) watches file-by-file via fs.watch
+      // on macOS - without this ignore it opens one fd per file in node_modules
+      // (~24k) and crashes with EMFILE (kernel cap kern.maxfilesperproc: 10240).
+      watch: {
+        ignored: /node_modules|\.git/
+      }
+    },
     compress: true,
     host: '0.0.0.0', // your ip address
-    port: 9000
+    port: 9000,
+    watchFiles: {
+      paths: ['**'],
+      options: {
+        ignored: /node_modules/
+      }
+    }
   }
 }
