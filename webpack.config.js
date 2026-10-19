@@ -1,4 +1,5 @@
 const path = require('path')
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 const PACKAGE = require('./package.json')
 const version = PACKAGE.version
@@ -6,19 +7,14 @@ const version = PACKAGE.version
 module.exports = {
   entry: './src/lib.js',
   mode: 'development',
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/, // both .js and .jsx
-        loader: 'eslint-loader',
-        include: path.resolve(process.cwd(), 'src'),
-        enforce: 'pre',
-        options: {
-          fix: true
-        }
-      }
-    ]
-  },
+  plugins: [
+    new ESLintPlugin({
+      extensions: ['js', 'jsx'],
+      files: [path.resolve(process.cwd(), 'src')],
+      fix: true,
+      configType: 'eslintrc'
+    })
+  ],
   watchOptions: {
     ignored: /node_modules/,
     poll: false
